@@ -11,7 +11,7 @@ public class DatabaseConnection {
         return DriverManager.getConnection(url, user, password);
     }
 
-    /* per arsye testimi
+    /*per arsye testimi
     public static void main(String[] args) throws SQLException{
         try(Connection con=getConnection()){
             System.out.println("Lidhja u be me sukses");
