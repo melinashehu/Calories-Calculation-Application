@@ -5,5 +5,6 @@ import java.util.List;
 
 public interface NotificationDAO {
     public List<Notification> getNotificationForAUser(int userId);
-    public List<Notification> getAllNotifications(); //mund te behet viewAllNotifications?
+    public List<Notification> getAllNotifications();//mund te behet viewAllNotifications?
+    public boolean addNotification(Notification notification);
 }
