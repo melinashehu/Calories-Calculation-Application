@@ -1,13 +1,28 @@
 package entity;
 
 public class User {
+    private int id;
     private String userName;
     private String email;
     private String password;
+    private String role; //perdorues i thjeshte apo admin
 
     public User(){
 
     }
+
+    public User(int id, String userName, String email, String password, String role) {
+        this.id = id;
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {this.id = id;}
 
     public String getUserName(){
         return userName;
@@ -30,7 +45,10 @@ public class User {
         this.password = password;
     }
 
+    public String getRole(){return role;}
+    public void setRole(String role){this.role = role;}
+
     public String toString(){
-        return "User{"+"name= "+userName+" , email= "+email+", password= "+password+" }";
+        return "User{"+"name= "+userName+" , email= "+email+", password= "+password+", role="+role+"}";
     }
 }

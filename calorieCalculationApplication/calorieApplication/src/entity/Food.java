@@ -3,8 +3,10 @@ package entity;
 import java.util.Date;
 
 public class Food {
+    private int id;
+    private int userId; // id e perdoruesit qe posedon kete ushqim
     private String foodName;
-    private int calorie;
+    private double calorie;
     private double price;
     private Date dateWhenConsumed;
 
@@ -12,6 +14,14 @@ public class Food {
 
     }
 
+    public Food(int id, int userId, String foodName, double calorie, double price, Date dateWhenConsumed) {
+        this.id = id;
+        this.userId = userId;
+        this.foodName = foodName;
+        this.calorie = calorie;
+        this.price = price;
+        this.dateWhenConsumed = dateWhenConsumed;
+    }
     public String getFoodName(){
         return foodName;
     }
@@ -19,7 +29,7 @@ public class Food {
         this.foodName = foodName;
     }
 
-    public int getCalorie(){
+    public double getCalorie(){
         return calorie;
     }
     public void setCalorie(int calorie){
@@ -38,5 +48,9 @@ public class Food {
     }
     public void setDateWhenConsumed(Date dateWhenConsumed){
         this.dateWhenConsumed = dateWhenConsumed;
+    }
+
+    public String toString(){
+        return "Food{"+"name= "+foodName+", consumed by= "+userId+", number of calories="+calorie+", price="+price+", dateWhenConsumed="+dateWhenConsumed+'}';
     }
 }
