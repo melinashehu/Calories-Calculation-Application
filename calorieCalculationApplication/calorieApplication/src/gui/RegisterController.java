@@ -13,6 +13,10 @@ public class RegisterController {
     private TextField emailField;
     @FXML
     private PasswordField passwordField;
+    @FXML
+    private Button registerButton;
+    @FXML
+    private Button cancelButton;
 
     private void showError(String message){
         Alert alert = new Alert(Alert.AlertType.ERROR, message);
@@ -46,5 +50,9 @@ public class RegisterController {
         }else{
             showError("Registration faled. Check you credentials.");
         }
+    }
+
+    public void closeApp(){
+        System.exit(0);
     }
 }
