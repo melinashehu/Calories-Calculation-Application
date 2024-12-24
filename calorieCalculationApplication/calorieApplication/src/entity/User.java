@@ -19,10 +19,10 @@ public class User {
         this.role = role;
     }
 
-    public int getId() {
+    public int getUserId() {
         return id;
     }
-    public void setId(int id) {this.id = id;}
+    public void setUserId(int id) {this.id = id;}
 
     public String getUserName(){
         return userName;
@@ -31,14 +31,14 @@ public class User {
         this.userName = userName;
     }
 
-    public String getEmail(){
+    public String getUserEmail(){
         return email;
     }
     public void setEmail(String email){
         this.email = email;
     }
 
-    public String getPassword(){
+    public String getUserPassword(){
         return password;
     }
     public void setPassword(String password){
