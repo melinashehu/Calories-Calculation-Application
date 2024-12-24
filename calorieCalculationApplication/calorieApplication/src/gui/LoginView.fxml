@@ -5,10 +5,44 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="gui.LoginController" prefHeight="400.0" prefWidth="520.0">
+    <children>
+        <Label layoutX="230.0" layoutY="27.0" text="Log-in">
+            <font>
+                <Font size="20.0"/>
+            </font>
+        </Label>
 
+        <Label layoutX="81.0" layoutY="55.0" text="E-mail">
+            <font>
+                <Font size="13.0"/>
+            </font>
+        </Label>
+        <TextField fx:id="emailField" layoutX="81.0" layoutY="75.0" prefHeight="25.0" prefWidth="357.0" promptText="E-mail"/>
+
+        <Label layoutX="81.0" layoutY="115.0" text="Password">
+            <font>
+                <Font size="13.0"/>
+            </font>
+        </Label>
+        <TextField fx:id="passwordField" layoutX="81.0" layoutY="135.0" prefHeight="25.0" prefWidth="357.0" promptText="Password"/>
+
+        <Hyperlink layoutX="81.0" layoutY="170.0" text="Don't have an account? Click here to register."/> <!--to do: duhet shtuar metoda per kalimin ne registerForm-->
+
+        <Button fx:id="loginButton" layoutX="81.0" layoutY="230.0" mnemonicParsing="false" prefWidth="357.0" prefHeight="25.0" style="-fx-background-color: #20B2AA;" text="Log-in" textFill="#f2f2f2"/> <!--duhet shtuan onAction per butonin login-->
+
+        <Button fx:id="closeButton" layoutX="81.0" layoutY="265.0"  mnemonicParsing="false" prefHeight="27.0" prefWidth="357.0" style="-fx-background-color: #20B2AA;" text="Close" textFill="#f2f2f2"/> <!--duhet shtuan onAction per butonin close-->
+
+        <Label fx:id="messageLabel" layoutX="81.0" layoutY="300.0" textFill="#ed0101" />
+    </children>
 </AnchorPane>
