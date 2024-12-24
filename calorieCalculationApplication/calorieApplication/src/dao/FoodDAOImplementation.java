@@ -11,7 +11,7 @@ import java.sql.Date;
 import calendar.Calendar;
 
 
-public class FoodDAOImplementation implements FoodDAO {
+public abstract class FoodDAOImplementation implements FoodDAO {
 
     @Override
     public Food getFood(int id){

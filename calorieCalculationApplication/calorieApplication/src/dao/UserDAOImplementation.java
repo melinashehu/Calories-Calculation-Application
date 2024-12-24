@@ -59,8 +59,8 @@ public class UserDAOImplementation implements UserDAO {
         try(Connection conn = DatabaseConnection.getConnection();
         PreparedStatement pst = conn.prepareStatement(sql)){
             pst.setString(1, user.getUserName());
-            pst.setString(2, user.getEmail());
-            pst.setString(3, user.getPassword());
+            pst.setString(2, user.getUserEmail());
+            pst.setString(3, user.getUserPassword());
             pst.setString(4, user.getRole());
             pst.executeUpdate();
             return true;
@@ -76,10 +76,10 @@ public class UserDAOImplementation implements UserDAO {
         try(Connection conn = DatabaseConnection.getConnection();
         PreparedStatement pst = conn.prepareStatement(sql)){
             pst.setString(1, user.getUserName());
-            pst.setString(2, user.getEmail());
-            pst.setString(3, user.getPassword());
+            pst.setString(2, user.getUserEmail());
+            pst.setString(3, user.getUserPassword());
             pst.setString(4, user.getRole());
-            pst.setInt(5, user.getId());
+            pst.setInt(5, user.getUserId());
             pst.executeUpdate();
             return true;
         }catch(SQLException e){
