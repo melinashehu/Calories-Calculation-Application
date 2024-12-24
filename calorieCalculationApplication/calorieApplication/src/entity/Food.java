@@ -22,6 +22,13 @@ public class Food {
         this.price = price;
         this.dateWhenConsumed = dateWhenConsumed;
     }
+
+    public int getFoodId(){
+        return id;
+    }
+    public void setFoodId(int id){
+        this.id = id;
+    }
     public String getFoodName(){
         return foodName;
     }
