@@ -5,7 +5,7 @@ public class StatisticalReport {
     private double totalCaloriesConsumed;
     private double totalSpendingMoney;
     private int daysAboveCalorieThreshold;
-
+    //duhet shtuar atribut per muajt kur eshte kaluar 1000euro
     public StatisticalReport() {}
 
     public StatisticalReport(int userId, double totalCaloriesConsumed, int daysAboveCalorieThreshold) {
