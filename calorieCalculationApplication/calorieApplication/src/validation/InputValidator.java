@@ -38,4 +38,18 @@ public class InputValidator {
         return null;
     }
 
+    public static String isValidInput(String inputEmail, String inputPassword) {
+        if( isEmpty(inputEmail) || isEmpty(inputPassword)){
+            return "All fields must be filled.";
+        }
+
+        if(!isValidEmail(inputEmail))
+            return "Email must be a valid email address. \n example@domain.com";
+
+        if(!isValidPassword(inputPassword))
+            return "Password must be at least 6 characters long.";
+
+        return null;
+    }
+
 }
