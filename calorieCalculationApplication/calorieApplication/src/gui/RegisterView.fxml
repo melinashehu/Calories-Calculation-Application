@@ -1,57 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.DropShadow?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="gui.RegisterController" prefHeight="476.0" prefWidth="520.0">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="320.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="gui.RegisterController">
     <children>
-        <AnchorPane prefHeight="82.0" prefWidth="520.0" style="-fx-background-color: #20B2AA;">
+
+        <AnchorPane prefHeight="80.0" prefWidth="320.0" style="-fx-background-color: #85b48a;">
             <children>
-                <!--<ImageView fitHeight="58.0" fitWidth="52.0" layoutX="46.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="C:\Users\User\Downloads\registerformicon.webp" />
-                    </image>
-                </ImageView>-->
-                <Label layoutX="109.0" layoutY="27.0" text="User Registration">
-                    <font>
-                        <Font size="18.0" />
-                    </font>
-                </Label>
+                <Hyperlink layoutX="220.0" layoutY="10.0" text="Need some help?" style="-fx-text-fill: white; -fx-font-size: 10px; -fx-underline: true;" />
             </children>
         </AnchorPane>
-        <Label layoutX="81.0" layoutY="92.0" text="Name">
-            <font>
-                <Font size="13.0" />
-            </font>
-        </Label>
-        <TextField fx:id="nameField" layoutX="81.0" layoutY="111.0" prefHeight="25.0" prefWidth="357.0" promptText="Name" />
-        <Label layoutX="79.0" layoutY="150.0" text="E-mail">
-            <font>
-                <Font size="13.0" />
-            </font>
-        </Label>
-        <TextField fx:id="emailField" layoutX="81.0" layoutY="168.0" prefHeight="25.0" prefWidth="357.0" promptText="E-mail" />
-        <Label layoutX="81.0" layoutY="210.0" text="Password">
-            <font>
-                <Font size="13.0" />
-            </font>
-        </Label>
-        <PasswordField fx:id="passwordField" layoutX="81.0" layoutY="230.0" prefHeight="25.0" prefWidth="357.0" promptText="Password" />
-        <Hyperlink layoutX = "81.0" layoutY="270.0" text="Have an account already? Click here to log-in."/> <!--to do: te vendoset onAction me metoden qe hap formen log-in-->
-        <Button fx:id="registerButton" layoutX="81.0" layoutY="373.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="357.0" style="-fx-background-color: #20B2AA;" text="Register" textFill="#f2f2f2" onAction="#handleRegister"/>
-        <Button fx:id="closeButton" layoutX="81.0" layoutY="418.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="357.0" style="-fx-background-color: #20B2AA;" text="Close" textFill="#f2f2f2" onAction="#closeApp" />
-        <Label fx:id="messageLabel"/>
+
+
+        <VBox layoutY="60.0" prefWidth="320.0" prefHeight="440.0" style="-fx-background-color: white; -fx-border-radius: 20 20 0 0; -fx-background-radius: 20 20 0 0; -fx-padding: 15;" spacing="15.0" VBox.vgrow="ALWAYS">
+            <children>
+
+                <Label text="Getting Started" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #85b48a;" />
+                <Label text="Create account to continue!" style="-fx-font-size: 12px; -fx-text-fill: #555555;" />
+
+
+                <TextField fx:id="nameField" promptText="Name" style="-fx-background-radius: 10; -fx-border-color: #cccccc; -fx-padding: 8;"/>
+                <TextField fx:id="emailField" promptText="E-mail" style="-fx-background-radius: 10; -fx-border-color: #cccccc; -fx-padding: 8;"/>
+                <PasswordField fx:id="passwordField" promptText="Password" style="-fx-background-radius: 10; -fx-border-color: #cccccc; -fx-padding: 8;"/>
+
+
+                <VBox spacing="10.0" alignment="CENTER">
+
+                    <Button fx:id="registerButton" text="Register" prefHeight="35.0" prefWidth="200.0" style="-fx-background-color: #85b48a; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-size: 14px;" onMouseEntered="#handleRegisterButtonMouseEntered" onMouseExited="#handleRegisterButtonMouseExited" onAction="#handleRegister"/>
+
+                    <Button fx:id="closeButton" text="Close" prefHeight="35.0" prefWidth="200.0" style="-fx-background-color: #f2f2f2; -fx-text-fill: #999999; -fx-border-color: #cccccc; -fx-background-radius: 10; -fx-font-size: 14px;" onMouseEntered="#handleCloseButtonMouseEntered" onMouseExited="#handleCloseButtonMouseExited" onAction="#closeApp"/>
+
+                </VBox>
+
+
+                <HBox alignment="CENTER" spacing="5.0">
+                    <Label text="Already have an account?" style="-fx-font-size: 11px; -fx-text-fill: #555555;" />
+                    <Hyperlink text="Sign in" style="-fx-text-fill: blue; -fx-underline: true;" /> <!--to do: me vendos on action formen login-->
+                </HBox>
+            </children>
+        </VBox>
     </children>
 </AnchorPane>
-
