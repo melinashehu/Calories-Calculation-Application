@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="gui.LoginController" prefHeight="400.0" prefWidth="320.0">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="gui.LoginController" prefHeight="500.0" prefWidth="320.0">
     <children>
 
         <AnchorPane prefHeight="80.0" prefWidth="320.0" style="-fx-background-color: #85b48a;"/>
@@ -13,29 +13,27 @@
         <VBox layoutY="60.0" prefWidth="320.0" prefHeight="440.0" style="-fx-background-color: white; -fx-border-radius: 20 20 0 0; -fx-background-radius: 20 20 0 0; -fx-padding: 15;" spacing="15.0" VBox.vgrow="ALWAYS">
             <children>
                 <Label text="Log-In" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #85b48a;"/>
+                <Label text="Log-in with your credentials to continue!" style="-fx-font-size: 12px; -fx-text-fill: #555555;" />
 
                 <TextField fx:id="emailField" promptText="E-mail" style="-fx-background-radius: 10; -fx-border-color: #cccccc; -fx-padding: 8;"/>
                 <PasswordField fx:id="passwordField" promptText="Password" style="-fx-background-radius: 10; -fx-border-color: #cccccc; -fx-padding: 8;"/>
 
                 <VBox spacing="10.0" alignment="CENTER">
 
-                    <Button fx:id="loginButton" text="Log-in" prefHeight="35.0" prefWidth="200.0" style="-fx-background-color: #85b48a; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-size: 14px;"  onAction="#handleLogin"/> <!--duhen shtuar metodat per mousehoverat-->
+                    <Button fx:id="loginButton" text="Log-in" prefHeight="35.0" prefWidth="200.0" style="-fx-background-color: #85b48a; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-size: 14px;" onMouseEntered="#handleLoginButtonMouseEntered" onMouseExited="#handleLoginButtonMouseExited" onAction="#handleLogin"/>
 
-                    <Button fx:id="closeButton" text="Close" prefHeight="35.0" prefWidth="200.0" style="-fx-background-color: #f2f2f2; -fx-text-fill: #999999; -fx-border-color: #cccccc; -fx-background-radius: 10; -fx-font-size: 14px;" /> <!--duhen shtuar metodat per mbylljen dhe mouse handlerat-->
+                    <Button fx:id="closeButton" text="Close" prefHeight="35.0" prefWidth="200.0" style="-fx-background-color: #f2f2f2; -fx-text-fill: #999999; -fx-border-color: #cccccc; -fx-background-radius: 10; -fx-font-size: 14px;" onMouseEntered="#handleLoginCloseButtonMouseEntered" onMouseExited="#handleLoginCloseButtonMouseExited" onAction="#closeLoginApp"/>
 
                 </VBox>
 
                 <!-- Register Hyperlink -->
                 <HBox alignment="CENTER" spacing="5.0">
                     <Label text="Don't have an account?" style="-fx-font-size: 11px; -fx-text-fill: #555555;" />
-                    <Hyperlink text="Register here" style="-fx-text-fill: blue; -fx-underline: true;" /> <!--to do: me vendos on action formen register-->
+                    <Hyperlink text="Register here" style="-fx-text-fill: blue; -fx-underline: true;" onAction="#redirectToRegisterForm" />
                 </HBox>
 
 
             </children>
         </VBox>
-
-        <!-- Error Message (if needed) -->
-        <Label fx:id="messageLabel" layoutX="81.0" layoutY="300.0" textFill="#ed0101" />
     </children>
 </AnchorPane>
