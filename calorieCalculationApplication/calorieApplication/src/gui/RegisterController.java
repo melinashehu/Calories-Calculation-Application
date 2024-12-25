@@ -2,9 +2,13 @@ package gui;
 import dao.*;
 import entity.*;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import validation.*;
+
+import java.io.IOException;
 
 public class RegisterController {
     @FXML
@@ -23,19 +27,6 @@ public class RegisterController {
         alert.showAndWait();
     }
 
-    public void handleRegisterButtonMouseEntered(){
-        registerButton.setStyle("-fx-background-color: #6f9973; -fx-text-fill: white; -fx-background-radius:10;");
-    }
-    public void handleRegisterButtonMouseExited(){
-        registerButton.setStyle("-fx-background-color: #85b48a; -fx-text-fill:white; -fx-background-radius:10;");
-    }
-
-    public void handleCloseButtonMouseEntered(){
-        closeButton.setStyle("-fx-background-color: #e6e6e6; -fx-text-fill: #666666; -fx-background-radius: 10;");
-    }
-    public void handleCloseButtonMouseExited(){
-        closeButton.setStyle("-fx-background-color: #f2f2f2; -fx-text-fill: #999999; -fx-background-radius: 10;");
-    }
 
     public void handleRegister(){
         String name = nameField.getText();
@@ -59,7 +50,29 @@ public class RegisterController {
         }
     }
 
-    public void closeApp(){
+    public void handleRegisterButtonMouseEntered(){
+        registerButton.setStyle("-fx-background-color: #6f9973; -fx-text-fill: white; -fx-background-radius:10;");
+    }
+    public void handleRegisterButtonMouseExited(){
+        registerButton.setStyle("-fx-background-color: #85b48a; -fx-text-fill:white; -fx-background-radius:10;");
+    }
+
+    public void handleRegisterCloseButtonMouseEntered(){
+        closeButton.setStyle("-fx-background-color: #e6e6e6; -fx-text-fill: #666666; -fx-background-radius: 10;");
+    }
+    public void handleRegisterCloseButtonMouseExited(){
+        closeButton.setStyle("-fx-background-color: #f2f2f2; -fx-text-fill: #999999; -fx-background-radius: 10;");
+    }
+
+    public void redirectToLoginForm() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginView.fxml"));
+        Scene registerScene = new Scene(loader.load());
+        Stage stage = (Stage)registerButton.getScene().getWindow();
+        stage.setScene(registerScene);
+        stage.show();
+    }
+
+    public void closeRegisterApp(){
         System.exit(0);
     }
 }
