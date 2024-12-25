@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserDAOImplementation implements UserDAO {
+
     @Override
     public User getUserById(int id){ //tested and it works :)
         String sql="SELECT * FROM users WHERE user_id= ?";
@@ -32,11 +33,12 @@ public class UserDAOImplementation implements UserDAO {
     }
 
     @Override
-    public User getUserByEmail(String email){ //tested and it works
-        String sql="SELECT * FROM users WHERE email= ?";
+    public User getUserByEmailAndPassword(String email, String password){ //tested and it works
+        String sql="SELECT * FROM users WHERE email= ? AND password= ?";
         try(Connection conn = DatabaseConnection.getConnection();
         PreparedStatement pst = conn.prepareStatement(sql)){
             pst.setString(1, email);
+            pst.setString(2, password);
             ResultSet rs = pst.executeQuery();
             if(rs.next()){
                 return new User(
