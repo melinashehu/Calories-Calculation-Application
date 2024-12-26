@@ -6,9 +6,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import login.*;
 import validation.*;
 import entity.*;
-
 import java.io.IOException;
 
 public class LoginController {
@@ -20,6 +20,7 @@ public class LoginController {
     private Button loginButton;
     @FXML
     private Button closeButton;
+
 
 
     private void showError(String message) {
@@ -40,8 +41,10 @@ public class LoginController {
         UserDAOImplementation userDao = new UserDAOImplementation();
         User user = userDao.getUserByEmailAndPassword(email, password);
         if(user != null){
+            UserSession.setLoggedInUser(user);
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Log-in successful! Welcome, "+user.getUserName());
             alert.showAndWait();
+            loginButton.getScene().getWindow().hide();
         }else{
             showError("Invalid email or password.");
         }
