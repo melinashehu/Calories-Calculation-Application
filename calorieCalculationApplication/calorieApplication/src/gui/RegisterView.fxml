@@ -5,26 +5,39 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.effect.DropShadow?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="320.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="gui.RegisterController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="350.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="gui.RegisterController">
     <children>
 
-        <AnchorPane prefHeight="80.0" prefWidth="320.0" style="-fx-background-color: #85b48a;">
+        <AnchorPane prefHeight="80.0" prefWidth="350.0" style="-fx-background-color: #85b48a;">
             <children>
-                <Hyperlink layoutX="220.0" layoutY="10.0" text="Need some help?" style="-fx-text-fill: white; -fx-font-size: 10px; -fx-underline: true;" />
+                <Hyperlink layoutX="250.0" layoutY="10.0" text="Need some help?" style="-fx-text-fill: white; -fx-font-size: 10px; -fx-underline: true;" />
             </children>
         </AnchorPane>
 
 
-        <VBox layoutY="60.0" prefWidth="320.0" prefHeight="440.0" style="-fx-background-color: white; -fx-border-radius: 20 20 0 0; -fx-background-radius: 20 20 0 0; -fx-padding: 15;" spacing="15.0" VBox.vgrow="ALWAYS">
+        <VBox layoutY="60.0" prefWidth="350.0" prefHeight="470.0" style="-fx-background-color: white; -fx-border-radius: 20 20 0 0; -fx-background-radius: 20 20 0 0; -fx-padding: 15;" spacing="15.0" VBox.vgrow="ALWAYS">
             <children>
 
                 <Label text="Getting Started" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #85b48a;" />
                 <Label text="Create account to continue!" style="-fx-font-size: 12px; -fx-text-fill: #555555;" />
 
+                <HBox alignment="CENTER_LEFT" spacing="5.0">
+                    <Label text="Name" style="-fx-font-size: 12px; -fx-text-fill: #555555;" />
+                    <Label text="*" style="-fx-font-size: 12px; -fx-text-fill: red;" />
+                </HBox>
+                <TextField fx:id="nameField" promptText="Name" style="-fx-background-radius: 10; -fx-padding: 8;"/>
 
-                <TextField fx:id="nameField" promptText="Name" style="-fx-background-radius: 10; -fx-border-color: #cccccc; -fx-padding: 8;"/>
-                <TextField fx:id="emailField" promptText="E-mail" style="-fx-background-radius: 10; -fx-border-color: #cccccc; -fx-padding: 8;"/>
-                <PasswordField fx:id="passwordField" promptText="Password" style="-fx-background-radius: 10; -fx-border-color: #cccccc; -fx-padding: 8;"/>
+                <HBox alignment="CENTER_LEFT" spacing="5.0">
+                    <Label text="Email" style="-fx-font-size: 12px; -fx-text-fill: #555555;" />
+                    <Label text="*" style="-fx-font-size: 12px; -fx-text-fill: red;" />
+                </HBox>
+                <TextField fx:id="emailField" promptText="E-mail" style="-fx-background-radius: 10; -fx-padding: 8;"/>
+
+                <HBox alignment="CENTER_LEFT" spacing="5.0">
+                    <Label text="Password" style="-fx-font-size: 12px; -fx-text-fill: #555555;" />
+                    <Label text="*" style="-fx-font-size: 12px; -fx-text-fill: red;" />
+                </HBox>
+                <PasswordField fx:id="passwordField" promptText="Password" style="-fx-background-radius: 10; -fx-padding: 8;"/>
 
 
                 <VBox spacing="10.0" alignment="CENTER">
