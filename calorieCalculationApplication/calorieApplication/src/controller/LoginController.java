@@ -1,4 +1,4 @@
-package gui;
+package controller;
 
 import javafx.fxml.FXML;
 import dao.*;
@@ -10,6 +10,7 @@ import login.*;
 import validation.*;
 import entity.*;
 import java.io.IOException;
+import gui.*;
 
 public class LoginController {
     @FXML
@@ -45,13 +46,25 @@ public class LoginController {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Log-in successful! Welcome, "+user.getUserName());
             alert.showAndWait();
             loginButton.getScene().getWindow().hide();
+
+            //ri-drejtimi per ne home pas logimit te suksesshem
+            try{
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/HomeView.fxml"));
+                Scene homeScene = new Scene(loader.load());
+                Stage stage = new Stage();
+                stage.setScene(homeScene);
+                stage.show();
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+
         }else{
             showError("Invalid email or password.");
         }
     }
 
     public void redirectToRegisterForm() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("RegisterView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/RegisterView.fxml"));
         Scene registerScene = new Scene(loader.load());
         Stage stage = (Stage)loginButton.getScene().getWindow();
         stage.setScene(registerScene);
