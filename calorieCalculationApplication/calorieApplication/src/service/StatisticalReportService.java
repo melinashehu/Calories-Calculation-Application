@@ -1,10 +1,10 @@
 package service;
 
+import Report.ReportCalculation;
+import Report.ReportCalculationImplementation;
 import entity.StatisticalReport;
 
-
-
-public class SatisticalReportService {
+public class StatisticalReportService {
     private ReportCalculation reportCalculation;
 
     public StatisticalReportService() {

@@ -1,6 +1,7 @@
 package service;
 
 import entity.StatisticalReport;
+import login.UserSession;
 
 import java.util.Scanner;
 
@@ -12,7 +13,14 @@ public class TestReport {
         System.out.print("Vendosni ID-në e përdoruesit: ");
         int userId = scanner.nextInt();
 
-        SatisticalReportService reportService = new SatisticalReportService();
+        // Kontrollo nëse përdoruesi ekziston
+        if (UserSession.getLoggedInUser() == null || UserSession.getLoggedInUser().getUserId() != userId) {
+            System.out.println("Gabim: Përdoruesi me ID " + userId + " nuk ekziston ose nuk është i loguar.");
+            return;
+        }
+
+
+        StatisticalReportService reportService = new StatisticalReportService();
         double calorieThreshold = 2500.0; // Vendos pragu i kalorive
 
         // Gjenero raportin për përdoruesin e dhënë
