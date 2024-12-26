@@ -5,10 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="653a12b4-d124-4558-9db2-ac7b7051a6fb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/controller/HomeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gui/HomeView.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/controller/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui/LoginView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/gui/LoginView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/controller/RegisterController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui/RegisterView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/gui/RegisterView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/TestingGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/gui/TestingGui.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +22,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -54,6 +59,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="controller" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="TestingGui" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="gui.TestingGui" />
@@ -61,7 +71,7 @@
       <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\User\Downloads\openjfx-23.0.1_windows-x64_bin-sdk\javafx-sdk-23.0.1\lib&quot; --add-modules javafx.controls,javafx.fxml" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="gui.*" />
+          <option name="PATTERN" value="controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -93,7 +103,7 @@
       <updated>1735074901122</updated>
       <workItem from="1735074906433" duration="39000" />
       <workItem from="1735227640709" duration="2967000" />
-      <workItem from="1735232900209" duration="1623000" />
+      <workItem from="1735232900209" duration="5236000" />
     </task>
     <servers />
   </component>
