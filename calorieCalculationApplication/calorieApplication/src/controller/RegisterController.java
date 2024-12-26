@@ -1,4 +1,4 @@
-package gui;
+package controller;
 import dao.*;
 import entity.*;
 import javafx.fxml.FXML;
@@ -6,8 +6,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import login.UserSession;
 import validation.*;
-
+import gui.*;
 import java.io.IOException;
 
 public class RegisterController {
@@ -43,12 +44,27 @@ public class RegisterController {
         UserDAOImplementation userDao = new UserDAOImplementation();
         boolean success = userDao.addUser(user);
         if(success){
+            UserSession.setLoggedInUser(user);
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Registration successful!");
             alert.showAndWait();
+            registerButton.getScene().getWindow().hide();
+
+            //ri-drejtimi per ne home pas regjistrimit te suksesshem
+            try{
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/HomeView.fxml"));
+                Scene homeScene = new Scene(loader.load());
+                Stage stage = new Stage();
+                stage.setScene(homeScene);
+                stage.show();
+            }catch(IOException e){
+                e.printStackTrace();
+            }
+
         }else{
             showError("Registration failed. Check you credentials.");
         }
     }
+
 
     public void handleRegisterButtonMouseEntered(){
         registerButton.setStyle("-fx-background-color: #6f9973; -fx-text-fill: white; -fx-background-radius:10;");
@@ -65,7 +81,7 @@ public class RegisterController {
     }
 
     public void redirectToLoginForm() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/LoginView.fxml"));
         Scene registerScene = new Scene(loader.load());
         Stage stage = (Stage)registerButton.getScene().getWindow();
         stage.setScene(registerScene);

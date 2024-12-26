@@ -5,14 +5,10 @@
 <?import javafx.scene.text.*?>
 <?import javafx.scene.effect.DropShadow?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="350.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="gui.RegisterController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="350.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.RegisterController">
     <children>
 
-        <AnchorPane prefHeight="80.0" prefWidth="350.0" style="-fx-background-color: #85b48a;">
-            <children>
-                <Hyperlink layoutX="250.0" layoutY="10.0" text="Need some help?" style="-fx-text-fill: white; -fx-font-size: 10px; -fx-underline: true;" />
-            </children>
-        </AnchorPane>
+        <AnchorPane prefHeight="80.0" prefWidth="350.0" style="-fx-background-color: #85b48a;"/>
 
 
         <VBox layoutY="60.0" prefWidth="350.0" prefHeight="470.0" style="-fx-background-color: white; -fx-border-radius: 20 20 0 0; -fx-background-radius: 20 20 0 0; -fx-padding: 15;" spacing="15.0" VBox.vgrow="ALWAYS">
