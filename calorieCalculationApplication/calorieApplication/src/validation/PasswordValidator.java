@@ -5,6 +5,4 @@ public class PasswordValidator {
         String passwordReg = "^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$";
         return password !=null && password.matches(passwordReg);
     }
-
-
 }
