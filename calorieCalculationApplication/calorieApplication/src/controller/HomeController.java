@@ -27,17 +27,17 @@ public class HomeController {
 
     @FXML
     private void initialize() {
-        updateReport(); // Përditëson raportin në fillim
+        updateReport();
     }
 
     private void updateReport() {
-        int userId = UserSession.getLoggedInUser().getUserId(); // Merr ID-në e përdoruesit
-        double calorieThreshold = 2500.0; // Kufiri i kalorive
+        int userId = UserSession.getLoggedInUser().getUserId();
+        double calorieThreshold = 2500.0;
 
-        // Gjenero raportin
+
         var report = reportService.generateReport(userId, calorieThreshold);
 
-        // Përditëso etiketat me të dhënat
+
         totalCaloriesLabel.setText(String.valueOf(report.getTotalCalories()));
         totalSpendingLabel.setText(String.valueOf(report.getTotalSpendingMoney()));
         daysAboveThresholdLabel.setText(String.valueOf(report.getDaysAboveCalorieThreshold()));
@@ -49,16 +49,14 @@ public class HomeController {
         String foodName = foodNameField.getText();
         double calorieValue = Double.parseDouble(calorieField.getText());
         double priceValue = Double.parseDouble(priceField.getText());
-        Date dateConsumed = Calendar.getCurrentDate(); // Përdorimi i datës aktuale
+        Date dateConsumed = Calendar.getCurrentDate();
 
         Food newFood = new Food(0, UserSession.getLoggedInUser().getUserId(), foodName, calorieValue, priceValue, dateConsumed);
 
-        // Shtimi ushqimit në databazë
         FoodDAO foodDao = new FoodDAOImplementation();
         boolean added = foodDao.addFood(newFood);
 
         if (added) {
-            // Përditesimi i  raportit
             updateReport();
             clearFormFields();
         } else {

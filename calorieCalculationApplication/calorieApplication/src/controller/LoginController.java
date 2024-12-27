@@ -48,7 +48,6 @@ public class LoginController {
             alert.showAndWait();
             loginButton.getScene().getWindow().hide();
 
-            //ri-drejtimi per ne home pas logimit te suksesshem
             try{
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/HomeView.fxml"));
                 Scene homeScene = new Scene(loader.load());

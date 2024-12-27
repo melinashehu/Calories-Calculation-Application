@@ -49,7 +49,6 @@ public class RegisterController {
             alert.showAndWait();
             registerButton.getScene().getWindow().hide();
 
-            //ri-drejtimi per ne home pas regjistrimit te suksesshem
             try{
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/HomeView.fxml"));
                 Scene homeScene = new Scene(loader.load());
