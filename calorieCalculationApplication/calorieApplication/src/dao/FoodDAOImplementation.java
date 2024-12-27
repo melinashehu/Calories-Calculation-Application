@@ -5,10 +5,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Date;
 import calendar.Calendar;
+import login.UserSession;
 
 
 public  class FoodDAOImplementation implements FoodDAO {
@@ -92,24 +94,30 @@ public  class FoodDAOImplementation implements FoodDAO {
     public List<Food> getAllFoodsForAWeeklyPeriod(java.util.Date startingDate) {
         return null;
     }
-
-
     @Override
-    public boolean addFood(Food food) {
-        String sql = "INSERT INTO user_foods (user_food_id, food_name, calorie_value, food_price, date_consumed) VALUES (?, ?, ?, ?, ?)";
-        try (Connection connection = DatabaseConnection.getConnection();
-             PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setInt(1, food.getFoodId());
-            pstmt.setString(2, food.getFoodName());
-            pstmt.setDouble(3, food.getCalorie());
-            pstmt.setDouble(4, food.getPrice());
-            pstmt.setDate(5, new Date(food.getDateWhenConsumed().getTime()));
-            return pstmt.executeUpdate() > 0;
-        } catch (SQLException e) {
-            System.err.println("Error adding food: " + e.getMessage());
-            return false;
+    public boolean addFood(Food food) {//testuar, punon
+        User loggedInUser = UserSession.getLoggedInUser();
+        if (loggedInUser != null) {
+            java.sql.Date currentDate = Calendar.getCurrentDate();
+            String sql = "INSERT INTO user_foods (food_name, calorie_value, food_price, date_consumed, user_id) VALUES (?, ?, ?, ?, ?)";
+            try (Connection connection = DatabaseConnection.getConnection();
+                 PreparedStatement pstmt = connection.prepareStatement(sql)) {
+                pstmt.setString(1, food.getFoodName());
+                pstmt.setDouble(2, food.getCalorie());
+                pstmt.setDouble(3, food.getPrice());
+            pstmt.setDate(4, currentDate);//new Date(food.getDateWhenConsumed().getTime()));
+                pstmt.setInt(5, loggedInUser.getUserId()); // Set the user_id from the logged-in user
+
+                return pstmt.executeUpdate() > 0;
+            } catch (SQLException e) {
+                System.err.println("Error adding food: " + e.getMessage());
+                return false;
+            }
         }
+        return false;
     }
+
+
 
     @Override
     public boolean deleteFood(int id) {
