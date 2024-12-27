@@ -15,6 +15,26 @@ import login.UserSession;
 
 public  class FoodDAOImplementation implements FoodDAO {
 
+    public List<Food> getAllFoods(){
+        List<Food> allFoods = new ArrayList<Food>();
+        String sql = "select * from user_foods";
+        try(Connection conn = DatabaseConnection.getConnection();
+            PreparedStatement pst = conn.prepareStatement(sql)){
+            ResultSet rs = pst.executeQuery();
+            if(rs.next()){
+                Food food = new Food(rs.getInt("user_food_id"), rs.getInt("user_id"),
+                        rs.getString("food_name"), rs.getDouble("calorie_value"),
+                        rs.getDouble("food_price"), rs.getDate("date_consumed"));
+                allFoods.add(food);
+            }else{
+                System.out.println("No foods found");
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return allFoods;
+    }
+
     @Override
     public Food getFood(int id) {
         String sql = "SELECT * FROM user_foods WHERE user_food_id=?";
@@ -99,7 +119,7 @@ public  class FoodDAOImplementation implements FoodDAO {
     @Override
     public boolean addFood(Food food) {//testuar, punon
         User loggedInUser = UserSession.getLoggedInUser();
-        if (loggedInUser != null) {
+        if(loggedInUser != null){
             java.sql.Date currentDate = Calendar.getCurrentDate();
             String sql = "INSERT INTO user_foods (food_name, calorie_value, food_price, date_consumed, user_id) VALUES (?, ?, ?, ?, ?)";
             try (Connection connection = DatabaseConnection.getConnection();
@@ -107,19 +127,16 @@ public  class FoodDAOImplementation implements FoodDAO {
                 pstmt.setString(1, food.getFoodName());
                 pstmt.setDouble(2, food.getCalorie());
                 pstmt.setDouble(3, food.getPrice());
-            pstmt.setDate(4, currentDate);
+                pstmt.setDate(4, currentDate);
                 pstmt.setInt(5, loggedInUser.getUserId());
-
                 return pstmt.executeUpdate() > 0;
             } catch (SQLException e) {
                 System.err.println("Error adding food: " + e.getMessage());
                 return false;
             }
         }
-        return false;
+        return true;
     }
-
-
 
     @Override
     public boolean deleteFood(int id) {
@@ -134,5 +151,20 @@ public  class FoodDAOImplementation implements FoodDAO {
         }
     }
 
-
+    @Override
+    public boolean updateFood(Food food) {
+        String sql="UPDATE user_foods SET food_name=?, calorie_value=?, food_price=?, date_consumed=? WHERE user_food_id=?";
+        try(Connection conn = DatabaseConnection.getConnection();
+            PreparedStatement pst = conn.prepareStatement(sql)){
+            pst.setString(1, food.getFoodName());
+            pst.setDouble(2, food.getCalorie());
+            pst.setDouble(3, food.getPrice());
+            pst.setDate(4, (Date) food.getDateWhenConsumed());
+            pst.executeUpdate();
+            return true;
+        }catch(SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
