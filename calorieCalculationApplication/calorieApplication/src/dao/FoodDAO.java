@@ -13,5 +13,4 @@ public interface FoodDAO {
     public List<Food> getAllFoodsForAWeeklyPeriod(Date startingDate);
     public boolean addFood(Food food);
     public boolean deleteFood(int id);
-
 }

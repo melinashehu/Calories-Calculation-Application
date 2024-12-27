@@ -14,7 +14,7 @@ public class DaoTestMain {
         User userById = userDAO.getUserById(1);
         System.out.println("User fetched by ID: " + (userById != null ? userById : "Not found"));
 
-        User userByCredentials = userDAO.getUserByEmail("test1@example.com");
+        User userByCredentials = userDAO.getUserByEmailAndPassword("test1@example.com", "testPassword");
         System.out.println("Login success: " + (userByCredentials != null ? "Yes" : "No"));
 
         boolean isDeleted = userDAO.deleteUser(1);
