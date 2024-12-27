@@ -89,11 +89,13 @@ public  class FoodDAOImplementation implements FoodDAO {
         }
         return foods;
     }
+
 //nuk eshte e implentuar sakte pasi e kam shtuar ne menyre qe ta bej klasen jo abstrakte
     @Override
     public List<Food> getAllFoodsForAWeeklyPeriod(java.util.Date startingDate) {
         return null;
     }
+
     @Override
     public boolean addFood(Food food) {//testuar, punon
         User loggedInUser = UserSession.getLoggedInUser();
@@ -105,8 +107,8 @@ public  class FoodDAOImplementation implements FoodDAO {
                 pstmt.setString(1, food.getFoodName());
                 pstmt.setDouble(2, food.getCalorie());
                 pstmt.setDouble(3, food.getPrice());
-            pstmt.setDate(4, currentDate);//new Date(food.getDateWhenConsumed().getTime()));
-                pstmt.setInt(5, loggedInUser.getUserId()); // Set the user_id from the logged-in user
+            pstmt.setDate(4, currentDate);
+                pstmt.setInt(5, loggedInUser.getUserId());
 
                 return pstmt.executeUpdate() > 0;
             } catch (SQLException e) {

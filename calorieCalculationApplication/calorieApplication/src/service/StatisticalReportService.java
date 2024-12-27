@@ -11,7 +11,6 @@ public class StatisticalReportService {
         this.reportCalculation = new ReportCalculationImplementation();
     }
 
-    // Gjenerimi i raportit
     public StatisticalReport generateReport(int userId, double calorieThreshold) {
         double totalCalories = reportCalculation.calculateTotalCaloriesConsumed(userId);
         double totalSpending = reportCalculation.calculateTotalSpendingMoney(userId);
