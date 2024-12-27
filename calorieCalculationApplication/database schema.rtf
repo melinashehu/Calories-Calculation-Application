@@ -46,3 +46,10 @@ CREATE TABLE notifications(
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
+
+
+
+
+/* shembull: mbushja e tabeles se user-ave me rol admin */
+INSERT INTO ‘users’(‘user_name’, ‘email’, ‘password’, ‘role’) VALUES (‘admin’, ‘admintest@gmail.com’, ‘adminCCA’, ‘admin’);
+
