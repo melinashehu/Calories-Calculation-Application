@@ -7,8 +7,26 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAOImplementation implements UserDAO {
+
+    public List<User> getAllUsers() { //tested and it works
+        List<User> allUsers = new ArrayList<User>();
+        String sql = "select * from users";
+        try(Connection conn = DatabaseConnection.getConnection();
+            PreparedStatement pst = conn.prepareStatement(sql)){
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                User user = new User(rs.getInt("user_id"), rs.getString("user_name"), rs.getString("email"), rs.getString("password"), rs.getString("role"));
+                allUsers.add(user);
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return allUsers;
+    }
 
     @Override
     public User getUserById(int id){ //tested and it works :)
@@ -91,7 +109,7 @@ public class UserDAOImplementation implements UserDAO {
     }
 
     @Override
-    public boolean deleteUser(int id){ //tabela foods ka lidhje ON DELETE CASCADE me user id => fshihet dhe tabela foods perkatese
+    public boolean deleteUser(int id){
         String sql="DELETE FROM users WHERE user_id= ?";
         try(Connection conn = DatabaseConnection.getConnection();
         PreparedStatement pst = conn.prepareStatement(sql)){

@@ -58,6 +58,6 @@ public class Food {
     }
 
     public String toString(){
-        return "Food{"+"name= "+foodName+", consumed by= "+userId+", number of calories="+calorie+", price="+price+", dateWhenConsumed="+dateWhenConsumed+'}';
+        return "Food{"+"name= "+foodName+", consumed by user with id = "+userId+", number of calories="+calorie+", price="+price+", dateWhenConsumed="+dateWhenConsumed+'}';
     }
 }
