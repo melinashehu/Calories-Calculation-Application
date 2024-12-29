@@ -86,6 +86,29 @@ public  class FoodDAOImplementation implements FoodDAO {
         return foods;
     }
 
+    public double getAvgCalorieValueFromAWeeklyPeriodForAUser(int userId, java.sql.Date startingDate){
+        Date endDate = Calendar.calculateEndWeekDate(startingDate);
+        String sql = "SELECT AVG(calorie_value) AS avg_calories " +
+                "FROM user_foods " +
+                "WHERE user_id = ? AND date_consumed BETWEEN ? AND ?";
+
+        double avgCalories = 0.0;
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setInt(1,userId);
+            pstmt.setDate(2, startingDate);
+            pstmt.setDate(3,endDate);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                avgCalories = rs.getDouble("avg_calories");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error fetching foods for user: " + e.getMessage());
+        }
+        return avgCalories;
+    }
+
     @Override
     public List<Food> getAllFoodsForAUser(int userId) {
         String sql = "SELECT * FROM user_foods WHERE user_id = ?";
