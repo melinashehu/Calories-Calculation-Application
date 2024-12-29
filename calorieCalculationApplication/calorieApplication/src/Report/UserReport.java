@@ -35,11 +35,11 @@ public class UserReport {
     }
 
     @Override
-    public String toString() {//shiko paraqitjen vizuale
-        return "Raporti i perdoruesit{" +
-                "Perdoruesi=" + user.getUserName() +
-                ", ushqimet=" + foods +
-                ", Mesatarja e kalorive te konsumuara ne nje jave=" + avgWeeklyConsumedCaloriesForAUser +
+    public String toString() {
+        return "User report{" +
+                "User=" + user.getUserName() +
+                ", foods=" + foods +
+                ", Average calories consumed=" + avgWeeklyConsumedCaloriesForAUser +
                 '}';
     }
 
