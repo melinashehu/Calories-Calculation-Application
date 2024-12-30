@@ -50,6 +50,21 @@ public class UserDAOImplementation implements UserDAO {
         return null;
     }
 
+    public List<Integer> getAllUsersIds(){
+        List<Integer> userIds = new ArrayList<>();
+        String sql = "SELECT user_id FROM users";
+        try(Connection conn = DatabaseConnection.getConnection();
+            PreparedStatement pst = conn.prepareStatement(sql)){
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                userIds.add(rs.getInt("user_id"));
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return userIds;
+    }
+
     @Override
     public User getUserByEmailAndPassword(String email, String password){ //tested and it works
         String sql="SELECT * FROM users WHERE email= ? AND password= ?";

@@ -15,4 +15,5 @@ public interface FoodDAO {
     public boolean addFood(Food food);
     public boolean deleteFood(int id);
     public boolean updateFood(Food food);
+    public double getAvgCalorieValueFromAWeeklyPeriodForAUser(int userId, java.sql.Date startingDate);
 }

@@ -40,6 +40,29 @@ public class ReportCalculationImplementation implements ReportCalculation {
             return 0.0;
         }
 
+    public double calculateMonthlySpendingForAUser(int userId, java.sql.Date startingDate){
+        String sql = "SELECT SUM(food_price) AS totalSpending " +
+                "FROM user_foods " +
+                "WHERE user_id = ? " +
+                "AND date_consumed BETWEEN ? AND DATE_ADD(?, INTERVAL 1 MONTH)";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setInt(1, userId);
+            pstmt.setDate(2, startingDate);
+            pstmt.setDate(3, startingDate);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getDouble("totalSpending");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error calculating monthly spending for user: " + e.getMessage());
+        }
+        return 0.0;
+    }
+
+
         @Override
         public int calculateDaysAboveCalorieThreshold(int userId, double calorieThreshold) {
             String sql = "SELECT COUNT(DISTINCT date_consumed) AS daysAboveThreshold FROM user_foods WHERE user_id = ? GROUP BY date_consumed HAVING SUM(calorie_value) > ?";
