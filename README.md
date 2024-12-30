@@ -21,3 +21,4 @@ Linku per shkarkim : https://gluonhq.com/products/scene-builder/. Hapat qe do nd
 Linku i tutorial-it per shkarkim: https://youtu.be/-Obxf6NjnbQ?si=eiN7E2H1ne72N_fw
 Pasi eshte bere shkarkimi i SceneBuilder, per ta shtuar ne IntelliJ IDE veprohet keshtu: File/Settings/Languages & Frameworks/JavaFx/Path to SceneBuilder ku do vendoset path-i i SceneBuilder.exe i marre nga folder-i ku ndodhet ne kompjuter. (Nje path i tille mund te jete: C:\Users\User\AppData\Local\SceneBuilder\SceneBuilder.exe)
 Linku i tutorial-it per shtimin ne IntelliJ IDE : https://youtu.be/-Obxf6NjnbQ?si=8mvlM4-qbwWcDDCg (fillon ne 6:28)
+Per te perdorur SceneBuilder ne file-in fxml perkates klikohet me te djathte ne file, zgjidhet opsioni: Open in SceneBuilder.
