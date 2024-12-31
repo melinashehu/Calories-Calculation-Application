@@ -25,6 +25,10 @@ Per te perdorur SceneBuilder ne file-in fxml perkates klikohet me te djathte ne 
 
 (Opsionale)
 Per te perdorur ikona ne dizenjimin e UI, i importojme ne SceneBuilder keshtu:
-Linku i tutorial-it per importimin e ikonave FontAwesome ne SceneBuilder: https://youtu.be/xU1Pl3knTqw?si=xWlLUBGIC8lNhF5P
 Linku per shkarkimin e librarise fontawesome: https://bitbucket.org/Jerady/fontawesomefx/downloads/
 Per ta shtuar librarine ne IntelliJ IDE veprojme keshtu: File/Project Structure/Libraries/+/Downloads/fontawesomefx.jar
+Linku per shkarkimin e librarise JFoenix: https://repo1.maven.org/maven2/com/jfoenix/jfoenix/9.0.10/ (Versioni jfoenix-9.0.10.jar)
+Per ta shtuar librarine ne IntelliJ IDE veprojme keshtu: File/Project Structure/Modules/Dependencies/+/jfoenix-9.0.10.jar. 
+Ne te njejten menyre veprojme dhe per librarine fontawesome :File/Project Structure/Modules/Dependencies/+/fontawesomefx-8.9.jar. 
+Per te perfshire librarine JFoenix ne SceneBuilder veprojme keshtu: Library/Ikona settings/JAR/FXML Manager/Add library/FXML from file system/jfoenix-9.0.10.
+
