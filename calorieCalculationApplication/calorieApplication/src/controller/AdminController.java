@@ -134,9 +134,9 @@ public class AdminController implements Initializable {
 
     private void openEditUserWindow(User selectedUser) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/EditUserFoods.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/FoodListPerUser.fxml"));
             Parent parent = loader.load();
-            EditUserFoodsController controller = loader.getController();
+            FoodListPerUserController controller = loader.getController();
             controller.initializeData(selectedUser);
 
             Stage stage = new Stage();
