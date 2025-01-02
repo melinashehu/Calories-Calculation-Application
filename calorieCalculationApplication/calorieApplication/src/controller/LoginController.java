@@ -47,18 +47,26 @@ public class LoginController {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Log-in successful! Welcome, "+user.getUserName());
             alert.showAndWait();
             loginButton.getScene().getWindow().hide();
+                try {
+                    FXMLLoader loader;
+                    Scene homeScene;
 
-            try{
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/HomeView.fxml"));
-                Scene homeScene = new Scene(loader.load());
-                Stage stage = new Stage();
-                stage.setScene(homeScene);
-                stage.show();
-            }catch(IOException e){
-                e.printStackTrace();
-            }
+                 if(user.getRole().equals("user")){
+                     loader = new FXMLLoader(getClass().getResource("/gui/HomeView.fxml"));
+                     homeScene = new Scene(loader.load());
+                } else{ //Per admin-et
 
-        }else{
+                     loader = new FXMLLoader(getClass().getResource("/gui/AdminView.fxml"));
+                     homeScene = new Scene(loader.load());
+                 }
+                    Stage stage = new Stage();
+                    stage.setScene(homeScene);
+                    stage.show();
+            } catch (IOException e) {
+                    e.printStackTrace();
+                    showError("Failed to show the appropriate view.");
+                }
+        } else{
             showError("Invalid email or password.");
         }
     }
