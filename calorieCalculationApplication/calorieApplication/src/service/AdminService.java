@@ -31,7 +31,7 @@ public class AdminService {
     public UserReport generateWeeklyFoodReport(int userId, Date startingDate){
 
         if(!isAdmin()){
-            throw new SecurityException("Nuk keni leje te aksesoni kete informacion!");
+            throw new SecurityException("You have no access to this information!");
         }
 
         double avgWeeklyConsumedCaloriesForAUser;
@@ -45,7 +45,7 @@ public class AdminService {
 
     public List<UserReport> usersWhoExceededMonthlySpendingLimit(Date startingDate){
         if(!isAdmin()){
-            throw new SecurityException("Nuk keni leje te aksesoni kete informacion!");
+            throw new SecurityException("You have no access to this information!");
         }
         double monthlyExpenditureThreshold = 1000;
         List<UserReport> usersWhoExceededMonthlySpendingLimit = new ArrayList<>();
@@ -57,7 +57,7 @@ public class AdminService {
             if(monthlySpendingForAUser > monthlyExpenditureThreshold){
                 User user = userDAO.getUserById(userId);
                 usersWhoExceededMonthlySpendingLimit.add(new UserReport(user));
-            }else System.out.println("Asnje perdorues nuk e kaluar limitin mujor.");
+            }else System.out.println("No user has exceeded the monthly expenditure.");
         }
         return usersWhoExceededMonthlySpendingLimit;
     }

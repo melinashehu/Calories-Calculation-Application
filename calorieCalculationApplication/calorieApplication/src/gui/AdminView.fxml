@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import com.jfoenix.controls.JFXButton?>
+
+<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" text="Admin Dashboard" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AdminController">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: green;">
+         <children>
+            <Text layoutX="24.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="List of users">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Pane layoutX="-1.0" layoutY="37.0" prefHeight="3.0" prefWidth="598.0" style="-fx-background-color: black;" />
+            <TableView fx:id="usersTable" layoutX="21.0" layoutY="76.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="262.0" prefWidth="546.0" style="-fx-border-color: black; -fx-border-width: 3;">
+              <columns>
+                <TableColumn fx:id="userIdCol" minWidth="100.0" prefWidth="122.39995956420898" text="          User ID" />
+                <TableColumn fx:id="userNameCol" minWidth="90.4000244140625" prefWidth="128.8000030517578" text="  User Name" />
+                  <TableColumn fx:id="userEmailCol" minWidth="75.199951171875" prefWidth="126.39996337890625" text=" User Email" />
+                  <TableColumn fx:id="editUserCol" minWidth="58.39990234375" prefWidth="79.2000732421875" text="Edit" />
+                  <TableColumn fx:id="deleteUserCol" minWidth="58.39990234375" prefWidth="81.60003662109375" text="Delete" />
+              </columns>
+            </TableView>
+         </children></AnchorPane>
+  </content>
+   <font>
+      <Font name="System Bold" size="13.0" />
+   </font>
+</TitledPane>
