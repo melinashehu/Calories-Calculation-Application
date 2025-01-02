@@ -29,6 +29,8 @@ public class Food {
     public void setFoodId(int id){
         this.id = id;
     }
+    public int getUserId(){ return userId; }
+    public void setUserId(int userId) { this.userId = userId; }
     public String getFoodName(){
         return foodName;
     }
@@ -39,7 +41,7 @@ public class Food {
     public double getCalorie(){
         return calorie;
     }
-    public void setCalorie(int calorie){
+    public void setCalorie(double calorie){
         this.calorie = calorie;
     }
 
