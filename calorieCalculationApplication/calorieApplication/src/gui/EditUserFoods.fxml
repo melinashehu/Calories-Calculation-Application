@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" text="Tabela e ushqimeve" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditUserFoodsController">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+         <children>
+            <TextField fx:id="userNameTextField" editable="false" layoutX="14.0" layoutY="14.0" />
+            <TableView fx:id="foodTable" editable="true" layoutX="14.0" layoutY="54.0" prefHeight="230.0" prefWidth="578.0">
+              <columns>
+                <TableColumn fx:id="userIdCol" prefWidth="61.599942207336426" text="User ID" />
+                <TableColumn fx:id="userFoodIdCol" prefWidth="103.199951171875" text="User Food ID " />
+                  <TableColumn fx:id="userFoodNameCol" prefWidth="87.99995422363281" text="Food Name" />
+                  <TableColumn fx:id="calorieValueCol" prefWidth="108.0" text="Calorie Value" />
+                  <TableColumn fx:id="foodPriceCol" prefWidth="90.39996337890625" text="Food Price" />
+                  <TableColumn fx:id="dateConsumedCol" prefWidth="128.79998779296875" text="Date Consumed" />
+              </columns>
+            </TableView>
+         </children></AnchorPane>
+  </content>
+   <font>
+      <Font name="System Bold" size="15.0" />
+   </font>
+</TitledPane>
