@@ -1,0 +1,17 @@
+#foodTable .table-cell{
+    -fx-alignment: CENTER;
+}
+
+.table-row-cell{
+    -fx-border-color: #453e3e;
+}
+
+.table-cell{
+    -fx-border-color: #453e3e;
+}
+
+#foodTable .column-header{
+    -fx-border-color: black;
+    -fx-alignment: center;
+    -fx-background-color: #87ae87;
+}
