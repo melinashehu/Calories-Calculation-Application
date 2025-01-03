@@ -4,19 +4,19 @@ import entity.Food;
 import entity.User;
 import java.util.List;
 
-public class UserReport {
+public class AdminReport {
 
     private final User user;
     private final List<Food> foods;
     private final double avgWeeklyConsumedCaloriesForAUser;
 
-    public UserReport(User user, List<Food> foods, double avgWeeklyConsumedCaloriesForAUser) {
+    public AdminReport(User user, List<Food> foods, double avgWeeklyConsumedCaloriesForAUser) {
         this.user = user;
         this.avgWeeklyConsumedCaloriesForAUser = avgWeeklyConsumedCaloriesForAUser;
         this.foods = foods;
     }
 
-    public UserReport(User user){
+    public AdminReport(User user){
         this.user = user;
         this.foods = null;
         this.avgWeeklyConsumedCaloriesForAUser = 0.0;
