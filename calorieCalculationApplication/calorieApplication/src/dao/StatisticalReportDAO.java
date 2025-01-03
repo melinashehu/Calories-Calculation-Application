@@ -1,6 +1,6 @@
-package Report;
+package dao;
 
-public interface ReportCalculation {
+public interface StatisticalReportDAO {
     double calculateTotalCaloriesConsumed(int userId);
     double calculateTotalSpendingMoney(int userId);
     int calculateDaysAboveCalorieThreshold(int userId, double calorieThreshold);

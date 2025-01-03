@@ -1,13 +1,11 @@
-package Report;
-
-import dao.DatabaseConnection;
+package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ReportCalculationImplementation implements ReportCalculation {
+public class StatisticalReportDAOImplementation implements StatisticalReportDAO {
     @Override
         public double calculateTotalCaloriesConsumed(int userId) {
             String sql = "SELECT SUM(calorie_value) AS totalCalories FROM user_foods WHERE user_id=?";
