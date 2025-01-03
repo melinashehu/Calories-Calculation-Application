@@ -21,7 +21,7 @@ public class TestReport {
         double calorieThreshold = 2500.0;
 
 
-        StatisticalReport report = reportService.generateReport(userId, calorieThreshold);
+        StatisticalReport report = reportService.generateUserReport(userId, calorieThreshold);
 
         System.out.println("Raporti Statistik:");
         System.out.println("Përdoruesi ID: " + report.getUserId());
