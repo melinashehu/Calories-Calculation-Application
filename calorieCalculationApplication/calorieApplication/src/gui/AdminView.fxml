@@ -9,7 +9,11 @@
 <?import javafx.scene.text.Text?>
 <?import com.jfoenix.controls.JFXButton?>
 
+<?import java.net.URL?>
 <TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" text="Admin Dashboard" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AdminController">
+    <stylesheets>
+        <URL value="@styleUserTable.css" />
+    </stylesheets>
   <content>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: green;">
          <children>
@@ -24,8 +28,8 @@
                 <TableColumn fx:id="userIdCol" minWidth="100.0" prefWidth="122.39995956420898" text="          User ID" />
                 <TableColumn fx:id="userNameCol" minWidth="90.4000244140625" prefWidth="128.8000030517578" text="  User Name" />
                   <TableColumn fx:id="userEmailCol" minWidth="75.199951171875" prefWidth="126.39996337890625" text=" User Email" />
-                  <TableColumn fx:id="editUserCol" minWidth="58.39990234375" prefWidth="79.2000732421875" text="Edit" />
-                  <TableColumn fx:id="deleteUserCol" minWidth="58.39990234375" prefWidth="81.60003662109375" text="Delete" />
+                  <TableColumn fx:id="foodsCol"  minWidth="58.39990234375" prefWidth="79.2000732421875" text="Edit" />
+                  <TableColumn fx:id="deleteUserCol"  minWidth="58.39990234375" prefWidth="81.60003662109375" text="Delete" />
               </columns>
             </TableView>
          </children></AnchorPane>
