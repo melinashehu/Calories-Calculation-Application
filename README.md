@@ -32,3 +32,5 @@ Per ta shtuar librarine ne IntelliJ IDE veprojme keshtu: File/Project Structure/
 Ne te njejten menyre veprojme dhe per librarine fontawesome :File/Project Structure/Modules/Dependencies/+/fontawesomefx-8.9.jar. 
 Per te perfshire librarine JFoenix ne SceneBuilder veprojme keshtu: Library/Ikona settings/JAR/FXML Manager/Add library/FXML from file system/jfoenix-9.0.10.
 
+Per te perfshire file-t .css per stilizimin e tabeles se user-it dhe te listes se ushqimeve, pasi te jene shtuar file-t ne package-n gui, do shkarkohet Intellij IDEA Ultimate. 
+
