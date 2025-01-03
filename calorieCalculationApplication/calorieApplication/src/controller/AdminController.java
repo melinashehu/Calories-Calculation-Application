@@ -33,7 +33,7 @@ public class AdminController implements Initializable {
     @FXML
     private TableColumn<User, String> userEmailCol;
     @FXML
-    private TableColumn<User, JFXButton> editUserCol;
+    private TableColumn<User, JFXButton> foodsCol;
     @FXML
     private TableColumn<User, JFXButton> deleteUserCol;
 
@@ -71,8 +71,8 @@ public class AdminController implements Initializable {
             e.printStackTrace();
             System.err.println("There was an error loading the users' data.");
         }
-//Shtohet qeliza qe permban butonin edit
-        editUserCol.setCellFactory(column -> {
+        //Me poshte shtohet qeliza qe permban butonin edit
+        foodsCol.setCellFactory(column -> {
             return new TableCell<User, JFXButton>() {
                 @Override
                 protected void updateItem(JFXButton item, boolean empty) {
@@ -82,19 +82,19 @@ public class AdminController implements Initializable {
                             setGraphic(null);
                             setText(null);
                         } else {
-                            Button editButton = new Button("Edit");
-                            editButton.setOnAction(event -> {
+                            Button foodsButton = new Button("Foods");
+                            foodsButton.setOnAction(event -> {
                                 User selectedUser = getTableView().getItems().get(getIndex());
                                 if (selectedUser != null) {
-                                    openEditUserWindow(selectedUser);
+                                    openListOfFoodsPerUserWindow(selectedUser);
                                 }
                             });
-                            setGraphic(editButton);
+                            setGraphic(foodsButton);
                             setText(null);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
-                        Alert errorAlert = new Alert(Alert.AlertType.ERROR, "Error in Edit Button Cell: " + e.getMessage());
+                        Alert errorAlert = new Alert(Alert.AlertType.ERROR, "Error in Foods Button Cell: " + e.getMessage());
                         errorAlert.showAndWait();
                     }
                 }
@@ -132,7 +132,7 @@ public class AdminController implements Initializable {
         });
     }
 
-    private void openEditUserWindow(User selectedUser) {
+    private void openListOfFoodsPerUserWindow(User selectedUser) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/FoodListPerUser.fxml"));
             Parent parent = loader.load();
@@ -175,6 +175,6 @@ public class AdminController implements Initializable {
     private void refreshTable () {
         List<User> users = userDAO.getAllUsers();
         ObservableList<User> userObservableList = FXCollections.observableArrayList(users);
-        usersTable.setItems(userObservableList); // Refresh the TableView items
+        usersTable.setItems(userObservableList);
     }
 }
