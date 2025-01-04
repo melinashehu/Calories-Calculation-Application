@@ -71,7 +71,7 @@ public class AdminController implements Initializable {
             e.printStackTrace();
             System.err.println("There was an error loading the users' data.");
         }
-        //Me poshte shtohet qeliza qe permban butonin edit
+
         foodsCol.setCellFactory(column -> {
             return new TableCell<User, JFXButton>() {
                 @Override
