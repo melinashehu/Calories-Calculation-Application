@@ -7,9 +7,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<?import java.net.URL?>
 <TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" text="Tabela e ushqimeve" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FoodListPerUserController">
+    <stylesheets>
+        <URL value="@styleFoodTablePerUser.css" />
+    </stylesheets>
   <content>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #85b48a">
          <children>
             <TextField fx:id="userNameTextField" editable="false" layoutX="14.0" layoutY="14.0" />
             <TableView fx:id="foodTable" editable="true" layoutX="14.0" layoutY="54.0" prefHeight="230.0" prefWidth="578.0">

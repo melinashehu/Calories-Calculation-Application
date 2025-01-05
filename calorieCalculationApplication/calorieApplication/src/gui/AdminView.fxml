@@ -9,9 +9,13 @@
 <?import javafx.scene.text.Text?>
 <?import com.jfoenix.controls.JFXButton?>
 
+<?import java.net.URL?>
 <TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" text="Admin Dashboard" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AdminController">
+    <stylesheets>
+        <URL value="@styleUserTable.css" />
+    </stylesheets>
   <content>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: green;">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #85b48a;">
          <children>
             <Text layoutX="24.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="List of users">
                <font>

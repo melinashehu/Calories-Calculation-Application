@@ -2,8 +2,6 @@ package controller;
 
 import dao.UserDAOImplementation;
 import com.jfoenix.controls.JFXButton;
-import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon;
-import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import entity.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -83,6 +81,7 @@ public class AdminController implements Initializable {
                             setText(null);
                         } else {
                             Button editButton = new Button("Edit");
+                            editButton.getStyleClass().add("edit-button");
                             editButton.setOnAction(event -> {
                                 User selectedUser = getTableView().getItems().get(getIndex());
                                 if (selectedUser != null) {
@@ -113,6 +112,7 @@ public class AdminController implements Initializable {
                             setText(null);
                         } else {
                             Button deleteButton = new Button("Delete");
+                            deleteButton.getStyleClass().add("delete-button");
                             deleteButton.setOnAction(event -> {
                                 User selectedUser = getTableView().getItems().get(getIndex());
                                 if (selectedUser != null) {
@@ -134,9 +134,9 @@ public class AdminController implements Initializable {
 
     private void openEditUserWindow(User selectedUser) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/EditUserFoods.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/FoodListPerUser.fxml"));
             Parent parent = loader.load();
-            EditUserFoodsController controller = loader.getController();
+            FoodListPerUserController controller = loader.getController();
             controller.initializeData(selectedUser);
 
             Stage stage = new Stage();
@@ -158,7 +158,6 @@ public class AdminController implements Initializable {
                 boolean success = userDAO.deleteUser(selectedUser.getUserId());
                 if (success) {
                     usersTable.getItems().remove(selectedUser);
-                    refreshTable();
                 } else {
                     Alert errorAlert = new Alert(Alert.AlertType.ERROR, "Failed to delete the user.");
                     errorAlert.showAndWait();
