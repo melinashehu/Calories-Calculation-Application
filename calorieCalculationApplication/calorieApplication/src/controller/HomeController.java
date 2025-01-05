@@ -27,16 +27,14 @@ public class HomeController {
 
     @FXML
     private void initialize() {
-        updateReport();
+        updateUserReport();
     }
 
-    private void updateReport() {
+    private void updateUserReport() {
         int userId = UserSession.getLoggedInUser().getUserId();
         double calorieThreshold = 2500.0;
 
-
-        var report = reportService.generateReport(userId, calorieThreshold);
-
+        var report = reportService.generateUserReport(userId, calorieThreshold);
 
         totalCaloriesLabel.setText(String.valueOf(report.getTotalCalories()));
         totalSpendingLabel.setText(String.valueOf(report.getTotalSpendingMoney()));
@@ -57,7 +55,7 @@ public class HomeController {
         boolean added = foodDao.addFood(newFood);
 
         if (added) {
-            updateReport();
+            updateUserReport();
             clearFormFields();
         } else {
             System.out.println("Error adding food.");

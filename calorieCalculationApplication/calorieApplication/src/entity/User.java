@@ -5,7 +5,7 @@ public class User {
     private String userName;
     private String email;
     private String password;
-    private String role; //perdorues i thjeshte apo admin
+    private String role;
 
     public User(){
 

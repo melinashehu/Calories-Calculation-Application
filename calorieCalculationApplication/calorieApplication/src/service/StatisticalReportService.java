@@ -1,17 +1,17 @@
 package service;
 
-import Report.ReportCalculation;
-import Report.ReportCalculationImplementation;
+import dao.StatisticalReportDAO;
+import dao.StatisticalReportDAOImplementation;
 import entity.StatisticalReport;
 
 public class StatisticalReportService {
-    private ReportCalculation reportCalculation;
+    private StatisticalReportDAO reportCalculation;
 
     public StatisticalReportService() {
-        this.reportCalculation = new ReportCalculationImplementation();
+        this.reportCalculation = new StatisticalReportDAOImplementation();
     }
 
-    public StatisticalReport generateReport(int userId, double calorieThreshold) {
+    public StatisticalReport generateUserReport(int userId, double calorieThreshold) {
         double totalCalories = reportCalculation.calculateTotalCaloriesConsumed(userId);
         double totalSpending = reportCalculation.calculateTotalSpendingMoney(userId);
         int daysAboveThreshold = reportCalculation.calculateDaysAboveCalorieThreshold(userId, calorieThreshold);

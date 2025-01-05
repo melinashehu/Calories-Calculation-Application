@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Food {
     private int id;
-    private int userId; // id e perdoruesit qe posedon kete ushqim
+    private int userId;
     private String foodName;
     private double calorie;
     private double price;

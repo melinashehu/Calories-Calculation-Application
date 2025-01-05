@@ -1,7 +1,8 @@
 package service;
 
-import Report.ReportCalculationImplementation;
-import Report.UserReport;
+import Report.AdminReport;
+import dao.StatisticalReportDAOImplementation;
+import Report.AdminReport;
 import dao.FoodDAOImplementation;
 import dao.UserDAOImplementation;
 import entity.Food;
@@ -15,12 +16,12 @@ public class AdminService {
 
     private final UserDAOImplementation userDAO;
     private final FoodDAOImplementation foodDAO;
-    private ReportCalculationImplementation reportCalculation;
+    private StatisticalReportDAOImplementation reportCalculation;
 
     public AdminService(){
         this.foodDAO = new FoodDAOImplementation();
         this.userDAO = new UserDAOImplementation();
-        this.reportCalculation = new ReportCalculationImplementation();
+        this.reportCalculation = new StatisticalReportDAOImplementation();
     }
 
     private boolean isAdmin() {//kontrollimi nese user-i eshte admin
@@ -28,7 +29,7 @@ public class AdminService {
         return loggedInUser != null && "admin".equals(loggedInUser.getRole());
     }
 
-    public UserReport generateWeeklyFoodReport(int userId, Date startingDate){
+    public AdminReport generateWeeklyFoodReport(int userId, Date startingDate){
 
         if(!isAdmin()){
             throw new SecurityException("You have no access to this information!");
@@ -39,16 +40,16 @@ public class AdminService {
         List<Food> foods = foodDAO.getAllFoodsFromAWeeklyPeriodForAUser(userId,startingDate);
         avgWeeklyConsumedCaloriesForAUser = foodDAO.getAvgCalorieValueFromAWeeklyPeriodForAUser(userId, startingDate);
         User user = userDAO.getUserById(userId);
-        return new UserReport(user,foods,avgWeeklyConsumedCaloriesForAUser);
+        return new AdminReport(user,foods,avgWeeklyConsumedCaloriesForAUser);
 
     }
 
-    public List<UserReport> usersWhoExceededMonthlySpendingLimit(Date startingDate){
+    public List<AdminReport> usersWhoExceededMonthlySpendingLimit(Date startingDate){
         if(!isAdmin()){
             throw new SecurityException("You have no access to this information!");
         }
         double monthlyExpenditureThreshold = 1000;
-        List<UserReport> usersWhoExceededMonthlySpendingLimit = new ArrayList<>();
+        List<AdminReport> usersWhoExceededMonthlySpendingLimit = new ArrayList<>();
         List<Integer> allUsersIds = userDAO.getAllUsersIds();
 
         for(Integer userId : allUsersIds){
@@ -56,7 +57,7 @@ public class AdminService {
 
             if(monthlySpendingForAUser > monthlyExpenditureThreshold){
                 User user = userDAO.getUserById(userId);
-                usersWhoExceededMonthlySpendingLimit.add(new UserReport(user));
+                usersWhoExceededMonthlySpendingLimit.add(new AdminReport(user));
             }else System.out.println("No user has exceeded the monthly expenditure.");
         }
         return usersWhoExceededMonthlySpendingLimit;

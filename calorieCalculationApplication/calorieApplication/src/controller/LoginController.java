@@ -23,8 +23,6 @@ public class LoginController {
     private Button closeButton;
 
 
-
-
     private void showError(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR, message);
         alert.showAndWait();

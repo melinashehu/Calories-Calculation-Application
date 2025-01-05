@@ -1,6 +1,6 @@
 package service;
 
-import Report.UserReport;
+import Report.AdminReport;
 import calendar.Calendar;
 import dao.UserDAOImplementation;
 import entity.User;
@@ -42,7 +42,7 @@ public class TestAdminService {
         System.out.println("Testimi i metodes generateWeeklyFoodReport");
         try {
             Date startingDate = Date.valueOf("2024-12-28");
-            List<UserReport> users = adminService.usersWhoExceededMonthlySpendingLimit(startingDate);
+            List<AdminReport> users = adminService.usersWhoExceededMonthlySpendingLimit(startingDate);
             System.out.println("Users who exceeded monthly spending limit:");
             users.forEach(System.out::println);
         } catch (Exception e) {

@@ -21,7 +21,7 @@
     -fx-font-weight: bold;
 }
 
-.edit-button{
+.foods-button{
     -fx-font-size: 10px;
     -fx-background-color: #58a058;
     -fx-border-radius: 5px;
@@ -31,7 +31,7 @@
     -fx-padding: 5px;
 }
 
-.edit-button:hover{
+.foods-button:hover{
     -fx-background-color: #206a20;
 }
 
