@@ -14,7 +14,7 @@ public class UserDAOImplementation implements UserDAO {
 
     public List<User> getAllUsers() { //tested and it works
         List<User> allUsers = new ArrayList<User>();
-        String sql = "select * from users";
+        String sql = "select * from users WHERE role='USER'";
         try(Connection conn = DatabaseConnection.getConnection();
             PreparedStatement pst = conn.prepareStatement(sql)){
             ResultSet rs = pst.executeQuery();
