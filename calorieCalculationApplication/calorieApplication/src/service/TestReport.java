@@ -1,13 +1,10 @@
 package service;
 
-import entity.StatisticalReport;
-import login.UserSession;
-
-import java.util.Scanner;
+import Report.AdminReport;
 
 public class TestReport {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        /*Scanner scanner = new Scanner(System.in);
         System.out.print("Vendosni ID-në e përdoruesit: ");
         int userId = scanner.nextInt();
 
@@ -27,6 +24,8 @@ public class TestReport {
         System.out.println("Përdoruesi ID: " + report.getUserId());
         System.out.println("Kaloritë totale të konsumuara: " + report.getTotalCalories());
         System.out.println("Shpenzimet totale: " + report.getTotalSpendingMoney());
-        System.out.println("Ditët mbi pragun e kalorive: " + report.getDaysAboveCalorieThreshold());
+        System.out.println("Ditët mbi pragun e kalorive: " + report.getDaysAboveCalorieThreshold());*/
+        AdminReport report = new AdminReport();
+        report.compareFoodEntriesPerWeek();
     }
 }
