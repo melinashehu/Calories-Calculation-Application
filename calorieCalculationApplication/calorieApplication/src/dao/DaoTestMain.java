@@ -3,14 +3,15 @@ package dao;
 import dao.UserDAOImplementation;
 import entity.*;
 
+import java.sql.Date;
 import java.util.List;
 
 public class DaoTestMain {
     public static void main(String[] args) {
         FoodDAOImplementation foodDao = new FoodDAOImplementation();
-        List<Food> foods = foodDao.getAllFoodsForAUser(2);
-        for (Food food : foods) {
-            System.out.println(food);
-        }
+        java.sql.Date testDate = new Date(2025 - 1900, 0, 1);
+        int entries = foodDao.getAllFoodEntriesForAWeeklyPeriod(testDate);
+        System.out.println(entries);
+
     }
 }

@@ -133,10 +133,22 @@ public  class FoodDAOImplementation implements FoodDAO {
         return foods;
     }
 
-//nuk eshte e implentuar sakte pasi e kam shtuar ne menyre qe ta bej klasen jo abstrakte
     @Override
-    public List<Food> getAllFoodsForAWeeklyPeriod(java.util.Date startingDate) {
-        return null;
+    public int getAllFoodEntriesForAWeeklyPeriod(java.sql.Date startingDate) {
+        String sql = "SELECT COUNT(*) FROM user_foods WHERE date_consumed BETWEEN DATE_SUB(?, INTERVAL 6 DAY) AND ?";
+        try(Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement pstmt = connection.prepareStatement(sql)){
+            pstmt.setDate(1, (Date) startingDate);
+            pstmt.setDate(2, (Date) startingDate);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                return rs.getInt(1);
+            }else{
+                return 0;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
