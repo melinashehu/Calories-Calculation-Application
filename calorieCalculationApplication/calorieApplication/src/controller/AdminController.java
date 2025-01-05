@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import Report.*;
 
 
 public class AdminController implements Initializable {
@@ -132,6 +133,11 @@ public class AdminController implements Initializable {
         });
     }
 
+    private void loadAdminReport(){
+        AdminReport adminReport = new AdminReport();
+        adminReport.compareFoodEntriesPerWeek();
+
+    }
     private void openListOfFoodsPerUserWindow(User selectedUser) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/FoodListPerUser.fxml"));
