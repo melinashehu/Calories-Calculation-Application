@@ -1,4 +1,11 @@
 package controller;
+
+/**
+ * Controller class for the Register functionality.
+ * This class handles the user interaction with the register form.
+ * Any modifications should be carefully reviewed to prevent security vulnerabilities.
+ */
+
 import dao.*;
 import entity.*;
 import javafx.fxml.FXML;
