@@ -21,6 +21,8 @@ import java.util.ResourceBundle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import Report.*;
+import javafx.scene.text.Text;
+import service.AdminService;
 
 
 public class AdminController implements Initializable {
@@ -37,13 +39,22 @@ public class AdminController implements Initializable {
     private TableColumn<User, JFXButton> foodsCol;
     @FXML
     private TableColumn<User, JFXButton> deleteUserCol;
-
-
+    @FXML
+    private JFXButton refreshReportButton;
+    @FXML
+    private Text reportText;
+    @FXML
+    private TableView<User> caloriesTable;
+    @FXML
+    private TableColumn<User, String> userNameColumn;
+    @FXML
+    private TableColumn<User, Double> avgCaloriesColumn;
     UserDAOImplementation userDAO = new UserDAOImplementation();
 
     public void initialize(URL url, ResourceBundle rb) {
         try {
             loadUserData();
+            loadAdminReport();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -133,11 +144,24 @@ public class AdminController implements Initializable {
         });
     }
 
+    /**
+     *
+     * @author: Amina
+     */
     private void loadAdminReport(){
-        AdminReport adminReport = new AdminReport();
-        adminReport.compareFoodEntriesPerWeek();
+        refreshReport();
+        AdminService adminService = new AdminService();
+        String report = adminService.printFoodEntriesPerWeekComparison();
+        reportText.setText(report);
 
+        List<User> reportList = adminService.getAvgCaloriesPerUserLast7Days();
+        //System.out.println("Loaded report data: " + reportList.size());
+        ObservableList<User> userObservableList = FXCollections.observableArrayList(reportList);
+        userNameColumn.setCellValueFactory(new PropertyValueFactory<>("userName"));
+        avgCaloriesColumn.setCellValueFactory(new PropertyValueFactory<>("avgCalories"));
+        caloriesTable.setItems(userObservableList);
     }
+
     private void openListOfFoodsPerUserWindow(User selectedUser) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/FoodListPerUser.fxml"));
@@ -182,5 +206,17 @@ public class AdminController implements Initializable {
         List<User> users = userDAO.getAllUsers();
         ObservableList<User> userObservableList = FXCollections.observableArrayList(users);
         usersTable.setItems(userObservableList);
+    }
+
+    /**
+     *
+     * @author: Amina
+     */
+    @FXML
+    private void refreshReport(){
+        AdminService adminService = new AdminService();
+        List<User> reportList = adminService.getAvgCaloriesPerUserLast7Days();
+        ObservableList<User> userObservableList = FXCollections.observableArrayList(reportList);
+        caloriesTable.setItems(userObservableList);
     }
 }

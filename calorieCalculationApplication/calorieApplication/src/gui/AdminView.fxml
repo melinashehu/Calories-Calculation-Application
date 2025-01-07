@@ -11,12 +11,12 @@
 
 <?import java.net.URL?>
 
-<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" text="Admin Dashboard" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AdminController">
+<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" text="Admin Dashboard" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AdminController">
     <stylesheets>
         <URL value="@styleUserTable.css" />
     </stylesheets>
     <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: #85b48a;">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="600.0" style="-fx-background-color: #85b48a;">
             <children>
                 <Text layoutX="24.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="List of users">
                     <font>
@@ -37,15 +37,25 @@
                 </TableView>
 
 
-                <Pane layoutX="21.0" layoutY="350.0" prefHeight="130.0" prefWidth="546.0" style="-fx-background-color: #ffffff; -fx-border-color: black; -fx-border-width: 2;">
+                <Pane layoutX="21.0" layoutY="350.0" prefHeight="550.0" prefWidth="546.0" style="-fx-background-color: #ffffff; -fx-border-color: black; -fx-border-width: 2;">
                     <children>
-                        <Text fx:id="reportText" layoutX="10.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ketu do shfaqet raporti" wrappingWidth="526.0">
+                        <Text fx:id="reportText" layoutX="10.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="526.0">
                             <font>
                                 <Font name="System" size="14.0" />
                             </font>
                         </Text>
 
-                        <JFXButton fx:id="refreshReportButton" layoutX="210.0" layoutY="90.0" prefHeight="30.0" prefWidth="120.0" text="Refresh Report" />
+                        <AnchorPane layoutX="20.0" layoutY="420.0" prefHeight="250.0" prefWidth="540.0">
+                            <TableView fx:id="caloriesTable">
+                                <columns>
+                                    <TableColumn fx:id="userNameColumn" prefWidth="270.0" text="User Name"/>
+                                    <TableColumn fx:id="avgCaloriesColumn" prefWidth="270.0" text="Average Calories" />
+                                </columns>
+                            </TableView>
+                        </AnchorPane>
+
+
+                        <JFXButton fx:id="refreshReportButton" layoutX="210.0" layoutY="90.0" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #85b48a; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-size: 14px;" text="Refresh" onAction="#refreshReport" />
                     </children>
                 </Pane>
             </children>
