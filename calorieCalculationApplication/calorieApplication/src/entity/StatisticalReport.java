@@ -1,5 +1,12 @@
 package entity;
 
+/**
+ * Represents a user's report in the system.
+ * This class should NOT be modified without careful consideration.
+ * Any changes to this class can impact the other parts of the application.
+ */
+
+
 public class StatisticalReport {
     private int userId;
     private double totalCaloriesConsumed;
