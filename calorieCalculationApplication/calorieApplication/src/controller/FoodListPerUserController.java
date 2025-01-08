@@ -37,7 +37,6 @@ public class FoodListPerUserController {
     private TableColumn<Food, Date> dateConsumedCol;
     @FXML
     private TextField userNameTextField;
-
     private User selectedUser;
     FoodDAOImplementation foodDao = new FoodDAOImplementation();
 

@@ -1,4 +1,5 @@
 package controller;
+
 import calendar.Calendar;
 import dao.FoodDAO;
 import dao.FoodDAOImplementation;
@@ -22,7 +23,6 @@ public class HomeController {
     @FXML private TextField calorieField;
     @FXML private TextField priceField;
     @FXML private DatePicker dateConsumedField;
-
     private StatisticalReportService reportService = new StatisticalReportService();
 
     @FXML

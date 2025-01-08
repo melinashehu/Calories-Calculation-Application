@@ -1,5 +1,11 @@
 package dao;
 
+/**
+ * Implementation of the UserDAO interface.
+ * This class provides methods to interact with the 'users' table in the database.
+ * Incorrect changes to the SQL queries or methods in this class can lead to data corruption or loss of functionality.
+ */
+
 import com.mysql.cj.x.protobuf.MysqlxPrepare;
 import entity.*;
 import dao.DatabaseConnection;

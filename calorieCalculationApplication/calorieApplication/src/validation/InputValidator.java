@@ -1,5 +1,13 @@
 package validation;
+
+/**
+ *  Validates inputs taken from the register/login form.
+ *  This class should NOT be modified without careful consideration.
+ *  Any changes to this class can impact the other parts of the application.
+ */
+
 import java.util.regex.Pattern;
+
 public class InputValidator {
 
     public static boolean isEmpty(String input){

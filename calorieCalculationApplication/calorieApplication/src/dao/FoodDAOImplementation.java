@@ -1,5 +1,11 @@
 package dao;
 
+/**
+ * Implementation of the FoodDAO interface.
+ * This class provides methods to interact with the 'user_foods' table in the database.
+ * Incorrect changes to the SQL queries or methods in this class can lead to data corruption or loss of functionality.
+ */
+
 import entity.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +17,6 @@ import java.util.List;
 import java.sql.Date;
 import calendar.Calendar;
 import login.UserSession;
-
 
 public  class FoodDAOImplementation implements FoodDAO {
 
