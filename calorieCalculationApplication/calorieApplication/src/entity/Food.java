@@ -1,5 +1,11 @@
 package entity;
 
+/**
+ * Represents a food entry in the system.
+ * This class should NOT be modified without careful consideration.
+ * Any changes to this class can impact the other parts of the application.
+ */
+
 import java.util.Date;
 
 public class Food {

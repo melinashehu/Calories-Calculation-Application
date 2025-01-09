@@ -1,5 +1,11 @@
 package controller;
 
+/**
+ * Controller class for the Login functionality.
+ * This class handles the user interaction with the login form.
+ * Any modifications should be carefully reviewed to prevent security vulnerabilities.
+ */
+
 import javafx.fxml.FXML;
 import dao.*;
 import javafx.fxml.FXMLLoader;

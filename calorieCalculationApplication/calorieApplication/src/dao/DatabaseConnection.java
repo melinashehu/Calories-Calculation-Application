@@ -1,4 +1,11 @@
 package dao;
+
+/**
+ * Handles the connection to the application's database.
+ * Do NOT modify this class unless there is a need to change the database URL, username or password.
+ * Incorrect modifications can break the connection to the database and disrupt the entire application.
+ */
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;

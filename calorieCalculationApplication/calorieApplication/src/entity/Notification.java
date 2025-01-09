@@ -1,10 +1,16 @@
 package entity;
 
+/**
+ * Represents a notification in the system.
+ * This class should NOT be modified without careful consideration.
+ * Any changes to this class can impact the other parts of the application.
+ */
+
 public class Notification {
     private int id;
     private int userId;
     private String notificationText;
-    private String role; //ne baze te rolit do te shfaqet mesazhi (per t'u ri-menduar kjo pjese)
+    private String role;
 
     public Notification(int id, int userId, String notificationText, String role) {
         this.id = id;

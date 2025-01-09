@@ -8,7 +8,7 @@ import java.time.ZoneId;
 
 public class Calendar {
 
-    public static java.sql.Date calculateEndWeekDate(Date startingDate){
+    public static java.sql.Date calculateEndWeekDate(java.util.Date startingDate){
         LocalDate localStartDate = Instant.ofEpochMilli(startingDate.getTime())
                 .atZone(ZoneId.systemDefault())
                 .toLocalDate();

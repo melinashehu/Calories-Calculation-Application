@@ -1,5 +1,11 @@
 package dao;
 
+/**
+ * Implementation of the FoodDAO interface.
+ * This class provides methods to interact with the 'user_foods' table in the database.
+ * Incorrect changes to the SQL queries or methods in this class can lead to data corruption or loss of functionality.
+ */
+
 import entity.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +17,6 @@ import java.util.List;
 import java.sql.Date;
 import calendar.Calendar;
 import login.UserSession;
-
 
 public  class FoodDAOImplementation implements FoodDAO {
 
@@ -133,10 +138,22 @@ public  class FoodDAOImplementation implements FoodDAO {
         return foods;
     }
 
-//nuk eshte e implentuar sakte pasi e kam shtuar ne menyre qe ta bej klasen jo abstrakte
     @Override
-    public List<Food> getAllFoodsForAWeeklyPeriod(java.util.Date startingDate) {
-        return null;
+    public int getAllFoodEntriesForAWeeklyPeriod(java.sql.Date startingDate) {
+        String sql = "SELECT COUNT(*) FROM user_foods WHERE date_consumed BETWEEN DATE_SUB(?, INTERVAL 6 DAY) AND ?";
+        try(Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement pstmt = connection.prepareStatement(sql)){
+            pstmt.setDate(1, (Date) startingDate);
+            pstmt.setDate(2, (Date) startingDate);
+            ResultSet rs = pstmt.executeQuery();
+            if(rs.next()){
+                return rs.getInt(1);
+            }else{
+                return 0;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
