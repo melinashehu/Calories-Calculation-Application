@@ -3,6 +3,7 @@ package service;
 import Report.AdminReport;
 import calendar.Calendar;
 import dao.UserDAOImplementation;
+import entity.Food;
 import entity.User;
 import login.UserSession;
 
@@ -25,6 +26,7 @@ public class TestAdminService {
         adminUser.setRole("admin");
         UserSession.setLoggedInUser(adminUser);
 
+
         AdminService adminService = new AdminService();
 
         /*if (!(UserSession.getLoggedInUser().getRole().equals("admin"))) {
@@ -34,7 +36,7 @@ public class TestAdminService {
         System.out.println("Testimi i metodes generateWeeklyFoodReport");
         try {
             Date startingDate = Date.valueOf("2024-12-28");
-            int userId = 2;
+            int userId = 1;
             System.out.println(adminService.generateWeeklyFoodReport(userId, startingDate));
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
@@ -44,7 +46,10 @@ public class TestAdminService {
             Date startingDate = Date.valueOf("2024-12-28");
             List<AdminReport> users = adminService.usersWhoExceededMonthlySpendingLimit(startingDate);
             System.out.println("Users who exceeded monthly spending limit:");
-            users.forEach(System.out::println);
+            //users.forEach(System.out::println);
+            for(AdminReport user : users){
+                System.out.println(user);
+            }
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
