@@ -1,11 +1,19 @@
 package entity;
 
+/**
+ * Represents a user in the system.
+ * This class should NOT be modified without careful consideration.
+ * Any changes to this class can impact the other parts of the application.
+ */
+
+
 public class User {
     private int id;
     private String userName;
     private String email;
     private String password;
     private String role;
+    private double avgCalories;
 
     public User(){
 
@@ -23,6 +31,11 @@ public class User {
         this.id = id;
         this.userName = userName;
         this.email = email;
+    }
+
+    public User(String userName, double avgCalories) {
+        this.userName = userName;
+        this.avgCalories = avgCalories;
     }
 
     public int getUserId() {
@@ -53,6 +66,13 @@ public class User {
 
     public String getRole(){return role;}
     public void setRole(String role){this.role = role;}
+
+    public double getAvgCalories() {
+        return avgCalories;
+    }
+    public void setAvgCalories(double averageCalories) {
+        this.avgCalories = averageCalories;
+    }
 
     public String toString(){
         return "User{"+"name= "+userName+" , email= "+email+", password= "+password+", role="+role+"}";
