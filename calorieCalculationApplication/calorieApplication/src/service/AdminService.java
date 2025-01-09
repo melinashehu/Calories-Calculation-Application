@@ -29,31 +29,51 @@ public class AdminService {
         return loggedInUser != null && "admin".equals(loggedInUser.getRole());
     }
 
-    public AdminReport generateWeeklyFoodReport(int userId, Date startingDate){
+    /**
+     * author:Edna
+     */
+    public AdminReport generateWeeklyFoodReport(int userId, Date startingDate){//testuar dhe funksionon
 
         if(!isAdmin()){
             throw new SecurityException("You have no access to this information!");
         }
 
         double avgWeeklyConsumedCaloriesForAUser;
-
+        double sumOfCalorieValuesForAWeeklyPeriodForAUser = 0.0;
         List<Food> foods = foodDAO.getAllFoodsFromAWeeklyPeriodForAUser(userId,startingDate);
-        avgWeeklyConsumedCaloriesForAUser = foodDAO.getAvgCalorieValueFromAWeeklyPeriodForAUser(userId, startingDate);
-        User user = userDAO.getUserById(userId);
-        return new AdminReport(user,foods,avgWeeklyConsumedCaloriesForAUser);
+            List<Double> calorieValues = foodDAO.getCalorieValuesForAWeeklyPeriodForAUser(userId,startingDate);
+            /*for(double calorie : calorieValues){
+                sumOfCalorieValuesForAWeeklyPeriodForAUser += calorie;
+            }*/
+        sumOfCalorieValuesForAWeeklyPeriodForAUser = calorieValues.stream()
+                .mapToDouble(Double::doubleValue)
+                .sum();
+
+            avgWeeklyConsumedCaloriesForAUser = sumOfCalorieValuesForAWeeklyPeriodForAUser/foods.size();
+            User user = userDAO.getUserById(userId);
+            return new AdminReport(user,foods,avgWeeklyConsumedCaloriesForAUser);
 
     }
 
-    public List<AdminReport> usersWhoExceededMonthlySpendingLimit(Date startingDate){
+    /**
+     * author:Edna
+     */
+
+    public List<AdminReport> usersWhoExceededMonthlySpendingLimit(Date startingDate){//testuar dhe funksionon
         if(!isAdmin()){
             throw new SecurityException("You have no access to this information!");
         }
         double monthlyExpenditureThreshold = 1000;
         List<AdminReport> usersWhoExceededMonthlySpendingLimit = new ArrayList<>();
         List<Integer> allUsersIds = userDAO.getAllUsersIds();
+        double monthlySpendingForAUser = 0.0;
 
         for(Integer userId : allUsersIds){
-            double monthlySpendingForAUser = reportCalculation.calculateMonthlySpendingForAUser(userId,startingDate);
+            List<Double> moneySpentFromAUser = reportCalculation.getMoneySpentFromAUser(userId,startingDate);
+
+            for(Double moneySpent : moneySpentFromAUser) {
+                monthlySpendingForAUser += moneySpent;
+            }
 
             if(monthlySpendingForAUser > monthlyExpenditureThreshold){
                 User user = userDAO.getUserById(userId);
