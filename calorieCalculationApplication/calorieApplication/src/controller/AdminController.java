@@ -33,7 +33,7 @@ public class AdminController implements Initializable {
     @FXML
     private TableColumn<User, String> userEmailCol;
     @FXML
-    private TableColumn<User, JFXButton> editUserCol;
+    private TableColumn<User, JFXButton> foodsCol;
     @FXML
     private TableColumn<User, JFXButton> deleteUserCol;
 
@@ -72,7 +72,7 @@ public class AdminController implements Initializable {
             System.err.println("There was an error loading the users' data.");
         }
 //Shtohet qeliza qe permban butonin edit
-        editUserCol.setCellFactory(column -> {
+        foodsCol.setCellFactory(column -> {
             return new TableCell<User, JFXButton>() {
                 @Override
                 protected void updateItem(JFXButton item, boolean empty) {
@@ -82,14 +82,15 @@ public class AdminController implements Initializable {
                             setGraphic(null);
                             setText(null);
                         } else {
-                            Button editButton = new Button("Edit");
-                            editButton.setOnAction(event -> {
+                            Button foodsButton = new Button("Foods");
+                            foodsButton.getStyleClass().add("foods-button");
+                            foodsButton.setOnAction(event -> {
                                 User selectedUser = getTableView().getItems().get(getIndex());
                                 if (selectedUser != null) {
                                     openEditUserWindow(selectedUser);
                                 }
                             });
-                            setGraphic(editButton);
+                            setGraphic(foodsButton);
                             setText(null);
                         }
                     } catch (Exception e) {
@@ -112,7 +113,8 @@ public class AdminController implements Initializable {
                             setGraphic(null);
                             setText(null);
                         } else {
-                            Button deleteButton = new Button("Delete");
+                            JFXButton deleteButton = new JFXButton("Delete");
+                            deleteButton.getStyleClass().add("delete-button");
                             deleteButton.setOnAction(event -> {
                                 User selectedUser = getTableView().getItems().get(getIndex());
                                 if (selectedUser != null) {
@@ -134,7 +136,7 @@ public class AdminController implements Initializable {
 
     private void openEditUserWindow(User selectedUser) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/EditUserFoods.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/FoodListPerUser.fxml"));
             Parent parent = loader.load();
             FoodListPerUserController controller = loader.getController();
             controller.initializeData(selectedUser);
