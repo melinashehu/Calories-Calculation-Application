@@ -34,7 +34,7 @@ public class TestAdminService {
         System.out.println("Testimi i metodes generateWeeklyFoodReport");
         try {
             Date startingDate = Date.valueOf("2024-12-28");
-            int userId = 2;
+            int userId = 1;
             System.out.println(adminService.generateWeeklyFoodReport(userId, startingDate));
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
