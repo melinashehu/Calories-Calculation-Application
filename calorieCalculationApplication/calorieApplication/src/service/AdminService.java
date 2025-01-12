@@ -33,31 +33,6 @@ public class AdminService {
     /**
      * @author :Edna
      */
-    public AdminReport generateWeeklyFoodReport(int userId, Date startingDate){//testuar dhe funksionon
-
-        if(!isAdmin()){
-            throw new SecurityException("You have no access to this information!");
-        }
-
-        double avgWeeklyConsumedCaloriesForAUser;
-        double sumOfCalorieValuesForAWeeklyPeriodForAUser = 0.0;
-
-        List<Food> foods = foodDAO.getAllFoodsFromAWeeklyPeriodForAUser(userId,startingDate);
-        List<Double> calorieValues = foodDAO.getCalorieValuesForAWeeklyPeriodForAUser(userId,startingDate);
-
-        for(double calories : calorieValues){
-            sumOfCalorieValuesForAWeeklyPeriodForAUser += calories;
-        }
-
-        avgWeeklyConsumedCaloriesForAUser = foods.isEmpty() ? 0.0 : sumOfCalorieValuesForAWeeklyPeriodForAUser/foods.size();
-        User user = userDAO.getUserById(userId);
-        return new AdminReport(user,foods,avgWeeklyConsumedCaloriesForAUser);
-
-    }
-
-    /**
-     * @author :Edna
-     */
 
     public List<AdminReport> usersWhoExceededMonthlySpendingLimit(Date startingDate){//testuar dhe funksionon
         if(!isAdmin()){
@@ -91,6 +66,11 @@ public class AdminService {
      * @author: Amina
      */
     public List<User> getAvgCaloriesPerUserLast7Days(){ //punon ne console
+
+        if(!isAdmin()){
+            throw new SecurityException("You have no access to this information!");
+        }
+
         List<User> reportList = new ArrayList<>();
         LocalDate today = LocalDate.now();
         Date startDate = Date.valueOf(today.minusDays(7));
