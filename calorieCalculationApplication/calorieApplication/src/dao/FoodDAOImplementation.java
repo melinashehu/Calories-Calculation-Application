@@ -110,6 +110,57 @@ public  class FoodDAOImplementation implements FoodDAO {
         }
         return calorieValuesForAWeeklyPeriodForAUser;
     }
+    /**
+     * @author :Edna
+     */
+    @Override
+    public List<Double> getMoneySpentFromAUser(int userId, java.sql.Date startingDate){
+        String sql = "SELECT food_price FROM user_foods WHERE user_id = ? AND date_consumed BETWEEN ? AND DATE_ADD(?, INTERVAL 1 MONTH)";
+        List<Double> getSpendingForAUser = new ArrayList<>();
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setInt(1, userId);
+            pstmt.setDate(2, startingDate);
+            pstmt.setDate(3, startingDate);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                getSpendingForAUser.add(rs.getDouble("food_price"));
+            }
+        } catch (SQLException e) {
+            System.err.println("Error calculating monthly spending for user: " + e.getMessage());
+        }
+        return getSpendingForAUser;
+    }
+    /**
+     * @author :Melina
+     */
+    @Override
+    public List<Food> getFoodsForUserByDate(int userId) {
+        String sql = "SELECT * FROM user_foods WHERE user_id = ? ORDER BY date_consumed";
+        List<Food> foods = new ArrayList<>();
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setInt(1, userId);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                foods.add(new Food(
+                        rs.getInt("user_food_id"),
+                        rs.getInt("user_id"),
+                        rs.getString("food_name"),
+                        rs.getDouble("calorie_value"),
+                        rs.getDouble("food_price"),
+                        rs.getDate("date_consumed")
+                ));
+            }
+        } catch (SQLException e) {
+            System.err.println("Error fetching foods for user: " + e.getMessage());
+        }
+        return foods;
+    }
 
 
     @Override
@@ -205,4 +256,6 @@ public  class FoodDAOImplementation implements FoodDAO {
             return false;
         }
     }
+
+
 }

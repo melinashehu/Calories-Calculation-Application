@@ -15,6 +15,7 @@ public class User {
     private String role;
     private double avgCalories;
 
+
     public User(){
 
     }
