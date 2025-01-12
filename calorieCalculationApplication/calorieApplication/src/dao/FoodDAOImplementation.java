@@ -91,13 +91,10 @@ public  class FoodDAOImplementation implements FoodDAO {
         return foods;
     }
 
-    public double getAvgCalorieValueFromAWeeklyPeriodForAUser(int userId, java.sql.Date startingDate){
+    public List<Double> getCalorieValuesForAWeeklyPeriodForAUser(int userId, java.sql.Date startingDate){
         Date endDate = Calendar.calculateEndWeekDate(startingDate);
-        String sql = "SELECT AVG(calorie_value) AS avg_calories " +
-                "FROM user_foods " +
-                "WHERE user_id = ? AND date_consumed BETWEEN ? AND ?";
-
-        double avgCalories = 0.0;
+        String sql = "SELECT calorie_value FROM user_foods WHERE user_id = ? AND date_consumed BETWEEN ? AND ?";
+        List<Double> calorieValuesForAWeeklyPeriodForAUser = new ArrayList<>();
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -105,14 +102,15 @@ public  class FoodDAOImplementation implements FoodDAO {
             pstmt.setDate(2, startingDate);
             pstmt.setDate(3,endDate);
             ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
-                avgCalories = rs.getDouble("avg_calories");
+            while (rs.next()) {
+                calorieValuesForAWeeklyPeriodForAUser.add(rs.getDouble("calorie_value"));
             }
         } catch (SQLException e) {
-            System.err.println("Error fetching foods for user: " + e.getMessage());
+            System.err.println("Error fetching calorie values for user: " + e.getMessage());
         }
-        return avgCalories;
+        return calorieValuesForAWeeklyPeriodForAUser;
     }
+
 
     @Override
     public List<Food> getAllFoodsForAUser(int userId) {

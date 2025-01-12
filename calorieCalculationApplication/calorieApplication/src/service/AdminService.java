@@ -30,22 +30,11 @@ public class AdminService {
         return loggedInUser != null && "admin".equals(loggedInUser.getRole());
     }
 
-    public AdminReport generateWeeklyFoodReport(int userId, Date startingDate){
+    /**
+     * @author :Edna
+     */
 
-        if(!isAdmin()){
-            throw new SecurityException("You have no access to this information!");
-        }
-
-        double avgWeeklyConsumedCaloriesForAUser;
-
-        List<Food> foods = foodDAO.getAllFoodsFromAWeeklyPeriodForAUser(userId,startingDate);
-        avgWeeklyConsumedCaloriesForAUser = foodDAO.getAvgCalorieValueFromAWeeklyPeriodForAUser(userId, startingDate);
-        User user = userDAO.getUserById(userId);
-        return new AdminReport(user,foods,avgWeeklyConsumedCaloriesForAUser);
-
-    }
-
-    public List<AdminReport> usersWhoExceededMonthlySpendingLimit(Date startingDate){ //testuar ne console, punon
+    public List<AdminReport> usersWhoExceededMonthlySpendingLimit(Date startingDate){//testuar dhe funksionon
         if(!isAdmin()){
             throw new SecurityException("You have no access to this information!");
         }
@@ -54,12 +43,20 @@ public class AdminService {
         List<Integer> allUsersIds = userDAO.getAllUsersIds();
 
         for(Integer userId : allUsersIds){
-            double monthlySpendingForAUser = reportCalculation.calculateMonthlySpendingForAUser(userId,startingDate);
+            double monthlySpendingForAUser = 0.0;
+            List<Double> moneySpentForAUser = reportCalculation.getMoneySpentFromAUser(userId,startingDate);
+            for(double moneySpent : moneySpentForAUser){
+                monthlySpendingForAUser += moneySpent;
+            }
 
             if(monthlySpendingForAUser > monthlyExpenditureThreshold){
                 User user = userDAO.getUserById(userId);
                 usersWhoExceededMonthlySpendingLimit.add(new AdminReport(user));
-            }else System.out.println("No user has exceeded the monthly expenditure.");
+            }
+        }
+
+        if(usersWhoExceededMonthlySpendingLimit.isEmpty()){
+            System.out.println("No user has exceeded the monthly expenditure.");
         }
         return usersWhoExceededMonthlySpendingLimit;
     }
@@ -69,6 +66,11 @@ public class AdminService {
      * @author: Amina
      */
     public List<User> getAvgCaloriesPerUserLast7Days(){ //punon ne console
+
+        if(!isAdmin()){
+            throw new SecurityException("You have no access to this information!");
+        }
+
         List<User> reportList = new ArrayList<>();
         LocalDate today = LocalDate.now();
         Date startDate = Date.valueOf(today.minusDays(7));
