@@ -41,13 +41,15 @@ public class AdminService {
 
         double avgWeeklyConsumedCaloriesForAUser;
         double sumOfCalorieValuesForAWeeklyPeriodForAUser = 0.0;
-        List<Food> foods = foodDAO.getAllFoodsFromAWeeklyPeriodForAUser(userId,startingDate);
 
+        List<Food> foods = foodDAO.getAllFoodsFromAWeeklyPeriodForAUser(userId,startingDate);
         List<Double> calorieValues = foodDAO.getCalorieValuesForAWeeklyPeriodForAUser(userId,startingDate);
+
         for(double calories : calorieValues){
             sumOfCalorieValuesForAWeeklyPeriodForAUser += calories;
         }
-        avgWeeklyConsumedCaloriesForAUser = sumOfCalorieValuesForAWeeklyPeriodForAUser/foods.size();
+
+        avgWeeklyConsumedCaloriesForAUser = foods.isEmpty() ? 0.0 : sumOfCalorieValuesForAWeeklyPeriodForAUser/foods.size();
         User user = userDAO.getUserById(userId);
         return new AdminReport(user,foods,avgWeeklyConsumedCaloriesForAUser);
 
@@ -64,8 +66,9 @@ public class AdminService {
         double monthlyExpenditureThreshold = 1000;
         List<AdminReport> usersWhoExceededMonthlySpendingLimit = new ArrayList<>();
         List<Integer> allUsersIds = userDAO.getAllUsersIds();
-        double monthlySpendingForAUser = 0.0;
+
         for(Integer userId : allUsersIds){
+            double monthlySpendingForAUser = 0.0;
             List<Double> moneySpentForAUser = reportCalculation.getMoneySpentFromAUser(userId,startingDate);
             for(double moneySpent : moneySpentForAUser){
                 monthlySpendingForAUser += moneySpent;
@@ -74,11 +77,14 @@ public class AdminService {
             if(monthlySpendingForAUser > monthlyExpenditureThreshold){
                 User user = userDAO.getUserById(userId);
                 usersWhoExceededMonthlySpendingLimit.add(new AdminReport(user));
-            }else System.out.println("No user has exceeded the monthly expenditure.");
+            }
+        }
+
+        if(usersWhoExceededMonthlySpendingLimit.isEmpty()){
+            System.out.println("No user has exceeded the monthly expenditure.");
         }
         return usersWhoExceededMonthlySpendingLimit;
     }
-
 
     /**
      *
