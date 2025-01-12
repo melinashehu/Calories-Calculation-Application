@@ -90,7 +90,7 @@ public  class FoodDAOImplementation implements FoodDAO {
         }
         return foods;
     }
-    
+
     public List<Double> getCalorieValuesForAWeeklyPeriodForAUser(int userId, java.sql.Date startingDate){
         Date endDate = Calendar.calculateEndWeekDate(startingDate);
         String sql = "SELECT calorie_value FROM user_foods WHERE user_id = ? AND date_consumed BETWEEN ? AND ?";
