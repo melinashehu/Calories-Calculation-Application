@@ -17,12 +17,11 @@ public class AdminService {
 
     private final UserDAOImplementation userDAO;
     private final FoodDAOImplementation foodDAO;
-    private StatisticalReportDAOImplementation reportCalculation;
+    private FoodDAOImplementation reportCalculation;
 
     public AdminService(){
         this.foodDAO = new FoodDAOImplementation();
         this.userDAO = new UserDAOImplementation();
-        this.reportCalculation = new StatisticalReportDAOImplementation();
     }
 
     private boolean isAdmin() {//kontrollimi nese user-i eshte admin

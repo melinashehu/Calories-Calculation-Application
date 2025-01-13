@@ -15,5 +15,7 @@ public interface FoodDAO {
     public boolean addFood(Food food);
     public boolean deleteFood(int id);
     public boolean updateFood(Food food);
+    public List<Food> getFoodsForUserByDate(int userId);
+    public List<Double> getMoneySpentFromAUser(int userId, java.sql.Date startingDate);
     public List<Double> getCalorieValuesForAWeeklyPeriodForAUser(int userId, java.sql.Date startingDate);
 }
