@@ -8,6 +8,9 @@ package entity;
 
 import java.util.Date;
 
+/**
+ * @author :Amina
+ */
 public class Food {
     private int id;
     private int userId;

@@ -18,6 +18,9 @@ import validation.*;
 import gui.*;
 import java.io.IOException;
 
+/**
+ * @author :Amina
+ */
 public class RegisterController {
     @FXML
     private TextField nameField;

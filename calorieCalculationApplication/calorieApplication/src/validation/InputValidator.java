@@ -8,6 +8,9 @@ package validation;
 
 import java.util.regex.Pattern;
 
+/**
+ * @author :Amina
+ */
 public class InputValidator {
 
     public static boolean isEmpty(String input){

@@ -6,7 +6,9 @@ package entity;
  * Any changes to this class can impact the other parts of the application.
  */
 
-
+/**
+ * @author :Amina
+ */
 public class User {
     private int id;
     private String userName;
