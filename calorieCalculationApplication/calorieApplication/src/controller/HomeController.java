@@ -6,13 +6,19 @@ import dao.FoodDAOImplementation;
 import entity.Food;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import service.UserService;
 import login.UserSession;
 import service.*;
+
+import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
 
@@ -32,11 +38,13 @@ public class HomeController {
     @FXML
     private VBox moneyWarningPopup;
     private UserService reportService = new UserService();
-
     @FXML
     private void initialize() {
         updateUserReport();
     }
+
+    LocalDate monthStartDate = LocalDate.now().minusMonths(1);
+    Date sqlMonthStartDate = Date.valueOf(monthStartDate);
     /**
      * @author :Melina
      */
@@ -44,8 +52,6 @@ public class HomeController {
         int userId = UserSession.getLoggedInUser().getUserId();
         double calorieThreshold = 2500.0;
         LocalDate weekStartDate = LocalDate.now().minusDays(7);
-        LocalDate monthStartDate = weekStartDate.minusMonths(1);
-        Date sqlMonthStartDate = Date.valueOf(monthStartDate);
         Date sqlWeekStartDate = Date.valueOf(weekStartDate);
         StatisticalReport report = reportService.generateUserReport(userId, sqlWeekStartDate, calorieThreshold);
 
@@ -100,7 +106,7 @@ public class HomeController {
 
 
     /**
-     * @author :Amina
+     * @author of all methods below:Amina
      */
     public void showWarningPopup(){
         warningPopup.setVisible(true);
@@ -113,5 +119,17 @@ public class HomeController {
     }
     public void closeMoneyWarningPopup(){
         moneyWarningPopup.setVisible(false);
+    }
+    public void handleShowMyFoods(){
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/AllFoods.fxml"));
+            Parent root = fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setTitle("All Foods");
+            stage.setScene(new Scene(root));
+            stage.show();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
 }
