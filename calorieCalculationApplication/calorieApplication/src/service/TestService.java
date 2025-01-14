@@ -32,6 +32,7 @@ public class TestService {
         UserService userService = new UserService();
         java.sql.Date testDate = java.sql.Date.valueOf("2025-01-01");
         System.out.println(userService.calculateDaysAboveCalorieThresholdPerWeek(2, 2500));
+        System.out.println(userService.sumofTodaysTotalCalories(2));
        //report.printFoodEntriesPerWeekComparison();
         /*List<User> reportList = report.getAvgCaloriesPerUserLast7Days();
         if(reportList.isEmpty()){
