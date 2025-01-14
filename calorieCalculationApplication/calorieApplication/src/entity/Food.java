@@ -6,7 +6,7 @@ package entity;
  * Any changes to this class can impact the other parts of the application.
  */
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * @author :Amina
@@ -17,7 +17,7 @@ public class Food {
     private String foodName;
     private double calorie;
     private double price;
-    private Date dateWhenConsumed;
+    private java.sql.Date dateWhenConsumed;
 
     public Food(){
 
