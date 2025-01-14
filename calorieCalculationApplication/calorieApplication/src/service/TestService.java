@@ -1,11 +1,11 @@
 package service;
 
-import Report.AdminReport;
 import entity.*;
 
+import java.sql.Date;
 import java.util.List;
 
-public class TestReport {
+public class TestService {
     public static void main(String[] args) {
         /*Scanner scanner = new Scanner(System.in);
         System.out.print("Vendosni ID-në e përdoruesit: ");
@@ -29,15 +29,17 @@ public class TestReport {
         System.out.println("Shpenzimet totale: " + report.getTotalSpendingMoney());
         System.out.println("Ditët mbi pragun e kalorive: " + report.getDaysAboveCalorieThreshold());*/
 
-        AdminService report = new AdminService();
+        UserService userService = new UserService();
+        java.sql.Date testDate = java.sql.Date.valueOf("2025-01-01");
+        System.out.println(userService.calculateDaysAboveCalorieThresholdPerWeek(2, 2500));
        //report.printFoodEntriesPerWeekComparison();
-        List<User> reportList = report.getAvgCaloriesPerUserLast7Days();
+        /*List<User> reportList = report.getAvgCaloriesPerUserLast7Days();
         if(reportList.isEmpty()){
             System.out.println("No reports found");
         }else{
             for(User user : reportList){
                 System.out.println("User: "+user.getUserName()+", Avg Calories: "+user.getAvgCalories());
             }
-        }
+        }*/
     }
 }

@@ -12,6 +12,8 @@ public class DaoTestMain {
         java.sql.Date testDate = new Date(2025 - 1900, 0, 1);
         int entries = foodDao.getAllFoodEntriesForAWeeklyPeriod(testDate);
         System.out.println(entries);
+        System.out.println(foodDao.getMoneySpentFromAUser(2,testDate));
+        System.out.println(foodDao.getFoodsForUserByDate(2));
 
     }
 }

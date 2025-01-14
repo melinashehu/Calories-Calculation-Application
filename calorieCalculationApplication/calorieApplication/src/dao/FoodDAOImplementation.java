@@ -110,6 +110,8 @@ public  class FoodDAOImplementation implements FoodDAO {
         }
         return calorieValuesForAWeeklyPeriodForAUser;
     }
+
+
     /**
      * @author :Edna
      */
@@ -133,6 +135,8 @@ public  class FoodDAOImplementation implements FoodDAO {
         }
         return getSpendingForAUser;
     }
+
+
     /**
      * @author :Melina
      */

@@ -17,7 +17,7 @@ public class UserService {
         this.foodDAO = new FoodDAOImplementation();
     }
 
-    public double calculateTotalCaloriesConsumedPerWeek(int userId,Date startingDate) {
+    public double calculateTotalCaloriesConsumedPerWeek(int userId,Date startingDate) { //testuar, punon
         List<Double> calorieValues = foodDAO.getCalorieValuesForAWeeklyPeriodForAUser(userId, startingDate);
         double totalCalories = 0.0;
         for (double calorie : calorieValues) {
@@ -25,10 +25,12 @@ public class UserService {
         }
         return totalCalories;
     }
+
+
     /**
      * @author :Melina
      */
-    public double calculateTotalMoneySpentPerWeek(int userId,Date startingDate) {
+    public double calculateTotalMoneySpentPerWeek(int userId,Date startingDate) { //testuar, punon
         List<Double> moneySpentValues = foodDAO.getMoneySpentFromAUser(userId, startingDate);
         double totalMoneySpent = 0.0;
         for (double money : moneySpentValues) {
@@ -36,10 +38,12 @@ public class UserService {
         }
         return totalMoneySpent;
     }
+
+
     /**
      * @author :Melina
      */
-    public int calculateDaysAboveCalorieThresholdPerWeek(int userId, double calorieThreshold) {
+    public int calculateDaysAboveCalorieThresholdPerWeek(int userId, double calorieThreshold) {//testuar, punon
         List<Food> foods = foodDAO.getFoodsForUserByDate(userId);
         Map<Date, Double> dailyCalories = new HashMap<>();
         for (Food food : foods) {
@@ -55,6 +59,8 @@ public class UserService {
         }
         return daysAboveThreshold;
     }
+
+
     /**
      * @author :Melina
      */
