@@ -16,6 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.stage.Stage;
@@ -23,6 +24,7 @@ import javafx.stage.StageStyle;
 import Report.*;
 import javafx.scene.text.Text;
 import service.AdminService;
+import service.UserService;
 
 
 public class AdminController implements Initializable {
@@ -39,6 +41,7 @@ public class AdminController implements Initializable {
     private TableColumn<User, JFXButton> foodsCol;
     @FXML
     private TableColumn<User, JFXButton> deleteUserCol;
+
     @FXML
     private JFXButton refreshReportButton;
     @FXML
@@ -49,6 +52,9 @@ public class AdminController implements Initializable {
     private TableColumn<User, String> userNameColumn;
     @FXML
     private TableColumn<User, Double> avgCaloriesColumn;
+    @FXML
+    private TableColumn<User, Boolean> exceededCaloriesColumn;
+    private UserService userService = new UserService();
     UserDAOImplementation userDAO = new UserDAOImplementation();
 
     public void initialize(URL url, ResourceBundle rb) {
@@ -66,6 +72,7 @@ public class AdminController implements Initializable {
         userIdCol.setCellValueFactory(new PropertyValueFactory<>("UserId"));
         userNameCol.setCellValueFactory(new PropertyValueFactory<>("UserName"));
         userEmailCol.setCellValueFactory(new PropertyValueFactory<>("UserEmail"));
+
         try {
             List<User> users = userDAO.getAllUsers();
             if (users.isEmpty()) {
@@ -155,10 +162,20 @@ public class AdminController implements Initializable {
         reportText.setText(report);
 
         List<User> reportList = adminService.getAvgCaloriesPerUserLast7Days();
-        //System.out.println("Loaded report data: " + reportList.size());
+        List<User> updatedUserList = new ArrayList<>();
+
+        for (User user : reportList) {
+            int daysAboveThreshold = userService.calculateDaysAboveCalorieThresholdPerWeek(user.getUserId(), 2000.0);
+            boolean exceededCalories = daysAboveThreshold > 0;
+            user.setExceededCalories(exceededCalories);
+
+            updatedUserList.add(user);
+        }
+
         ObservableList<User> userObservableList = FXCollections.observableArrayList(reportList);
         userNameColumn.setCellValueFactory(new PropertyValueFactory<>("userName"));
         avgCaloriesColumn.setCellValueFactory(new PropertyValueFactory<>("avgCalories"));
+        exceededCaloriesColumn.setCellValueFactory(new PropertyValueFactory<>("exceededCalories"));
         caloriesTable.setItems(userObservableList);
     }
 

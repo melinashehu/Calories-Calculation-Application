@@ -14,6 +14,11 @@ public class User {
     private String password;
     private String role;
     private double avgCalories;
+    /**
+     * @author :Melina
+     */
+    private boolean exceededCalories;
+
 
 
     public User(){
@@ -38,7 +43,11 @@ public class User {
         this.userName = userName;
         this.avgCalories = avgCalories;
     }
-
+    public User(String userName, double avgCalories, boolean exceededCalories) {
+        this.userName = userName;
+        this.avgCalories = avgCalories;
+        this.exceededCalories = exceededCalories;
+    }
     public int getUserId() {
         return id;
     }
@@ -73,6 +82,14 @@ public class User {
     }
     public void setAvgCalories(double averageCalories) {
         this.avgCalories = averageCalories;
+    }
+
+    public boolean isExceededCalories() {
+        return exceededCalories;
+    }
+
+    public void setExceededCalories(boolean exceededCalories) {
+        this.exceededCalories = exceededCalories;
     }
 
     public String toString(){
