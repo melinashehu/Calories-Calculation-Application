@@ -14,6 +14,7 @@ public class DaoTestMain {
         System.out.println(entries);
         System.out.println(foodDao.getMoneySpentFromAUser(2,testDate));
         System.out.println(foodDao.getFoodsForUserByDate(2));
+        System.out.println(foodDao.getTodaysTotalCalories(2));
 
     }
 }
