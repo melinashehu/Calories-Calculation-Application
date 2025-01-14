@@ -5,6 +5,8 @@ package entity;
  * This class should NOT be modified without careful consideration.
  * Any changes to this class can impact the other parts of the application.
  */
+
+
 /**
  * @author :Melina
  */

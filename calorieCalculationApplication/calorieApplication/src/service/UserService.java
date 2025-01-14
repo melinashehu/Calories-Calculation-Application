@@ -2,6 +2,7 @@ package service;
 import dao.FoodDAOImplementation;
 import entity.Food;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
@@ -58,6 +59,27 @@ public class UserService {
             }
         }
         return daysAboveThreshold;
+    }
+
+
+    /**
+     * @author :Amina
+     */
+    public double sumofTodaysTotalCalories(int userId){ //testuar, punon
+        List<Double> todaysCalories = foodDAO.getTodaysTotalCalories(userId);
+        double todaysTotalCaloriesCount = 0.0;
+        for (double calorieValue : todaysCalories) {
+            todaysTotalCaloriesCount += calorieValue;
+        }
+        return todaysTotalCaloriesCount;
+    }
+    public double sumOfTotalMoneySpent(int userId, Date startingDate) {
+        List<Double> totalMoney = foodDAO.getMoneySpentFromAUser(userId, startingDate);
+        double totalMoneySpent = 0.0;
+        for (double money : totalMoney) {
+            totalMoneySpent += money;
+        }
+        return totalMoneySpent;
     }
 
 

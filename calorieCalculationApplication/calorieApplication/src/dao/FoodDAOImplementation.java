@@ -20,6 +20,9 @@ import login.UserSession;
 
 public  class FoodDAOImplementation implements FoodDAO {
 
+    /**
+     * @author :Amina
+     */
     public List<Food> getAllFoods(){
         List<Food> allFoods = new ArrayList<Food>();
         String sql = "select * from user_foods";
@@ -40,6 +43,9 @@ public  class FoodDAOImplementation implements FoodDAO {
         return allFoods;
     }
 
+    /**
+     * @author :Amina
+     */
     @Override
     public Food getFood(int id) {
         String sql = "SELECT * FROM user_foods WHERE user_food_id=?";
@@ -64,6 +70,9 @@ public  class FoodDAOImplementation implements FoodDAO {
         return null;
     }
 
+    /**
+     * @author :Amina
+     */
     @Override
     public List<Food> getAllFoodsFromAWeeklyPeriodForAUser(int userId, java.sql.Date startingDate) {
         Date endDate = Calendar.calculateEndWeekDate(startingDate);
@@ -91,6 +100,9 @@ public  class FoodDAOImplementation implements FoodDAO {
         return foods;
     }
 
+    /**
+     * @author :Amina
+     */
     public List<Double> getCalorieValuesForAWeeklyPeriodForAUser(int userId, java.sql.Date startingDate){
         Date endDate = Calendar.calculateEndWeekDate(startingDate);
         String sql = "SELECT calorie_value FROM user_foods WHERE user_id = ? AND date_consumed BETWEEN ? AND ?";
@@ -209,6 +221,9 @@ public  class FoodDAOImplementation implements FoodDAO {
         }
     }
 
+    /**
+     * @author :Amina
+     */
     @Override
     public boolean addFood(Food food) {//testuar, punon
         User loggedInUser = UserSession.getLoggedInUser();
@@ -231,6 +246,9 @@ public  class FoodDAOImplementation implements FoodDAO {
         return true;
     }
 
+    /**
+     * @author :Amina
+     */
     @Override
     public boolean deleteFood(int id) {
         String sql = "DELETE FROM user_foods WHERE user_food_id = ?";
@@ -244,6 +262,9 @@ public  class FoodDAOImplementation implements FoodDAO {
         }
     }
 
+    /**
+     * @author :Amina
+     */
     @Override
     public boolean updateFood(Food food) {
         String sql="UPDATE user_foods SET food_name=?, calorie_value=?, food_price=?, date_consumed=? WHERE user_food_id=?";
@@ -261,5 +282,24 @@ public  class FoodDAOImplementation implements FoodDAO {
         }
     }
 
-
+    /**
+     * @author :Amina
+     */
+    @Override
+    public List<Double> getTodaysTotalCalories(int userId) { //testuar, punon
+        String sql = "Select calorie_value from user_foods where user_id = ? and date_consumed = ?";
+        List<Double> calories = new ArrayList<>();
+        try(Connection conn = DatabaseConnection.getConnection();
+        PreparedStatement pst = conn.prepareStatement(sql)){
+            pst.setInt(1, userId);
+            pst.setDate(2, Date.valueOf(LocalDate.now()));
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                calories.add(rs.getDouble("calorie_value"));
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return calories;
+    }
 }

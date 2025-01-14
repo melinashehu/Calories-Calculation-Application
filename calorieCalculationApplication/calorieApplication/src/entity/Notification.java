@@ -1,22 +1,28 @@
 package entity;
-
 /**
  * Represents a notification in the system.
  * This class should NOT be modified without careful consideration.
  * Any changes to this class can impact the other parts of the application.
  */
+import java.util.Date;
+
+/**
+ * @author :Amina
+ */
 
 public class Notification {
     private int id;
     private int userId;
-    private String notificationText;
-    private String role;
+    private String message;
+    private Date dateSent;
+    private boolean is_read;
 
-    public Notification(int id, int userId, String notificationText, String role) {
+    public Notification(int id, int userId, String message, Date dateSent, boolean is_read) {
         this.id = id;
         this.userId = userId;
-        this.notificationText = notificationText;
-        this.role = role;
+        this.message = message;
+        this.dateSent = dateSent;
+        this.is_read = is_read;
     }
 
     public int getId() {
@@ -29,11 +35,21 @@ public class Notification {
     public int getUserId() {return userId;}
     public void setUserId(int userId) {this.userId = userId;}
 
-    public String getNotificationText() {return notificationText;}
-    public void setNotificationText(String notificationText) {this.notificationText = notificationText;}
+    public String getMessage() {return message;}
+    public void setMessage(String message) {this.message= message;}
 
-    /* jo shume e nevojshme, mund dhe te mos vendoset
-    public String toString(){
+    public Date getDateSent() {
+        return dateSent;
+    }
+    public void setDateSent(Date dateSent) {
+        this.dateSent = dateSent;
+    }
 
-    }*/
+    public boolean isIs_read() {
+        return is_read;
+    }
+    public void setIs_read(boolean is_read) {
+        this.is_read = is_read;
+    }
+
 }

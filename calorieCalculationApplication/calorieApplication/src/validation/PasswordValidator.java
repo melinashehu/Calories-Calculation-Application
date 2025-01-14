@@ -6,6 +6,9 @@ package validation;
  *  Any changes to this class can impact the other parts of the application.
  */
 
+/**
+ * @author :Amina
+ */
 public class PasswordValidator {
     public static boolean isStrongPassword(String password) {
         String passwordReg = "^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$";

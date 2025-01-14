@@ -18,6 +18,9 @@ import java.util.List;
 
 public class UserDAOImplementation implements UserDAO {
 
+    /**
+     * @author :Amina
+     */
     public List<User> getAllUsers() { //tested and it works
         List<User> allUsers = new ArrayList<User>();
         String sql = "select * from users WHERE role='USER'";
@@ -34,6 +37,9 @@ public class UserDAOImplementation implements UserDAO {
         return allUsers;
     }
 
+    /**
+     * @author :Amina
+     */
     @Override
     public User getUserById(int id){ //tested and it works :)
         String sql="SELECT * FROM users WHERE user_id= ?";
@@ -71,6 +77,10 @@ public class UserDAOImplementation implements UserDAO {
         return userIds;
     }
 
+
+    /**
+     * @author :Amina
+     */
     @Override
     public User getUserByEmailAndPassword(String email, String password){ //tested and it works
         String sql="SELECT * FROM users WHERE email= ? AND password= ?";
@@ -94,6 +104,10 @@ public class UserDAOImplementation implements UserDAO {
         return null;
     }
 
+
+    /**
+     * @author :Amina
+     */
     @Override
     public boolean addUser(User user){ //tested and it works :)
         String sql="INSERT INTO users(user_name, email, password, role) VALUES (?, ?, ?, ?)";
@@ -111,6 +125,10 @@ public class UserDAOImplementation implements UserDAO {
         }
     }
 
+
+    /**
+     * @author :Amina
+     */
     @Override
     public boolean updateUser(User user){ //tested and it works
         String sql="UPDATE users SET user_name=?, email=?, password=?, role=? WHERE user_id=?";
@@ -129,6 +147,10 @@ public class UserDAOImplementation implements UserDAO {
         }
     }
 
+
+    /**
+     * @author :Amina
+     */
     @Override
     public boolean deleteUser(int id){
         String sql="DELETE FROM users WHERE user_id= ?";

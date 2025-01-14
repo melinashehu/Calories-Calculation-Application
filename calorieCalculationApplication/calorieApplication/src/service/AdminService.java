@@ -1,8 +1,6 @@
 package service;
 
 import Report.AdminReport;
-import dao.StatisticalReportDAOImplementation;
-import Report.AdminReport;
 import dao.FoodDAOImplementation;
 import dao.UserDAOImplementation;
 import entity.Food;
@@ -32,7 +30,6 @@ public class AdminService {
     /**
      * @author :Edna
      */
-
     public List<AdminReport> usersWhoExceededMonthlySpendingLimit(Date startingDate){//testuar dhe funksionon
         if(!isAdmin()){
             throw new SecurityException("You have no access to this information!");
@@ -61,7 +58,6 @@ public class AdminService {
     }
 
     /**
-     *
      * @author: Amina
      */
     public List<User> getAvgCaloriesPerUserLast7Days(){ //punon ne console
@@ -88,7 +84,6 @@ public class AdminService {
     }
 
     /**
-     *
      * @author: Amina
      */
     public String printFoodEntriesPerWeekComparison(){

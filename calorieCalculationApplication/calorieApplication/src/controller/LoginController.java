@@ -18,6 +18,9 @@ import entity.*;
 import java.io.IOException;
 import gui.*;
 
+/**
+ * @author :Amina
+ */
 public class LoginController {
     @FXML
     private TextField emailField;
