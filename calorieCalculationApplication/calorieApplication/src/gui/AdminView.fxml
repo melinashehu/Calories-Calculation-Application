@@ -21,7 +21,7 @@
 
                 <Text layoutX="24.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="List of Users">
                     <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font name="System Bold" size="15.0" />
                     </font>
                 </Text>
 
@@ -29,7 +29,7 @@
                 <Pane layoutX="-1.0" layoutY="37.0" prefHeight="3.0" prefWidth="598.0" style="-fx-background-color: black;" />
 
 
-                <TableView fx:id="usersTable" layoutX="21.0" layoutY="50.0" prefHeight="262.0" prefWidth="546.0" style="-fx-border-color: black; -fx-border-width: 3;">
+                <TableView fx:id="usersTable" layoutX="21.0" layoutY="50.0" prefHeight="250.0" prefWidth="546.0" style="-fx-border-color: black; -fx-border-width: 3;">
                     <columns>
                         <TableColumn fx:id="userIdCol" minWidth="100.0" prefWidth="122.39995956420898" text="User ID" />
                         <TableColumn fx:id="userNameCol" minWidth="90.4000244140625" prefWidth="128.8000030517578" text="User Name" />
@@ -39,28 +39,32 @@
                     </columns>
                 </TableView>
 
-                <Text layoutX="24.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Report Table">
+                <Text layoutX="24.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Report Table">
                     <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font name="System Bold" size="15.0" />
                     </font>
                 </Text>
 
-                <Pane layoutX="21.0" layoutY="360.0" prefHeight="3.0" prefWidth="546.0" style="-fx-background-color: black;" />
+                <Pane layoutX="21.0" layoutY="340.0" prefHeight="3.0" prefWidth="546.0" style="-fx-background-color: black;" />
+                <Text fx:id="reportText" layoutX="24.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="526.0">
+                    <font>
+                        <Font name="System" size="14.0" />
+                    </font>
+                </Text>
 
-
-                <TableView fx:id="userStatsTable" layoutX="21.0" layoutY="375.0" prefHeight="300.0" prefWidth="546.0" style="-fx-border-color: black; -fx-border-width: 3;">
+                <TableView fx:id="userStatsTable" layoutX="21.0" layoutY="400.0" prefHeight="250.0" prefWidth="546.0" style="-fx-border-color: black; -fx-border-width: 3;">
                     <stylesheets>
                         <URL value="@styleReportTable.css" />
                     </stylesheets>
                     <columns>
                         <TableColumn fx:id="userNameColumn" prefWidth="176.0" text="User Name" />
                         <TableColumn fx:id="avgCaloriesColumn" prefWidth="150.0" text="Average Calories" />
-                        <TableColumn fx:id="exceededCaloriesColumn" prefWidth="215.0" text="Exceeded Calories (True/False)" />
+                        <TableColumn fx:id="exceededSpendingColumn" prefWidth="215.0" text="Exceeded Spending (True/False)" />
                     </columns>
                 </TableView>
 
 
-                <JFXButton fx:id="refreshReportButton" layoutX="230.0" layoutY="680.0" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #000000; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-size: 14px;" text="Refresh" onAction="#refreshReport" />
+                <JFXButton fx:id="refreshReportButton" layoutX="230.0" layoutY="665.0" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #000000; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-size: 14px;" text="Refresh" onAction="#refreshReport" />
             </children>
         </AnchorPane>
     </content>

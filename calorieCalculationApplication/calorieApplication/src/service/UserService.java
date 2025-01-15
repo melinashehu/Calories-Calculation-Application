@@ -10,6 +10,7 @@ import entity.StatisticalReport;
 public class UserService {
     private FoodDAOImplementation foodDAO;
 
+
     /**
      * @author :Melina
      */

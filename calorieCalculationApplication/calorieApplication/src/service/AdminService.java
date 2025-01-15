@@ -47,12 +47,15 @@ public class AdminService {
             for(double moneySpent : moneySpentForAUser){
                 monthlySpendingForAUser += moneySpent;
             }
-
-            if(monthlySpendingForAUser > monthlyExpenditureThreshold){
+            boolean exceededLimit = monthlySpendingForAUser > monthlyExpenditureThreshold;
+            if (exceededLimit) {
                 User user = userDAO.getUserById(userId);
+                AdminReport report = new AdminReport(user);
+                report.setExceededSpending(true);
                 usersWhoExceededMonthlySpendingLimit.add(new AdminReport(user));
             }
-        }
+
+            }
 
         if(usersWhoExceededMonthlySpendingLimit.isEmpty()){
             System.out.println("No user has exceeded the monthly expenditure.");

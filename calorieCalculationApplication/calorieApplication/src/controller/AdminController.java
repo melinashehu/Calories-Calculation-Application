@@ -16,6 +16,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -52,8 +54,6 @@ public class AdminController implements Initializable {
     private TableColumn<User, String> userNameColumn;
     @FXML
     private TableColumn<User, Double> avgCaloriesColumn;
-    @FXML
-    private TableColumn<User, Boolean> exceededCaloriesColumn;
     private UserService userService = new UserService();
     UserDAOImplementation userDAO = new UserDAOImplementation();
 
@@ -158,26 +158,36 @@ public class AdminController implements Initializable {
     private void loadAdminReport(){
         refreshReport();
         AdminService adminService = new AdminService();
-        String report = adminService.printFoodEntriesPerWeekComparison();
-        reportText.setText(report);
+        String reportEntries = adminService.printFoodEntriesPerWeekComparison();
+        reportText.setText(reportEntries);
+
+        Date startingDate = Date.valueOf(LocalDate.now().minusMonths(1));
+        List<AdminReport> usersWhoExceededLimit = adminService.usersWhoExceededMonthlySpendingLimit(startingDate);
 
         List<User> reportList = adminService.getAvgCaloriesPerUserLast7Days();
         List<User> updatedUserList = new ArrayList<>();
 
         for (User user : reportList) {
-            int daysAboveThreshold = userService.calculateDaysAboveCalorieThresholdPerWeek(user.getUserId(), 2000.0);
-            boolean exceededCalories = daysAboveThreshold > 0;
-            user.setExceededCalories(exceededCalories);
-
+            AdminReport adminReport = new AdminReport(user);
+            boolean exceededSpending = usersWhoExceededLimit.stream()
+                    .anyMatch(report -> report.getUser().getUserId() == user.getUserId());
             updatedUserList.add(user);
+            adminReport.setExceededSpending(exceededSpending);
         }
 
-        ObservableList<User> userObservableList = FXCollections.observableArrayList(reportList);
+        ObservableList<User> userObservableList = FXCollections.observableArrayList(updatedUserList);
         userNameColumn.setCellValueFactory(new PropertyValueFactory<>("userName"));
         avgCaloriesColumn.setCellValueFactory(new PropertyValueFactory<>("avgCalories"));
-        exceededCaloriesColumn.setCellValueFactory(new PropertyValueFactory<>("exceededCalories"));
+        TableColumn<User, Boolean> exceededSpendingColumn = new TableColumn<>("Exceeded Spending");
+        exceededSpendingColumn.setCellValueFactory(new PropertyValueFactory<>("exceededSpending"));
+
+        caloriesTable.getColumns().clear();
+        caloriesTable.getColumns().add(userNameColumn);
+        caloriesTable.getColumns().add(avgCaloriesColumn);
+        caloriesTable.getColumns().add(exceededSpendingColumn);
         caloriesTable.setItems(userObservableList);
     }
+
 
     private void openListOfFoodsPerUserWindow(User selectedUser) {
         try {

@@ -16,6 +16,7 @@ public class AdminReport {
     private final User user;
     private final List<Food> foods;
     private final double avgWeeklyConsumedCaloriesForAUser;
+    private boolean exceededSpending;
 
     public AdminReport(){
         this.user = null;
@@ -33,6 +34,14 @@ public class AdminReport {
         this.user = user;
         this.foods = null;
         this.avgWeeklyConsumedCaloriesForAUser = 0.0;
+    }
+
+    public boolean isExceededSpending() {
+        return exceededSpending;
+    }
+
+    public void setExceededSpending(boolean exceededSpending) {
+        this.exceededSpending = exceededSpending;
     }
 
     public User getUser(){
