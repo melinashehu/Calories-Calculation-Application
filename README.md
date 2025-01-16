@@ -34,3 +34,10 @@ Per te perfshire librarine JFoenix ne SceneBuilder veprojme keshtu: Library/Ikon
 
 Per te perfshire file-t .css per stilizimin e tabeles se user-it dhe te listes se ushqimeve, pasi te jene shtuar file-t ne package-n gui, do shkarkohet Intellij IDEA Ultimate. 
 
+
+
+
+
+
+
+TO DO: afishimi raportit ne gui per adminin; Duhet me implementu metoden (ne package service indirekt me dao) qe updaton kolonen hasExceededMoneyLimit te tabela users kur > 1000.
