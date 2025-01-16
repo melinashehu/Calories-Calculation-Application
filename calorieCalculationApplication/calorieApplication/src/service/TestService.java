@@ -1,5 +1,7 @@
 package service;
 
+import dao.FoodDAOImplementation;
+import dao.UserDAOImplementation;
 import entity.*;
 
 import java.sql.Date;
@@ -29,11 +31,13 @@ public class TestService {
         System.out.println("Shpenzimet totale: " + report.getTotalSpendingMoney());
         System.out.println("Ditët mbi pragun e kalorive: " + report.getDaysAboveCalorieThreshold());*/
 
-        UserService userService = new UserService();
+        /*UserService userService = new UserService();
         java.sql.Date testDate = java.sql.Date.valueOf("2025-01-01");
         System.out.println(userService.calculateDaysAboveCalorieThresholdPerWeek(2, 2500));
-        System.out.println(userService.sumofTodaysTotalCalories(2));
+        System.out.println(userService.sumofTodaysTotalCalories(2));*/
+
        //report.printFoodEntriesPerWeekComparison();
+
         /*List<User> reportList = report.getAvgCaloriesPerUserLast7Days();
         if(reportList.isEmpty()){
             System.out.println("No reports found");
@@ -42,5 +46,14 @@ public class TestService {
                 System.out.println("User: "+user.getUserName()+", Avg Calories: "+user.getAvgCalories());
             }
         }*/
+
+        FoodDAOImplementation foodDAO = new FoodDAOImplementation();
+        UserDAOImplementation userDAO = new UserDAOImplementation();
+        AdminService adminService = new AdminService();
+        adminService.updateHasExceededLimitForAllUsers();
+        System.out.println("Updated users:");
+        userDAO.getAllUsers().forEach(user -> {
+            System.out.println("User ID: " + user.getUserId()+ ", Name: " + user.getUserName()+ ", Has Exceeded Limit: "+user.getHasExceededMoneyLimit());
+        });
     }
 }

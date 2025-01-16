@@ -108,4 +108,17 @@ public class AdminService {
 
         return builder.toString();
     }
+
+    public void updateHasExceededLimitForAllUsers(){
+        List<User> allUsers = userDAO.getAllUsers();
+        Date startingDate = Date.valueOf(LocalDate.now().minusMonths(1));
+        for(User user : allUsers){
+            List<Double> moneySpentOnFood = foodDAO.getMoneySpentFromAUser(user.getUserId(), startingDate);
+            double totalSpent = moneySpentOnFood.stream().mapToDouble(Double::doubleValue).sum();
+            boolean hasExceededLimit = totalSpent > 1000;
+            user.setHasExceededMoneyLimit(hasExceededLimit);
+            userDAO.updateUser(user);
+        }
+    }
+
 }

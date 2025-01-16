@@ -6,9 +6,9 @@ package dao;
  * Incorrect changes to the SQL queries or methods in this class can lead to data corruption or loss of functionality.
  */
 
-import com.mysql.cj.x.protobuf.MysqlxPrepare;
+//import com.mysql.cj.x.protobuf.MysqlxPrepare;
 import entity.*;
-import dao.DatabaseConnection;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -131,7 +131,7 @@ public class UserDAOImplementation implements UserDAO {
      */
     @Override
     public boolean updateUser(User user){ //tested and it works
-        String sql="UPDATE users SET user_name=?, email=?, password=?, role=? WHERE user_id=?";
+        String sql="UPDATE users SET user_name=?, email=?, password=?, role=?, hasExceededMoneyLimit =? WHERE user_id=?";
         try(Connection conn = DatabaseConnection.getConnection();
         PreparedStatement pst = conn.prepareStatement(sql)){
             pst.setString(1, user.getUserName());
@@ -139,6 +139,7 @@ public class UserDAOImplementation implements UserDAO {
             pst.setString(3, user.getUserPassword());
             pst.setString(4, user.getRole());
             pst.setInt(5, user.getUserId());
+            pst.setBoolean(6, user.getHasExceededMoneyLimit());
             pst.executeUpdate();
             return true;
         }catch(SQLException e){
@@ -163,5 +164,21 @@ public class UserDAOImplementation implements UserDAO {
             System.err.println("Error while deleting user");
             return false;
         }
+    }
+
+    @Override
+    public List<Boolean> getHasExceededMoneyLimitColumn(){
+        List<Boolean> exceededMoneyLimitColumn = new ArrayList<>();
+        String sql="SELECT hasExceededMoneyLimit FROM users";
+        try(Connection conn = DatabaseConnection.getConnection();
+            PreparedStatement pst = conn.prepareStatement(sql)){
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                exceededMoneyLimitColumn.add(rs.getBoolean("hasExceededMoneyLimit"));
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return exceededMoneyLimitColumn;
     }
 }

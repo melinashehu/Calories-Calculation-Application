@@ -16,6 +16,7 @@ public class User {
     private String password;
     private String role;
     private double avgCalories;
+    private boolean hasExceededMoneyLimit;
 
 
     public User(){
@@ -75,6 +76,13 @@ public class User {
     }
     public void setAvgCalories(double averageCalories) {
         this.avgCalories = averageCalories;
+    }
+
+    public boolean getHasExceededMoneyLimit() {
+        return hasExceededMoneyLimit;
+    }
+    public void setHasExceededMoneyLimit(boolean hasExceededMoneyLimit) {
+        this.hasExceededMoneyLimit = hasExceededMoneyLimit;
     }
 
     public String toString(){
