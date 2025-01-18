@@ -38,6 +38,3 @@ Per te perfshire file-t .css per stilizimin e tabeles se user-it dhe te listes s
 
 
 
-
-
-TO DO: afishimi raportit ne gui per adminin; Duhet me implementu metoden (ne package service indirekt me dao) qe updaton kolonen hasExceededMoneyLimit te tabela users kur > 1000.
