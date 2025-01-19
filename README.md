@@ -35,6 +35,8 @@ Per te perfshire librarine JFoenix ne SceneBuilder veprojme keshtu: Library/Ikon
 Per te perfshire file-t .css per stilizimin e tabeles se user-it dhe te listes se ushqimeve, pasi te jene shtuar file-t ne package-n gui, do shkarkohet Intellij IDEA Ultimate. 
 
 
+TO DO: te shikohet problemi i ruajtjes se userit te sapo-regjistruar ne sesion per te rregulluar problemin e shtimit te ushqimit pas regjistrimit per here te pare; te shtohen butona log out perkates 
+
 
 
 
