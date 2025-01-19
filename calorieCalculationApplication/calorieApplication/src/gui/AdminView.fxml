@@ -18,53 +18,49 @@
     <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="600.0" style="-fx-background-color: #85b48a;">
             <children>
-
-                <Text layoutX="24.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="List of Users">
+                <Text layoutX="24.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="List of users">
                     <font>
                         <Font name="System Bold" size="15.0" />
                     </font>
                 </Text>
 
-
                 <Pane layoutX="-1.0" layoutY="37.0" prefHeight="3.0" prefWidth="598.0" style="-fx-background-color: black;" />
 
-
-                <TableView fx:id="usersTable" layoutX="21.0" layoutY="50.0" prefHeight="250.0" prefWidth="546.0" style="-fx-border-color: black; -fx-border-width: 3;">
+                <TableView fx:id="usersTable" layoutX="21.0" layoutY="76.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="262.0" prefWidth="546.0" style="-fx-border-color: black; -fx-border-width: 3;">
                     <columns>
-                        <TableColumn fx:id="userIdCol" minWidth="100.0" prefWidth="122.39995956420898" text="User ID" />
-                        <TableColumn fx:id="userNameCol" minWidth="90.4000244140625" prefWidth="128.8000030517578" text="User Name" />
-                        <TableColumn fx:id="userEmailCol" minWidth="75.199951171875" prefWidth="126.39996337890625" text="User Email" />
+                        <TableColumn fx:id="userIdCol" minWidth="100.0" prefWidth="122.39995956420898" text="          User ID" />
+                        <TableColumn fx:id="userNameCol" minWidth="90.4000244140625" prefWidth="128.8000030517578" text="  User Name" />
+                        <TableColumn fx:id="userEmailCol" minWidth="75.199951171875" prefWidth="126.39996337890625" text=" User Email" />
                         <TableColumn fx:id="foodsCol" minWidth="58.39990234375" prefWidth="79.2000732421875" text="Foods" />
                         <TableColumn fx:id="deleteUserCol" minWidth="58.39990234375" prefWidth="81.60003662109375" text="Delete" />
                     </columns>
                 </TableView>
 
-                <Text layoutX="24.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Report Table">
-                    <font>
-                        <Font name="System Bold" size="15.0" />
-                    </font>
-                </Text>
 
-                <Pane layoutX="21.0" layoutY="340.0" prefHeight="3.0" prefWidth="546.0" style="-fx-background-color: black;" />
-                <Text fx:id="reportText" layoutX="24.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="526.0">
-                    <font>
-                        <Font name="System" size="14.0" />
-                    </font>
-                </Text>
+                <Pane layoutX="21.0" layoutY="3.0" prefHeight="3.0" prefWidth="546.0" style="-fx-background-color: #ffffff; -fx-border-color: black; -fx-border-width: 2;">
+                    <children>
+                        <Text fx:id="reportText" layoutX="22.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="526.0">
+                            <font>
+                                <Font name="System" size="14.0" />
+                            </font>
+                        </Text>
 
-                <TableView fx:id="userStatsTable" layoutX="21.0" layoutY="400.0" prefHeight="250.0" prefWidth="546.0" style="-fx-border-color: black; -fx-border-width: 3;">
-                    <stylesheets>
-                        <URL value="@styleReportTable.css" />
-                    </stylesheets>
-                    <columns>
-                        <TableColumn fx:id="userNameColumn" prefWidth="176.0" text="User Name" />
-                        <TableColumn fx:id="avgCaloriesColumn" prefWidth="150.0" text="Average Calories" />
-                        <TableColumn fx:id="exceededSpendingColumn" prefWidth="215.0" text="Exceeded Spending (True/False)" />
-                    </columns>
-                </TableView>
+                        <TableView fx:id="caloriesTable" layoutX="21.0" layoutY="400.0" prefHeight="250.0" prefWidth="540.0" style="-fx-border-color: black; -fx-border-width: 3;">
+                            <stylesheets>
+                                <URL value="@styleReportTable.css" />
+                            </stylesheets>
+                            <columns>
+                                <TableColumn fx:id="userIdColumn" prefWidth="176.0" text="ID"/>
+                                <TableColumn fx:id="userNameColumn" prefWidth="150.0" text="User Name"/>
+                                <TableColumn fx:id="avgCaloriesColumn" prefWidth="215.0" text="Average Calories" />
+                                <TableColumn fx:id="limitExceededColumn" prefWidth="270.0" text="Money Limit Exceeded"/>
+                            </columns>
+                        </TableView>
 
 
-                <JFXButton fx:id="refreshReportButton" layoutX="230.0" layoutY="665.0" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #000000; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-size: 14px;" text="Refresh" onAction="#refreshReport" />
+                        <JFXButton fx:id="refreshReportButton" layoutX="230.0" layoutY="665.0" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #85b48a; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-size: 14px;" text="Refresh" onAction="#refreshReport" />
+                    </children>
+                </Pane>
             </children>
         </AnchorPane>
     </content>

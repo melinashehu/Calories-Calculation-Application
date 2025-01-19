@@ -1,8 +1,6 @@
 package service;
 
 import Report.AdminReport;
-import dao.StatisticalReportDAOImplementation;
-import Report.AdminReport;
 import dao.FoodDAOImplementation;
 import dao.UserDAOImplementation;
 import entity.Food;
@@ -32,7 +30,6 @@ public class AdminService {
     /**
      * @author :Edna
      */
-
     public List<AdminReport> usersWhoExceededMonthlySpendingLimit(Date startingDate){//testuar dhe funksionon
         if(!isAdmin()){
             throw new SecurityException("You have no access to this information!");
@@ -47,15 +44,12 @@ public class AdminService {
             for(double moneySpent : moneySpentForAUser){
                 monthlySpendingForAUser += moneySpent;
             }
-            boolean exceededLimit = monthlySpendingForAUser > monthlyExpenditureThreshold;
-            if (exceededLimit) {
+
+            if(monthlySpendingForAUser > monthlyExpenditureThreshold){
                 User user = userDAO.getUserById(userId);
-                AdminReport report = new AdminReport(user);
-                report.setExceededSpending(true);
                 usersWhoExceededMonthlySpendingLimit.add(new AdminReport(user));
             }
-
-            }
+        }
 
         if(usersWhoExceededMonthlySpendingLimit.isEmpty()){
             System.out.println("No user has exceeded the monthly expenditure.");
@@ -64,14 +58,13 @@ public class AdminService {
     }
 
     /**
-     *
      * @author: Amina
      */
     public List<User> getAvgCaloriesPerUserLast7Days(){ //punon ne console
 
-        if(!isAdmin()){
+        /*if(!isAdmin()){
             throw new SecurityException("You have no access to this information!");
-        }
+        }*/
 
         List<User> reportList = new ArrayList<>();
         LocalDate today = LocalDate.now();
@@ -91,7 +84,6 @@ public class AdminService {
     }
 
     /**
-     *
      * @author: Amina
      */
     public String printFoodEntriesPerWeekComparison(){
@@ -116,4 +108,21 @@ public class AdminService {
 
         return builder.toString();
     }
+
+    public List<User> getReportForUsers(){
+        List<User> reportList = new ArrayList<>();
+        List<Integer> userIds = userDAO.getAllUsersIds();
+        List<Boolean> exceededMoneyLimits = userDAO.getHasExceededMoneyLimitColumn();
+        List<User> avgCaloriesPerUserLast7Days = getAvgCaloriesPerUserLast7Days();
+        int size = Math.min(userIds.size(), Math.min(exceededMoneyLimits.size(), avgCaloriesPerUserLast7Days.size()));
+        for(int i=0; i<size; i++){
+            int userId=userIds.get(i);
+            boolean hasExceededMoneyLimit = exceededMoneyLimits.get(i);
+            String userName = avgCaloriesPerUserLast7Days.get(i).getUserName();
+            double avgCalories = avgCaloriesPerUserLast7Days.get(i).getAvgCalories();
+
+            reportList.add(new User(userId, userName, avgCalories, hasExceededMoneyLimit));
+        }
+        return reportList;
+}
 }

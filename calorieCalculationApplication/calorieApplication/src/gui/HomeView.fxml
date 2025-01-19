@@ -24,7 +24,7 @@
 
         <!-- Rresht për ditët mbi kufirin -->
         <HBox spacing="10.0" alignment="CENTER_LEFT">
-            <Label text="Ditet qe keni kaluar kufirin:" style="-fx-font-size: 14px; -fx-text-fill: #555555;" />
+            <Label text="Ditet qe keni kaluar kufirin e kalorive:" style="-fx-font-size: 14px; -fx-text-fill: #555555;" />
             <Label fx:id="daysAboveThresholdLabel" text="0" style="-fx-font-size: 14px; -fx-text-fill: #333333;" />
         </HBox>
         <Button text="Add Food" onAction="#handleAddFood"/>

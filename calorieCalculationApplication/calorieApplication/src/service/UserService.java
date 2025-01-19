@@ -1,15 +1,19 @@
 package service;
 import dao.FoodDAOImplementation;
+import dao.UserDAOImplementation;
+import dao.*;
 import entity.Food;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import entity.StatisticalReport;
+import entity.User;
 
 public class UserService {
     private FoodDAOImplementation foodDAO;
-
+    private UserDAOImplementation userDAO = new UserDAOImplementation();
 
     /**
      * @author :Melina
@@ -63,6 +67,38 @@ public class UserService {
 
 
     /**
+     * @author :Amina
+     */
+    public double sumofTodaysTotalCalories(int userId){ //testuar, punon
+        List<Double> todaysCalories = foodDAO.getTodaysTotalCalories(userId);
+        double todaysTotalCaloriesCount = 0.0;
+        for (double calorieValue : todaysCalories) {
+            todaysTotalCaloriesCount += calorieValue;
+        }
+        return todaysTotalCaloriesCount;
+    }
+    public double sumOfTotalMoneySpent(int userId, Date startingDate) {
+        List<Double> totalMoney = foodDAO.getMoneySpentFromAUser(userId, startingDate);
+        double totalMoneySpent = 0.0;
+        for (double money : totalMoney) {
+            totalMoneySpent += money;
+        }
+        return totalMoneySpent;
+    }
+    public void updateHasExceededLimitForAllUsers(){
+        List<User> allUsers = userDAO.getAllUsers();
+        Date startingDate = Date.valueOf(LocalDate.now().minusMonths(1));
+        for(User user : allUsers){
+            double totalSpent = sumOfTotalMoneySpent(user.getUserId(), startingDate);
+            boolean hasExceededLimit = totalSpent > 1000;
+            user.setHasExceededMoneyLimit(hasExceededLimit);
+            userDAO.updateUser(user);
+        }
+    }
+
+
+
+    /**
      * @author :Melina
      */
     public StatisticalReport generateUserReport(int userId, Date startingDate, double calorieThreshold) {
@@ -71,5 +107,5 @@ public class UserService {
         int daysAboveThreshold = calculateDaysAboveCalorieThresholdPerWeek(userId, calorieThreshold);
 
         return new StatisticalReport(totalCalories, totalSpending, daysAboveThreshold);
-    }
+}
 }

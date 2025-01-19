@@ -1,9 +1,8 @@
 package controller;
+import com.jfoenix.controls.JFXButton;
 
 import dao.UserDAOImplementation;
-import com.jfoenix.controls.JFXButton;
-//import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIcon;
-//import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
+
 import entity.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,9 +15,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.stage.Stage;
@@ -43,7 +39,6 @@ public class AdminController implements Initializable {
     private TableColumn<User, JFXButton> foodsCol;
     @FXML
     private TableColumn<User, JFXButton> deleteUserCol;
-
     @FXML
     private JFXButton refreshReportButton;
     @FXML
@@ -51,10 +46,14 @@ public class AdminController implements Initializable {
     @FXML
     private TableView<User> caloriesTable;
     @FXML
+    private TableColumn<User, Integer> userIdColumn;
+    @FXML
     private TableColumn<User, String> userNameColumn;
     @FXML
     private TableColumn<User, Double> avgCaloriesColumn;
-    private UserService userService = new UserService();
+    @FXML
+    private TableColumn<User, Boolean> limitExceededColumn;
+    private final AdminService adminService = new AdminService();
     UserDAOImplementation userDAO = new UserDAOImplementation();
 
     public void initialize(URL url, ResourceBundle rb) {
@@ -72,7 +71,6 @@ public class AdminController implements Initializable {
         userIdCol.setCellValueFactory(new PropertyValueFactory<>("UserId"));
         userNameCol.setCellValueFactory(new PropertyValueFactory<>("UserName"));
         userEmailCol.setCellValueFactory(new PropertyValueFactory<>("UserEmail"));
-
         try {
             List<User> users = userDAO.getAllUsers();
             if (users.isEmpty()) {
@@ -158,36 +156,10 @@ public class AdminController implements Initializable {
     private void loadAdminReport(){
         refreshReport();
         AdminService adminService = new AdminService();
-        String reportEntries = adminService.printFoodEntriesPerWeekComparison();
-        reportText.setText(reportEntries);
-
-        Date startingDate = Date.valueOf(LocalDate.now().minusMonths(1));
-        List<AdminReport> usersWhoExceededLimit = adminService.usersWhoExceededMonthlySpendingLimit(startingDate);
-
-        List<User> reportList = adminService.getAvgCaloriesPerUserLast7Days();
-        List<User> updatedUserList = new ArrayList<>();
-
-        for (User user : reportList) {
-            AdminReport adminReport = new AdminReport(user);
-            boolean exceededSpending = usersWhoExceededLimit.stream()
-                    .anyMatch(report -> report.getUser().getUserId() == user.getUserId());
-            updatedUserList.add(user);
-            adminReport.setExceededSpending(exceededSpending);
-        }
-
-        ObservableList<User> userObservableList = FXCollections.observableArrayList(updatedUserList);
-        userNameColumn.setCellValueFactory(new PropertyValueFactory<>("userName"));
-        avgCaloriesColumn.setCellValueFactory(new PropertyValueFactory<>("avgCalories"));
-        TableColumn<User, Boolean> exceededSpendingColumn = new TableColumn<>("Exceeded Spending");
-        exceededSpendingColumn.setCellValueFactory(new PropertyValueFactory<>("exceededSpending"));
-
-        caloriesTable.getColumns().clear();
-        caloriesTable.getColumns().add(userNameColumn);
-        caloriesTable.getColumns().add(avgCaloriesColumn);
-        caloriesTable.getColumns().add(exceededSpendingColumn);
-        caloriesTable.setItems(userObservableList);
+        String report = adminService.printFoodEntriesPerWeekComparison();
+        reportText.setText(report);
+        loadReportTable();
     }
-
 
     private void openListOfFoodsPerUserWindow(User selectedUser) {
         try {
@@ -203,6 +175,17 @@ public class AdminController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void loadReportTable() {
+        userIdColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
+        userNameColumn.setCellValueFactory(new PropertyValueFactory<>("userName"));
+        avgCaloriesColumn.setCellValueFactory(new PropertyValueFactory<>("avgCalories"));
+        limitExceededColumn.setCellValueFactory(new PropertyValueFactory<>("hasExceededMoneyLimit"));
+
+        List<User> tableRows = adminService.getReportForUsers();
+        ObservableList<User> observableList = FXCollections.observableArrayList(tableRows);
+        caloriesTable.setItems(observableList);
     }
 
     private void deleteUser(User selectedUser) {
@@ -242,8 +225,10 @@ public class AdminController implements Initializable {
     @FXML
     private void refreshReport(){
         AdminService adminService = new AdminService();
+        UserService userService=new UserService();
+        userService.updateHasExceededLimitForAllUsers();
         List<User> reportList = adminService.getAvgCaloriesPerUserLast7Days();
         ObservableList<User> userObservableList = FXCollections.observableArrayList(reportList);
         caloriesTable.setItems(userObservableList);
-    }
+}
 }

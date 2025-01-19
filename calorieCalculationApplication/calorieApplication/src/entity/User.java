@@ -6,7 +6,9 @@ package entity;
  * Any changes to this class can impact the other parts of the application.
  */
 
-
+/**
+ * @author :Amina
+ */
 public class User {
     private int id;
     private String userName;
@@ -14,8 +16,7 @@ public class User {
     private String password;
     private String role;
     private double avgCalories;
-
-
+    private boolean hasExceededMoneyLimit;
 
 
     public User(){
@@ -30,6 +31,15 @@ public class User {
         this.role = role;
     }
 
+    public User(int id, String userName, String email, String password, String role, Boolean hasExceededMoneyLimit) {
+        this.id = id;
+        this.userName = userName;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.hasExceededMoneyLimit = hasExceededMoneyLimit;
+    }
+
     public User(int id, String userName, String email) {
         this.id = id;
         this.userName = userName;
@@ -39,6 +49,13 @@ public class User {
     public User(String userName, double avgCalories) {
         this.userName = userName;
         this.avgCalories = avgCalories;
+    }
+
+    public User(int id, String userName, double avgCalories, boolean hasExceededMoneyLimit) {
+        this.id = id;
+        this.userName = userName;
+        this.avgCalories = avgCalories;
+        this.hasExceededMoneyLimit = hasExceededMoneyLimit;
     }
 
     public int getUserId() {
@@ -76,7 +93,15 @@ public class User {
     public void setAvgCalories(double averageCalories) {
         this.avgCalories = averageCalories;
     }
+
+    public boolean getHasExceededMoneyLimit() {
+        return hasExceededMoneyLimit;
+    }
+    public void setHasExceededMoneyLimit(boolean hasExceededMoneyLimit) {
+        this.hasExceededMoneyLimit = hasExceededMoneyLimit;
+    }
+
     public String toString(){
         return "User{"+"name= "+userName+" , email= "+email+", password= "+password+", role="+role+"}";
-    }
+}
 }
