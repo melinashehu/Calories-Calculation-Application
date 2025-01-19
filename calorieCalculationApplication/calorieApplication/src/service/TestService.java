@@ -49,8 +49,8 @@ public class TestService {
 
         FoodDAOImplementation foodDAO = new FoodDAOImplementation();
         UserDAOImplementation userDAO = new UserDAOImplementation();
-        AdminService adminService = new AdminService();
-        adminService.updateHasExceededLimitForAllUsers();
+        UserService userService = new UserService();
+        userService.updateHasExceededLimitForAllUsers();
         System.out.println("Updated users:");
         userDAO.getAllUsers().forEach(user -> {
             System.out.println("User ID: " + user.getUserId()+ ", Name: " + user.getUserName()+ ", Has Exceeded Limit: "+user.getHasExceededMoneyLimit());

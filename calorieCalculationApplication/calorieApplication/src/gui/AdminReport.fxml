@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.BarChart?>
+<?import java.net.URL?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controller.AdminReportController"
+            prefHeight="600.0" prefWidth="1100.0" style="-fx-background-color: #ffff;">
+
+    <Label text="Statistics" layoutX="0.0" layoutY="10.0" prefWidth="1100.0" alignment="CENTER"
+           style="-fx-font-size: 18px;
+                  -fx-font-family: 'Segoe UI';
+                  -fx-font-weight: bold;
+                  -fx-text-fill: #85b48a;" />
+    <TextArea fx:id="foodEntriesComparisonArea" layoutX="0.0" layoutY="50.0" prefHeight="90.0" prefWidth="1100.0" editable="false"
+              style="-fx-control-inner-background: #ffffff;
+                     -fx-font-size: 14px;
+                     -fx-font-family: 'Segoe UI';
+                     -fx-text-fill: #333333;
+                     -fx-border-color: #85b48a;
+                     -fx-border-width: 2px;
+                     -fx-border-radius: 8px;
+                     -fx-background-radius: 8px;" />
+
+    <BarChart fx:id="barChart" layoutX="0.0" layoutY="150.0" prefWidth="500.0" prefHeight="400.0">
+        <xAxis>
+            <CategoryAxis fx:id="xAxis" label = "Users"/>
+        </xAxis>
+        <yAxis>
+            <NumberAxis fx:id="yAxis" label="This Week Average Calories" />
+        </yAxis>
+    </BarChart>
+
+    <!-- Table for User Names and Money Limit Exceed -->
+    <TableView fx:id="userTable" layoutX="520.0" layoutY="150.0" prefHeight="400.0" prefWidth="550.0">
+        <stylesheets>
+            <URL value="@styleReportTable.css" />
+        </stylesheets>
+        <columns>
+            <TableColumn fx:id="userIdColumn" text="User Id" prefWidth="200.0"/>
+            <TableColumn fx:id="moneyLimitColumn" text="Has Exceeded Money Limit" prefWidth="350.0"/>
+        </columns>
+    </TableView>
+</AnchorPane>

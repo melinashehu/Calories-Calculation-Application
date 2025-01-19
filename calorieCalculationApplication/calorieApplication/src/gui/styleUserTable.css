@@ -1,51 +1,27 @@
-#usersTable .table-cell{
-    -fx-alignment: center;
-}
-
-.table-row-cell{
-    -fx-border-color: #453e3e;
-}
-
-.table-cell{
-    -fx-border-color: #453e3e;
-}
-
-#usersTable .column-header{
-    -fx-border-color: black;
-    -fx-alignment: center;
-    -fx-background-color: #87ae87;
-}
-
-#usersTable .column-header .label{
+#usersTable .table-cell {
+    -fx-alignment: CENTER;
+    -fx-font-size: 14px;
     -fx-text-fill: black;
-    -fx-font-weight: bold;
 }
 
-.foods-button{
-    -fx-font-size: 10px;
-    -fx-background-color: #58a058;
-    -fx-border-radius: 5px;
-    -fx-font-weight: bold;
-    -fx-alignment: center;
-    -fx-text-fill: white;
+
+.table-row-cell {
+    -fx-border-color: #dcdcdc;
+    -fx-border-width: 1px;
+}
+
+
+.table-cell {
+    -fx-border-color: #dcdcdc;
     -fx-padding: 5px;
 }
 
-.foods-button:hover{
-    -fx-background-color: #206a20;
-}
 
-.delete-button{
-    -fx-font-size: 10px;
-    -fx-background-color: red;
-    -fx-border-radius: 5px;
-    -fx-font-weight: bold;
+#usersTable .column-header {
+    -fx-border-color: gray;
     -fx-alignment: center;
+    -fx-background-color: #85b48a;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
     -fx-text-fill: white;
-    -fx-padding: 5px;
 }
-
-.delete-button:hover{
-    -fx-background-color: #930808;
-}
-

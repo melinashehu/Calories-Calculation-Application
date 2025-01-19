@@ -15,9 +15,19 @@ public class DaoTestMain {
         System.out.println(entries);
         System.out.println(foodDao.getMoneySpentFromAUser(2,testDate));
         System.out.println(foodDao.getFoodsForUserByDate(2));
-        System.out.println(foodDao.getTodaysTotalCalories(2));*/
+        System.out.println(foodDao.getTodaysTotalCalories(2));
 
         UserDAOImplementation userDAO = new UserDAOImplementation();
-        System.out.println(userDAO.getHasExceededMoneyLimitColumn());
+        System.out.println(userDAO.getHasExceededMoneyLimitColumn());*/
+        try {
+            FoodDAOImplementation foodDao = new FoodDAOImplementation();
+            java.sql.Date testDate = new Date(2025 - 1900, 0, 1);
+            Food apple = new Food(1, 7, "apple", 150.0, 15.0, testDate);
+            foodDao.addFood(apple);
+            //System.out.println("Food added successfully!");
+        } catch (Exception e) {
+            System.out.println("Error adding food: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }
