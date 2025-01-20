@@ -55,8 +55,8 @@
             </VBox>
         </VBox>
     </ScrollPane>
-   <!-- shtimi i imazhit per t'u pare perseri (nuk njeh direktorine)
+   <!-- shtimi i imazhit per t'u pare perseri (nuk njeh direktorine)-->
     <ImageView fitHeight="100" fitWidth="100" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-        <Image url="@images/homepage_icon.png"/>
-    </ImageView>-->
+        <Image url="@../images/homepage_icon.png"/>
+    </ImageView>
 </AnchorPane>
