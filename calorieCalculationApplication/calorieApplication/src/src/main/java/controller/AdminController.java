@@ -34,7 +34,8 @@ public class AdminController implements Initializable {
     private TableColumn<User, JFXButton> foodsCol;
     @FXML
     private TableColumn<User, JFXButton> deleteUserCol;
-
+    @FXML
+    private Button logOutButton;
 
     private final AdminService adminService = new AdminService();
     private UserDAOImplementation userDAO = new UserDAOImplementation();
@@ -183,5 +184,12 @@ public class AdminController implements Initializable {
         }catch(IOException e){
             e.printStackTrace();
         }
+    }
+    public void handleLogOutButton() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/LoginView.fxml"));
+        Scene registerScene = new Scene(loader.load());
+        Stage stage = (Stage)logOutButton.getScene().getWindow();
+        stage.setScene(registerScene);
+        stage.show();
     }
 }
