@@ -9,7 +9,9 @@ import login.UserSession;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AdminService {
 
@@ -62,9 +64,9 @@ public class AdminService {
      */
     public List<User> getAvgCaloriesPerUserLast7Days(){ //punon ne console
 
-        if(!isAdmin()){
+        /*if(!isAdmin()){
             throw new SecurityException("You have no access to this information!");
-        }
+        }*/
 
         List<User> reportList = new ArrayList<>();
         LocalDate today = LocalDate.now();
@@ -99,7 +101,7 @@ public class AdminService {
         builder.append("\nPrevious week entries: ").append(previousWeekEntries);
 
         if(currentWeekEntries > previousWeekEntries){
-            builder.append("\nThis week has ").append((currentWeekEntries - previousWeekEntries)).append("more entries compared to the previous week.");
+            builder.append("\nThis week has ").append((currentWeekEntries - previousWeekEntries)).append(" more entries compared to the previous week.");
         }else if(currentWeekEntries < previousWeekEntries){
             builder.append("\nThis week has ").append((previousWeekEntries - currentWeekEntries)).append(" fewer entries compared to the previous week.");
         }else{
@@ -108,4 +110,6 @@ public class AdminService {
 
         return builder.toString();
     }
+
+
 }

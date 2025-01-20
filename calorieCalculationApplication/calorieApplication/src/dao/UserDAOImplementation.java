@@ -6,9 +6,9 @@ package dao;
  * Incorrect changes to the SQL queries or methods in this class can lead to data corruption or loss of functionality.
  */
 
-import com.mysql.cj.x.protobuf.MysqlxPrepare;
+//import com.mysql.cj.x.protobuf.MysqlxPrepare;
 import entity.*;
-import dao.DatabaseConnection;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,7 +28,7 @@ public class UserDAOImplementation implements UserDAO {
             PreparedStatement pst = conn.prepareStatement(sql)){
             ResultSet rs = pst.executeQuery();
             while(rs.next()){
-                User user = new User(rs.getInt("user_id"), rs.getString("user_name"), rs.getString("email"), rs.getString("password"), rs.getString("role"));
+                User user = new User(rs.getInt("user_id"), rs.getString("user_name"), rs.getString("email"), rs.getString("password"), rs.getString("role"), rs.getBoolean("hasExceededMoneyLimit"));
                 allUsers.add(user);
             }
         }catch(SQLException e){
@@ -53,7 +53,8 @@ public class UserDAOImplementation implements UserDAO {
                         rs.getString("user_name"),
                         rs.getString("email"),
                         rs.getString("password"),
-                        rs.getString("role")
+                        rs.getString("role"),
+                        rs.getBoolean("hasExceededMoneyLimit")
                 );
             }
         }catch(SQLException e){
@@ -64,7 +65,7 @@ public class UserDAOImplementation implements UserDAO {
 
     public List<Integer> getAllUsersIds(){
         List<Integer> userIds = new ArrayList<>();
-        String sql = "SELECT user_id FROM users";
+        String sql = "SELECT user_id FROM users ORDER BY user_id ASC";
         try(Connection conn = DatabaseConnection.getConnection();
             PreparedStatement pst = conn.prepareStatement(sql)){
             ResultSet rs = pst.executeQuery();
@@ -85,7 +86,7 @@ public class UserDAOImplementation implements UserDAO {
     public User getUserByEmailAndPassword(String email, String password){ //tested and it works
         String sql="SELECT * FROM users WHERE email= ? AND password= ?";
         try(Connection conn = DatabaseConnection.getConnection();
-        PreparedStatement pst = conn.prepareStatement(sql)){
+            PreparedStatement pst = conn.prepareStatement(sql)){
             pst.setString(1, email);
             pst.setString(2, password);
             ResultSet rs = pst.executeQuery();
@@ -95,7 +96,8 @@ public class UserDAOImplementation implements UserDAO {
                         rs.getString("user_name"),
                         rs.getString("email"),
                         rs.getString("password"),
-                        rs.getString("role")
+                        rs.getString("role"),
+                        rs.getBoolean("hasExceededMoneyLimit")
                 );
             }
         }catch(SQLException e){
@@ -112,7 +114,7 @@ public class UserDAOImplementation implements UserDAO {
     public boolean addUser(User user){ //tested and it works :)
         String sql="INSERT INTO users(user_name, email, password, role) VALUES (?, ?, ?, ?)";
         try(Connection conn = DatabaseConnection.getConnection();
-        PreparedStatement pst = conn.prepareStatement(sql)){
+            PreparedStatement pst = conn.prepareStatement(sql)){
             pst.setString(1, user.getUserName());
             pst.setString(2, user.getUserEmail());
             pst.setString(3, user.getUserPassword());
@@ -131,14 +133,15 @@ public class UserDAOImplementation implements UserDAO {
      */
     @Override
     public boolean updateUser(User user){ //tested and it works
-        String sql="UPDATE users SET user_name=?, email=?, password=?, role=? WHERE user_id=?";
+        String sql="UPDATE users SET user_name=?, email=?, password=?, role=?, hasExceededMoneyLimit =? WHERE user_id=?";
         try(Connection conn = DatabaseConnection.getConnection();
-        PreparedStatement pst = conn.prepareStatement(sql)){
+            PreparedStatement pst = conn.prepareStatement(sql)){
             pst.setString(1, user.getUserName());
             pst.setString(2, user.getUserEmail());
             pst.setString(3, user.getUserPassword());
             pst.setString(4, user.getRole());
-            pst.setInt(5, user.getUserId());
+            pst.setBoolean(5, user.getHasExceededMoneyLimit());
+            pst.setInt(6, user.getUserId());
             pst.executeUpdate();
             return true;
         }catch(SQLException e){
@@ -155,7 +158,7 @@ public class UserDAOImplementation implements UserDAO {
     public boolean deleteUser(int id){
         String sql="DELETE FROM users WHERE user_id= ?";
         try(Connection conn = DatabaseConnection.getConnection();
-        PreparedStatement pst = conn.prepareStatement(sql)){
+            PreparedStatement pst = conn.prepareStatement(sql)){
             pst.setInt(1, id);
             int rowsAffected = pst.executeUpdate();
             return rowsAffected > 0;
@@ -163,5 +166,21 @@ public class UserDAOImplementation implements UserDAO {
             System.err.println("Error while deleting user");
             return false;
         }
+    }
+
+    @Override
+    public List<Boolean> getHasExceededMoneyLimitColumn(){
+        List<Boolean> exceededMoneyLimitColumn = new ArrayList<>();
+        String sql="SELECT hasExceededMoneyLimit FROM users";
+        try(Connection conn = DatabaseConnection.getConnection();
+            PreparedStatement pst = conn.prepareStatement(sql)){
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                exceededMoneyLimitColumn.add(rs.getBoolean("hasExceededMoneyLimit"));
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return exceededMoneyLimitColumn;
     }
 }

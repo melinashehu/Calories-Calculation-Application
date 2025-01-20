@@ -10,4 +10,5 @@ public interface UserDAO {
     public boolean updateUser(User user);
     public boolean deleteUser(int id);
     public List<Integer> getAllUsersIds();
+    public List<Boolean> getHasExceededMoneyLimitColumn();
 }

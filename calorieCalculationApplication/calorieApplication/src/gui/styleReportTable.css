@@ -1,9 +1,7 @@
-#usersTable .table-cell {
-    -fx-alignment: CENTER;
-    -fx-font-size: 14px;
-    -fx-text-fill: black;
+#userTable .table-cell {
+    -fx-alignment: center;
+    -fx-border-color: #afafaf;
 }
-
 
 .table-row-cell {
     -fx-border-color: #dcdcdc;
@@ -16,12 +14,13 @@
     -fx-padding: 5px;
 }
 
-
-#usersTable .column-header {
+#userTable .column-header {
     -fx-border-color: gray;
     -fx-alignment: center;
     -fx-background-color: #85b48a;
-    -fx-font-size: 14px;
-    -fx-font-weight: bold;
+}
+
+#userTable .column-header .label {
     -fx-text-fill: white;
+    -fx-font-weight: bold;
 }

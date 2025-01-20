@@ -1,50 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.HomeController" style="-fx-background-color: #85b48a;">
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.HomeController" style="-fx-background-color:  #85b48a" prefWidth="1100.0" prefHeight="800.0">
+
+    <ScrollPane fitToWidth="true" fitToHeight="true" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0">
+        <VBox fx:id="mainContainer" spacing="20.0" prefHeight="150.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-border-color: lightgray; -fx-border-radius: 20; -fx-border-width: 2; -fx-padding: 30;" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="100.0" AnchorPane.bottomAnchor="50.0">
+            <VBox alignment="CENTER" spacing="10.0">
+                <Label text="Welcome to the Calorie and Spending Tracker!" style="-fx-font-size: 24px; -fx-text-fill: #85b48a; -fx-font-weight: bold;" />
+            </VBox>
+
+            <HBox spacing="20.0" alignment="CENTER_LEFT">
+                <Label text="Total Weekly Calories:" style="-fx-font-size: 20px; -fx-text-fill: #5a5a5a; -fx-font-weight: bold;" />
+                <Label fx:id="totalCaloriesLabel" text="0" style="-fx-font-size: 20px; -fx-text-fill: #333333;" />
+            </HBox>
+
+            <HBox spacing="20.0" alignment="CENTER_LEFT">
+                <Label text="Spendings:" style="-fx-font-size: 20px; -fx-text-fill: #5a5a5a; -fx-font-weight: bold;" />
+                <Label fx:id="totalSpendingLabel" text="0" style="-fx-font-size: 20px; -fx-text-fill: #333333;" />
+            </HBox>
+
+            <HBox spacing="20.0" alignment="CENTER_LEFT">
+                <Label text="Number of days when calorie limit was passed:" style="-fx-font-size: 20px; -fx-text-fill: #5a5a5a; -fx-font-weight: bold;" />
+                <Label fx:id="daysAboveThresholdLabel" text="0" style="-fx-font-size: 20px; -fx-text-fill: #333333;" />
+            </HBox>
 
 
-    <Label text="Welcome!" layoutX="50.0" layoutY="30.0" style="-fx-font-size: 36px; -fx-text-fill: #ffffff; -fx-font-weight: bold;" />
+            <HBox spacing="20.0" alignment="CENTER">
+                <Button text="Show My Foods" onAction="#handleShowMyFoods" style="-fx-font-size: 14px; -fx-background-color: #85b48a; -fx-text-fill: white; -fx-background-radius: 15; -fx-padding: 10 20; -fx-box-sizing: border-box; -fx-effect: dropshadow(three-pass-box, rgba(12,101,12,0.6), 5, 0, 2, 2);" />
+            </HBox>
 
 
-    <VBox fx:id="mainContainer" spacing="20.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-border-color: lightgray; -fx-border-radius: 20; -fx-border-width: 2; -fx-padding: 30;" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="100.0" AnchorPane.bottomAnchor="50.0">
+            <TextField fx:id="foodNameField" promptText="Food Name" style="-fx-font-size: 16px; -fx-background-color: white; -fx-border-color: #85b48a; -fx-border-radius: 10; -fx-padding: 10px; -fx-effect: dropshadow(three-pass-box, rgba(12,101,12,0.6), 5, 0, 2, 2);" />
+            <TextField fx:id="calorieField" promptText="Calorie Value" style="-fx-font-size: 16px; -fx-background-color: white; -fx-border-color: #85b48a; -fx-border-radius: 10; -fx-padding: 10px; -fx-effect: dropshadow(three-pass-box, rgba(12,101,12,0.6), 5, 0, 2, 2);" />
+            <TextField fx:id="priceField" promptText="Food Price" style="-fx-font-size: 16px; -fx-background-color: white; -fx-border-color: #85b48a; -fx-border-radius: 10; -fx-padding: 10px; -fx-effect: dropshadow(three-pass-box, rgba(12,101,12,0.6), 5, 0, 2, 2);" />
 
 
-        <HBox spacing="20.0" alignment="CENTER_LEFT">
-            <Label text="Kalorite Totale Javore:" style="-fx-font-size: 18px; -fx-text-fill: #555555;" />
-            <Label fx:id="totalCaloriesLabel" text="0" style="-fx-font-size: 18px; -fx-text-fill: #333333;" />
-        </HBox>
-
-        <HBox spacing="20.0" alignment="CENTER_LEFT">
-            <Label text="Shpenzimet Totale Javore:" style="-fx-font-size: 18px; -fx-text-fill: #555555;" />
-            <Label fx:id="totalSpendingLabel" text="0" style="-fx-font-size: 18px; -fx-text-fill: #333333;" />
-        </HBox>
-
-        <HBox spacing="20.0" alignment="CENTER_LEFT">
-            <Label text="Ditet qe keni kaluar kufirin per kete jave:" style="-fx-font-size: 18px; -fx-text-fill: #555555;" />
-            <Label fx:id="daysAboveThresholdLabel" text="0" style="-fx-font-size: 18px; -fx-text-fill: #333333;" />
-        </HBox>
-
-        <Button text="Show My Foods" onAction="#handleShowMyFoods" style="-fx-font-size: 14px; -fx-background-color: #85b48a; -fx-text-fill: white; -fx-background-radius: 15; -fx-padding: 10 20;" />
-        <Button text="Add Food" onAction="#handleAddFood" style="-fx-font-size: 14px; -fx-background-color: #85b48a; -fx-text-fill: white; -fx-background-radius: 15; -fx-padding: 10 20;" />
+            <HBox spacing="20.0" alignment="CENTER">
+                <Button text="Add Food" onAction="#handleAddFood" style="-fx-font-size: 14px; -fx-background-color: #85b48a; -fx-text-fill: white; -fx-background-radius: 15; -fx-padding: 10 20; -fx-box-sizing: border-box; -fx-effect: dropshadow(three-pass-box, rgba(12,101,12,0.6), 5, 0, 2, 2);" />
+            </HBox>
 
 
-        <TextField fx:id="foodNameField" promptText="Food Name" style="-fx-font-size: 16px;" />
-        <TextField fx:id="calorieField" promptText="Calorie Value" style="-fx-font-size: 16px;" />
-        <TextField fx:id="priceField" promptText="Food Price" style="-fx-font-size: 16px;" />
+            <VBox fx:id="warningPopup" visible="false" spacing="10" style="-fx-background-color: white; -fx-background-radius: 15; -fx-border-color: #ff4d4d; -fx-border-radius: 15; -fx-border-width: 2; -fx-padding: 20;">
+                <Label text="That's not healthy!" style="-fx-text-fill: #ff4d4d; -fx-font-size: 24px; -fx-font-weight: bold;" />
+                <Label text="You have surpassed the limit of 2500 calories today! Be careful with your calories!" style="-fx-text-fill: #333333; -fx-font-size: 16px;" />
+                <Button text="Close" onAction="#closeWarningPopup" style="-fx-background-color: #ff4d4d; -fx-text-fill: white; -fx-background-radius: 10; -fx-padding: 10 20; -fx-content-display: center; -fx-alignment: center" />
+            </VBox>
 
-        <VBox fx:id="warningPopup" visible="false" spacing="10" style="-fx-background-color: white; -fx-background-radius: 15; -fx-border-color: #ff4d4d; -fx-border-radius: 15; -fx-border-width: 2; -fx-padding: 20;">
-            <Label text="That's not healthy!" style="-fx-text-fill: #ff4d4d; -fx-font-size: 24px; -fx-font-weight: bold;" />
-            <Label text="You have surpassed the limit of 2500 calories today! Be careful with your calories!" style="-fx-text-fill: #333333; -fx-font-size: 16px;" />
-            <Button text="Close" onAction="#closeWarningPopup" style="-fx-background-color: #ff4d4d; -fx-text-fill: white; -fx-background-radius: 10; -fx-padding: 10 20; -fx-content-display: center; -fx-alignment: center" />
+            <VBox fx:id="moneyWarningPopup" visible="false" spacing="10" style="-fx-background-color: white; -fx-background-radius: 15; -fx-border-color: #ff4d4d; -fx-border-radius: 15; -fx-border-width: 2; -fx-padding: 20;">
+                <Label text="Be careful!" style="-fx-text-fill: #ff4d4d; -fx-font-size: 24px; -fx-font-weight: bold;" />
+                <Label text="You have spent more than 1000 EUROs on food this month! Be careful with your spending money!" style="-fx-text-fill: #333333; -fx-font-size: 16px;" />
+                <Button text="Close" onAction="#closeMoneyWarningPopup" style="-fx-background-color: #ff4d4d; -fx-text-fill: white; -fx-background-radius: 10; -fx-padding: 10 20; -fx-content-display: center; -fx-alignment: center" />
+            </VBox>
         </VBox>
-
-        <VBox fx:id="moneyWarningPopup" visible="false" spacing="10" style="-fx-background-color: white; -fx-background-radius: 15; -fx-border-color: #ff4d4d; -fx-border-radius: 15; -fx-border-width: 2; -fx-padding: 20;">
-            <Label text="Be careful!" style="-fx-text-fill: #ff4d4d; -fx-font-size: 24px; -fx-font-weight: bold;" />
-            <Label text="You have spent more than 1000 EUROs on food this month! Be careful with your spending money!" style="-fx-text-fill: #333333; -fx-font-size: 16px;" />
-            <Button text="Close" onAction="#closeMoneyWarningPopup" style="-fx-background-color: #ff4d4d; -fx-text-fill: white; -fx-background-radius: 10; -fx-padding: 10 20; -fx-content-display: center; -fx-alignment: center" />
-        </VBox>
-
-    </VBox>
-
+    </ScrollPane>
+   <!-- shtimi i imazhit per t'u pare perseri (nuk njeh direktorine)
+    <ImageView fitHeight="100" fitWidth="100" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+        <Image url="@images/homepage_icon.png"/>
+    </ImageView>-->
 </AnchorPane>

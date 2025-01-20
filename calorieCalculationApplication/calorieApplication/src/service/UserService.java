@@ -1,5 +1,7 @@
 package service;
 import dao.FoodDAOImplementation;
+import dao.UserDAOImplementation;
+import dao.*;
 import entity.Food;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -7,9 +9,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import entity.StatisticalReport;
+import entity.User;
 
 public class UserService {
     private FoodDAOImplementation foodDAO;
+    private UserDAOImplementation userDAO = new UserDAOImplementation();
 
     /**
      * @author :Melina
@@ -81,6 +85,17 @@ public class UserService {
         }
         return totalMoneySpent;
     }
+    public void updateHasExceededLimitForAllUsers(){
+        List<User> allUsers = userDAO.getAllUsers();
+        Date startingDate = Date.valueOf(LocalDate.now().minusMonths(1));
+        for(User user : allUsers){
+            double totalSpent = sumOfTotalMoneySpent(user.getUserId(), startingDate);
+            boolean hasExceededLimit = totalSpent > 1000;
+            user.setHasExceededMoneyLimit(hasExceededLimit);
+            userDAO.updateUser(user);
+        }
+    }
+
 
 
     /**
