@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -32,6 +33,8 @@ public class HomeController {
     @FXML private TextField foodNameField;
     @FXML private TextField calorieField;
     @FXML private TextField priceField;
+    @FXML
+    private Button logOutButtonUser;
 
     @FXML
     private VBox warningPopup;
@@ -131,5 +134,12 @@ public class HomeController {
         }catch(IOException e){
             e.printStackTrace();
         }
+    }
+    public void handleLogOutButtonUser() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/LoginView.fxml"));
+        Scene registerScene = new Scene(loader.load());
+        Stage stage = (Stage)logOutButtonUser.getScene().getWindow();
+        stage.setScene(registerScene);
+        stage.show();
     }
 }
