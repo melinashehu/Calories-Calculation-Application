@@ -35,10 +35,15 @@ Per te perfshire librarine JFoenix ne SceneBuilder veprojme keshtu: Library/Ikon
 Per te perfshire file-t .css per stilizimin e tabeles se user-it dhe te listes se ushqimeve, pasi te jene shtuar file-t ne package-n gui, do shkarkohet Intellij IDEA Ultimate. 
 
 
-TO DO: te shikohet problemi i ruajtjes se userit te sapo-regjistruar ne sesion per te rregulluar problemin e shtimit te ushqimit pas regjistrimit per here te pare; te shtohen butona log out perkates; klasa AdminReport te kalohet nga package Report ne package entity meqe eshte klase entitet;
+TO DO: te shikohet problemi i ruajtjes se userit te sapo-regjistruar ne sesion per te rregulluar problemin e shtimit te ushqimit pas regjistrimit per here te pare; klasa AdminReport te kalohet nga package Report ne package entity meqe eshte klase entitet;
 
 
 
-Klasat per testim: UserDAOImplementation; FoodDAOImplementation (metodat qe perdoren); UserService; AdminService (metodat qe kane perdorim); FoodService; InputValidator & PasswordValidator;
- te gjitha metodat qe kane lidhje me klikim butonash/fushat e inputeve ne gui (te mos nxirren exceptions gjate rasteve te testimit)
+Klasat per testim: UserDAOImplementation; FoodDAOImplementation (metodat qe perdoren); UserService; AdminService (metodat qe kane perdorim); FoodService; te gjitha metodat qe kane lidhje me klikim butonash/fushat e inputeve ne gui (te mos nxirren exceptions gjate rasteve te testimit)
+
+
+
+
+link per JUnit: https://junit.org/junit5/docs/current/user-guide/
+link per Mockito: https://site.mockito.org/
 
