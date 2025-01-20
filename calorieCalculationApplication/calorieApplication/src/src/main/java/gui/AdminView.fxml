@@ -40,6 +40,11 @@
                         <Font name="System Bold" size="13.0" />
                     </font>
                 </JFXButton>
+                <JFXButton fx:id="logOutButton" onAction="#handleLogOutButton" layoutX="500.0" layoutY="5.0" prefHeight="30.0" prefWidth="80.0" text="Log Out" style="-fx-background-color: #85b48a; -fx-text-fill: white; -fx-font-size: 14;">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                </JFXButton>
             </children>
         </AnchorPane>
     </content>
