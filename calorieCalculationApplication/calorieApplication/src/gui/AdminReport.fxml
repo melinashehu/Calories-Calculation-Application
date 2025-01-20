@@ -39,8 +39,7 @@
             <NumberAxis fx:id="yAxis" label="This Week Average Calories" />
         </yAxis>
     </BarChart>
-
-    <!-- Table for User Names and Money Limit Exceed -->
+    
     <TableView fx:id="userTable" layoutX="520.0" layoutY="150.0" prefHeight="400.0" prefWidth="550.0">
         <stylesheets>
             <URL value="@styleReportTable.css" />
