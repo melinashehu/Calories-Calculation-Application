@@ -47,3 +47,5 @@ Klasat per testim: UserDAOImplementation; FoodDAOImplementation (metodat qe perd
 link per JUnit: https://junit.org/junit5/docs/current/user-guide/
 link per Mockito: https://site.mockito.org/
 
+link per dependencies: https://mvnrepository.com/
+
