@@ -15,7 +15,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import login.UserSession;
 import validation.*;
-import gui.*;
+
 import java.io.IOException;
 
 /**
@@ -60,7 +60,7 @@ public class RegisterController {
             registerButton.getScene().getWindow().hide();
 
             try{
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/HomeView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/HomeView.fxml"));
                 Scene homeScene = new Scene(loader.load());
                 Stage stage = new Stage();
                 stage.setScene(homeScene);
@@ -90,7 +90,7 @@ public class RegisterController {
     }
 
     public void redirectToLoginForm() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/LoginView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/LoginView.fxml"));
         Scene registerScene = new Scene(loader.load());
         Stage stage = (Stage)registerButton.getScene().getWindow();
         stage.setScene(registerScene);

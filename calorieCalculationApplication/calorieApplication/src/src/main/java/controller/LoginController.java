@@ -16,7 +16,6 @@ import login.*;
 import validation.*;
 import entity.*;
 import java.io.IOException;
-import gui.*;
 
 /**
  * @author :Amina
@@ -59,11 +58,11 @@ public class LoginController {
                     Scene homeScene;
 
                  if(user.getRole().equals("user")){
-                     loader = new FXMLLoader(getClass().getResource("/gui/HomeView.fxml"));
+                     loader = new FXMLLoader(getClass().getResource("../gui/HomeView.fxml"));
                      homeScene = new Scene(loader.load());
                 } else{ //Per admin-et
 
-                     loader = new FXMLLoader(getClass().getResource("/gui/AdminView.fxml"));
+                     loader = new FXMLLoader(getClass().getResource("../gui/AdminView.fxml"));
                      homeScene = new Scene(loader.load());
                  }
                     Stage stage = new Stage();
@@ -79,7 +78,7 @@ public class LoginController {
     }
 
     public void redirectToRegisterForm() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/RegisterView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/RegisterView.fxml"));
         Scene registerScene = new Scene(loader.load());
         Stage stage = (Stage)loginButton.getScene().getWindow();
         stage.setScene(registerScene);

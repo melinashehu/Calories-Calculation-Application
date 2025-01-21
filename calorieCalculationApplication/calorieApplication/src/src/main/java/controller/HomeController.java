@@ -11,12 +11,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import service.UserService;
 import login.UserSession;
-import service.*;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -122,7 +120,7 @@ public class HomeController {
     }
     public void handleShowMyFoods(){
         try{
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/AllFoods.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../gui/AllFoods.fxml"));
             Parent root = fxmlLoader.load();
             Stage stage = new Stage();
             stage.setTitle("All Foods");
