@@ -57,8 +57,8 @@ public class UserServiceTest {
             @Override
             public List<User> getAllUsers() {
                 return Arrays.asList(
-                        new User(1, "User1", "user1@gmail.com"),
-                        new User(2, "User2", "user2@gmail.com")
+                        new User(1, "User1", "User1@gmail.com"),
+                        new User(2, "User2", "User2@gmail.com")
                 );
             }
         });
@@ -108,7 +108,7 @@ public class UserServiceTest {
 
     @Test
     void testGenerateUserReportNoFood() throws NoSuchFieldException, IllegalAccessException {
-        int userId = 2; // Assume this user has no food entries for the week
+        int userId = 2;
         Date startingDate = Date.valueOf(LocalDate.now().minusDays(7));
         double calorieThreshold = 2500.0;
 
