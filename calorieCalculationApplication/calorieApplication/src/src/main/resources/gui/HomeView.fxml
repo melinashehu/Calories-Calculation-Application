@@ -57,7 +57,7 @@
         </VBox>
     </ScrollPane>
 
-    <ImageView fitHeight="100" fitWidth="100" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+   <!-- <ImageView fitHeight="100" fitWidth="100" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
         <Image url="@/images/pickles.jpg"/>
-    </ImageView>
+    </ImageView>-->
 </AnchorPane>

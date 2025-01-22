@@ -30,4 +30,16 @@ public class FoodService {
         }
         return filteredFoods;
     }
+
+    public List<Food> getAllFoodsFromAWeeklyPeriodForAUserService(int userId, java.sql.Date startingDate){
+        return foodDAO.getAllFoodsFromAWeeklyPeriodForAUser(userId,startingDate);
+    }
+
+    public List<Food> getAllFoodsForAUserService(int userId){
+        return foodDAO.getAllFoodsForAUser(userId);
+    }
+
+    public boolean updateFoodService(Food food){
+        return foodDAO.updateFood(food);
+    }
 }

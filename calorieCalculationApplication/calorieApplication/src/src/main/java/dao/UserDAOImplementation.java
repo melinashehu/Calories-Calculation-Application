@@ -106,6 +106,23 @@ public class UserDAOImplementation implements UserDAO {
         return null;
     }
 
+    public int getUserIdByEmail(String email) {
+        String sql = "SELECT user_id FROM users WHERE email = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pst = conn.prepareStatement(sql)) {
+
+            pst.setString(1, email);
+            try (ResultSet rs = pst.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("user_id");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
 
     /**
      * @author :Amina

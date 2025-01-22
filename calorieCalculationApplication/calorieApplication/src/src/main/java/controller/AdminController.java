@@ -1,6 +1,5 @@
 package controller;
 
-import dao.UserDAOImplementation;
 import com.jfoenix.controls.JFXButton;
 import entity.User;
 import javafx.collections.FXCollections;
@@ -14,7 +13,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import service.AdminService;
+import service.UserService;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -36,9 +36,7 @@ public class AdminController implements Initializable {
     private TableColumn<User, JFXButton> deleteUserCol;
     @FXML
     private Button logOutButton;
-
-    private final AdminService adminService = new AdminService();
-    private UserDAOImplementation userDAO = new UserDAOImplementation();
+    private UserService userService = new UserService();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -56,7 +54,7 @@ public class AdminController implements Initializable {
         userEmailCol.setCellValueFactory(new PropertyValueFactory<>("UserEmail"));
 
         try {
-            List<User> users = userDAO.getAllUsers();
+            List<User> users = userService.getAllUsersService();
             if (users.isEmpty()) {
                 System.out.println("There are no users.");
             }
@@ -149,7 +147,7 @@ public class AdminController implements Initializable {
 
         if (alert.getResult() == ButtonType.YES) {
             try {
-                boolean success = userDAO.deleteUser(selectedUser.getUserId());
+                boolean success = userService.deleteUserService(selectedUser.getUserId());
                 if (success) {
                     usersTable.getItems().remove(selectedUser);
                     refreshTable();
@@ -167,7 +165,7 @@ public class AdminController implements Initializable {
 
     @FXML
     private void refreshTable() {
-        List<User> users = userDAO.getAllUsers();
+        List<User> users = userService.getAllUsersService();
         ObservableList<User> userObservableList = FXCollections.observableArrayList(users);
         usersTable.setItems(userObservableList);
     }
