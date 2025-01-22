@@ -1,6 +1,6 @@
 package service;
 
-import Report.AdminReport;
+import entity.AdminReport;
 import dao.FoodDAOImplementation;
 import dao.UserDAOImplementation;
 import entity.Food;
@@ -9,9 +9,7 @@ import login.UserSession;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class AdminService {
 

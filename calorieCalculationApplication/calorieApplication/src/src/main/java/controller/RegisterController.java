@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import login.UserSession;
+import service.UserService;
 import validation.*;
 
 import java.io.IOException;
@@ -51,8 +52,8 @@ public class RegisterController {
         }
 
         User user = new User(0, name, email, password, "user");
-        UserDAOImplementation userDao = new UserDAOImplementation();
-        boolean success = userDao.addUser(user);
+        UserService userService = new UserService();
+        boolean success = userService.addUserService(user);
         if(success){
             UserSession.setLoggedInUser(user);
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Registration successful!");
