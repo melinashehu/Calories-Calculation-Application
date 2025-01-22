@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import service.FoodService;
 import service.UserService;
 import login.UserSession;
 
@@ -35,7 +36,7 @@ public class HomeController {
     private VBox warningPopup;
     @FXML
     private VBox moneyWarningPopup;
-    private UserService reportService = new UserService();
+    private UserService userService = new UserService();
     @FXML
     private void initialize() {
         updateUserReport();
@@ -51,16 +52,16 @@ public class HomeController {
         double calorieThreshold = 2500.0;
         LocalDate weekStartDate = LocalDate.now().minusDays(7);
         Date sqlWeekStartDate = Date.valueOf(weekStartDate);
-        StatisticalReport report = reportService.generateUserReport(userId, sqlWeekStartDate, calorieThreshold);
+        StatisticalReport report = userService.generateUserReport(userId, sqlWeekStartDate, calorieThreshold);
 
         totalCaloriesLabel.setText(String.valueOf(report.getTotalCalories()));
         totalSpendingLabel.setText(String.valueOf(report.getTotalSpendingMoney()));
         daysAboveThresholdLabel.setText(String.valueOf(report.getDaysAboveCalorieThreshold()));
 
-        if(reportService.sumofTodaysTotalCalories(UserSession.getLoggedInUser().getUserId()) > 2500){
+        if(userService.sumofTodaysTotalCalories(UserSession.getLoggedInUser().getUserId()) > 2500){
             showWarningPopup();
         }
-        if(reportService.sumOfTotalMoneySpent(UserSession.getLoggedInUser().getUserId(), sqlMonthStartDate) > 1000){
+        if(userService.sumOfTotalMoneySpent(UserSession.getLoggedInUser().getUserId(), sqlMonthStartDate) > 1000){
             showMoneyWarningPopup();
         }
     }
@@ -77,13 +78,14 @@ public class HomeController {
 
         Food newFood = new Food(0, UserSession.getLoggedInUser().getUserId(), foodName, calorieValue, priceValue, dateConsumed);
 
-        FoodDAO foodDao = new FoodDAOImplementation();
-        boolean added = foodDao.addFood(newFood);
+        FoodService foodService = new FoodService();
+        boolean added = foodService.addFoodService(newFood);
+
 
         if (added) {
             updateUserReport();
 
-            if(reportService.sumofTodaysTotalCalories(UserSession.getLoggedInUser().getUserId()) > 2500){
+            if(userService.sumofTodaysTotalCalories(UserSession.getLoggedInUser().getUserId()) > 2500){
                 showWarningPopup();
             }
 
