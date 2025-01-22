@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import login.*;
+import service.UserService;
 import validation.*;
 import entity.*;
 import java.io.IOException;
@@ -46,8 +47,8 @@ public class LoginController {
             return;
         }
 
-        UserDAOImplementation userDao = new UserDAOImplementation();
-        User user = userDao.getUserByEmailAndPassword(email, password);
+        UserService userService = new UserService();
+        User user = userService.getUserByEmailAndPasswordService(email, password);
         if(user != null){
             UserSession.setLoggedInUser(user);
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Log-in successful! Welcome, "+user.getUserName());
