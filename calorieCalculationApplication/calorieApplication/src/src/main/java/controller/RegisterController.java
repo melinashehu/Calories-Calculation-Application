@@ -55,25 +55,33 @@ public class RegisterController {
         UserService userService = new UserService();
         boolean success = userService.addUserService(user);
         if(success){
-            UserSession.setLoggedInUser(user);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Registration successful!");
-            alert.showAndWait();
-            registerButton.getScene().getWindow().hide();
+            int userId = userDao.getUserIdByEmail(email);
+            if(userId > 0){
+                user.setUserId(userId);
+                UserSession.setLoggedInUser(user);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Registration successful!");
+                alert.showAndWait();
+                registerButton.getScene().getWindow().hide();
 
-            try{
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/HomeView.fxml"));
-                Scene homeScene = new Scene(loader.load());
-                Stage stage = new Stage();
-                stage.setScene(homeScene);
-                stage.show();
-            }catch(IOException e){
-                e.printStackTrace();
+                try{
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/HomeView.fxml"));
+                    Scene homeScene = new Scene(loader.load());
+                    Stage stage = new Stage();
+                    stage.setScene(homeScene);
+                    stage.show();
+                }catch(IOException e){
+                    e.printStackTrace();
+                }
+
+            }else{
+                showError("Failed to retrieve your user ID after registration.");
             }
-
-        }else{
+        }else {
             showError("Registration failed. Check you credentials.");
         }
     }
+
+
 
 
     public void handleRegisterButtonMouseEntered(){

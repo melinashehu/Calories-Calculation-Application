@@ -12,6 +12,7 @@ import entity.StatisticalReport;
 import entity.User;
 
 public class UserService {
+
     private FoodDAOImplementation foodDAO;
     private UserDAOImplementation userDAO;
 
@@ -108,8 +109,21 @@ public class UserService {
         int daysAboveThreshold = calculateDaysAboveCalorieThresholdPerWeek(userId, calorieThreshold);
 
         return new StatisticalReport(totalCalories, totalSpending, daysAboveThreshold);
+    
+    public List<User> getAllUsersService() {
+        return userDAO.getAllUsers();
     }
 
+    public boolean deleteUserService(int userId){
+        return userDAO.deleteUser(userId);
+    }
+
+    public List<Integer> getAllUsersIdsService(){
+        return userDAO.getAllUsersIds();
+    }
+
+    public List<Boolean> getHasExceededMoneyLimitColumnService(){
+        return userDAO.getHasExceededMoneyLimitColumn();
     public boolean addUserService(User user){
        return userDAO.addUser(user);
     }

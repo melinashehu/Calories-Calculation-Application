@@ -14,6 +14,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import service.AdminService;
+import service.FoodService;
 import service.UserService;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -32,10 +33,20 @@ public class AdminReportController {
     private TableColumn<User, String> userIdColumn;
     @FXML
     private TableColumn<User, Boolean> moneyLimitColumn;
-    private AdminService adminService = new AdminService();
-    private UserDAOImplementation userDAO = new UserDAOImplementation();
-    private UserService userService = new UserService();
-    private FoodDAOImplementation foodDAO = new FoodDAOImplementation();
+    private AdminService adminService;
+    private FoodService foodService;
+    private UserService userService;
+
+    public AdminReportController(TextArea foodEntriesComparisonArea,BarChart<String,Number> barChart,TableView<User> userTable
+    ,TableColumn<User,String> userIdColumn, TableColumn<User,Boolean> moneyLimitColumn){
+        this.foodEntriesComparisonArea = foodEntriesComparisonArea;
+        this.barChart = barChart;
+        this.userTable = userTable;
+        this.userIdColumn = userIdColumn;
+        this.moneyLimitColumn = moneyLimitColumn;
+    }
+
+
 
     @FXML
     public void initialize() {
@@ -52,14 +63,14 @@ public class AdminReportController {
 
     @FXML
     public void showCaloriesChart(){
-        List<Integer> userIds = userDAO.getAllUsersIds();
+        List<Integer> userIds = userService.getAllUsersIdsService();
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Avg Calories per User");
         LocalDate today = LocalDate.now();
         Date startDate = Date.valueOf(today.minusDays(7));
         for(Integer userId : userIds) {
             double totalCalories = userService.calculateTotalCaloriesConsumedPerWeek(userId, startDate);
-            List<Food> foodEntries = foodDAO.getAllFoodsFromAWeeklyPeriodForAUser(userId, startDate);
+            List<Food> foodEntries = foodService.getAllFoodsFromAWeeklyPeriodForAUserService(userId, startDate);
             int entryCount = foodEntries.size();
             double avgCalories = entryCount > 0 ? totalCalories / entryCount : 0.0;
             series.getData().add(new XYChart.Data<>(userId.toString(), avgCalories));
@@ -70,8 +81,8 @@ public class AdminReportController {
 
     @FXML
     public void showUsersThatExceededMoneyLimit() {
-        List<Integer> userIds = userDAO.getAllUsersIds();
-        List<Boolean> exceededMoneyLimit = userDAO.getHasExceededMoneyLimitColumn();
+        List<Integer> userIds = userService.getAllUsersIdsService();
+        List<Boolean> exceededMoneyLimit = userService.getHasExceededMoneyLimitColumnService();
         ObservableList<User> userData = FXCollections.observableArrayList();
         for (int i = 0; i < userIds.size(); i++) {
             userData.add(new User(userIds.get(i), exceededMoneyLimit.get(i)));

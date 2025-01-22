@@ -11,4 +11,5 @@ public interface UserDAO {
     public boolean deleteUser(int id);
     public List<Integer> getAllUsersIds();
     public List<Boolean> getHasExceededMoneyLimitColumn();
+    public int getUserIdByEmail(String email);
 }

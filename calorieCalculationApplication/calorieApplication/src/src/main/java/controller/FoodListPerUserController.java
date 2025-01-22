@@ -15,6 +15,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.DoubleStringConverter;
+import service.FoodService;
+import service.UserService;
+
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
@@ -38,7 +41,7 @@ public class FoodListPerUserController {
     @FXML
     private TextField userNameTextField;
     private User selectedUser;
-    FoodDAOImplementation foodDao = new FoodDAOImplementation();
+    private FoodService foodService = new FoodService();
 
     public void displayUserGreeting(User selectedUser){
         if(selectedUser!=null){
@@ -56,7 +59,7 @@ public class FoodListPerUserController {
     }
 
     private void loadFoodData(){
-        List<Food> userFoods = foodDao.getAllFoodsForAUser(selectedUser.getUserId());
+        List<Food> userFoods = foodService.getAllFoodsForAUserService(selectedUser.getUserId());
         ObservableList<Food> foodObservableList = FXCollections.observableArrayList(userFoods);
         foodTable.setItems(foodObservableList);
     }
@@ -74,7 +77,7 @@ public class FoodListPerUserController {
             Food food = event.getRowValue();
             food.setFoodName(event.getNewValue());
             try {
-                foodDao.updateFood(food);
+                foodService.updateFoodService(food);
             } catch (Exception e) {
                 e.printStackTrace();
 
@@ -88,7 +91,7 @@ public class FoodListPerUserController {
             Food food = event.getRowValue();
             food.setCalorie(event.getNewValue());
             try {
-                foodDao.updateFood(food);
+                foodService.updateFoodService(food);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -102,7 +105,7 @@ public class FoodListPerUserController {
             Food food = event.getRowValue();
             food.setPrice(event.getNewValue());
             try {
-                foodDao.updateFood(food);
+                foodService.updateFoodService(food);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -128,7 +131,7 @@ public class FoodListPerUserController {
             Food food = event.getRowValue();
             food.setDateWhenConsumed(event.getNewValue());
             try {
-                foodDao.updateFood(food);
+                foodService.updateFoodService(food);
             } catch (Exception e) {
                 e.printStackTrace();
             }

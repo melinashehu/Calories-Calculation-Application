@@ -50,7 +50,6 @@ public class AllFoodsController {
     private DatePicker endDatePicker;
     @FXML
     private Button filterButton;
-    private FoodDAOImplementation foodDao = new FoodDAOImplementation();
     private FoodService foodService = new FoodService();
 
     public void displayUserGreeting(User loggedUser){
@@ -76,7 +75,7 @@ public class AllFoodsController {
             throw new IllegalArgumentException("The user cannot be null!");
         }
         int userId = loggedUser.getUserId();
-        List<Food> userFoods = foodDao.getAllFoodsForAUser(userId);
+        List<Food> userFoods = foodService.getAllFoodsForAUserService(userId);
         ObservableList<Food> foodObservableList = FXCollections.observableArrayList(userFoods);
         foodTable.setItems(foodObservableList);
     }
