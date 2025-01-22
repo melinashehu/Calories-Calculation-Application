@@ -42,4 +42,8 @@ public class FoodService {
     public boolean updateFoodService(Food food){
         return foodDAO.updateFood(food);
     }
+    public boolean addFoodService(Food food){
+        return foodDAO.addFood(food);
+    }
+
 }
