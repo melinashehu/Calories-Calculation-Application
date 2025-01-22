@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminService {
+public class AdminService implements AdminServiceInterface {
 
     private final UserDAOImplementation userDAO;
     private final FoodDAOImplementation foodDAO;
@@ -30,6 +30,7 @@ public class AdminService {
     /**
      * @author :Edna
      */
+    @Override
     public List<AdminReport> usersWhoExceededMonthlySpendingLimit(Date startingDate){//testuar dhe funksionon
         if(!isAdmin()){
             throw new SecurityException("You have no access to this information!");
@@ -60,6 +61,7 @@ public class AdminService {
     /**
      * @author: Amina
      */
+    @Override
     public List<User> getAvgCaloriesPerUserLast7Days(){ //punon ne console
 
         /*if(!isAdmin()){
@@ -86,6 +88,7 @@ public class AdminService {
     /**
      * @author: Amina
      */
+    @Override
     public String printFoodEntriesPerWeekComparison(){
         LocalDate today = LocalDate.now();
         Date currentDate = Date.valueOf(today);

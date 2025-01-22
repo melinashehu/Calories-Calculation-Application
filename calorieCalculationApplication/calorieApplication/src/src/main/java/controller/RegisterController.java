@@ -55,7 +55,7 @@ public class RegisterController {
         UserService userService = new UserService();
         boolean success = userService.addUserService(user);
         if(success){
-            int userId = userDao.getUserIdByEmail(email);
+            int userId = userService.getUserIdByEmailService(email);
             if(userId > 0){
                 user.setUserId(userId);
                 UserSession.setLoggedInUser(user);

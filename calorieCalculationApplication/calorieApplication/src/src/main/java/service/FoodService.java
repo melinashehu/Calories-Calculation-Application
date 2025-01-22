@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * @author: Amina
  */
-public class FoodService {
+public class FoodService implements FoodServiceInterface {
     private FoodDAOImplementation foodDAO;
 
     public FoodService() {
