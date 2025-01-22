@@ -14,13 +14,14 @@ import entity.User;
 public class UserService {
 
     private FoodDAOImplementation foodDAO;
-    private UserDAOImplementation userDAO = new UserDAOImplementation();
+    private UserDAOImplementation userDAO;
 
     /**
      * @author :Melina
      */
     public UserService() {
         this.foodDAO = new FoodDAOImplementation();
+        this.userDAO = new UserDAOImplementation();
     }
 
     public double calculateTotalCaloriesConsumedPerWeek(int userId,Date startingDate) { //testuar, punon
@@ -108,8 +109,7 @@ public class UserService {
         int daysAboveThreshold = calculateDaysAboveCalorieThresholdPerWeek(userId, calorieThreshold);
 
         return new StatisticalReport(totalCalories, totalSpending, daysAboveThreshold);
-    }
-
+    
     public List<User> getAllUsersService() {
         return userDAO.getAllUsers();
     }
@@ -124,5 +124,10 @@ public class UserService {
 
     public List<Boolean> getHasExceededMoneyLimitColumnService(){
         return userDAO.getHasExceededMoneyLimitColumn();
+    public boolean addUserService(User user){
+       return userDAO.addUser(user);
+    }
+    public User getUserByEmailAndPasswordService(String email, String password){
+        return userDAO.getUserByEmailAndPassword(email, password);
     }
 }
