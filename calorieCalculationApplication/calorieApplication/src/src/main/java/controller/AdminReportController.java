@@ -1,7 +1,5 @@
 package controller;
 
-import dao.FoodDAOImplementation;
-import dao.UserDAOImplementation;
 import entity.Food;
 import entity.User;
 import javafx.beans.property.SimpleObjectProperty;
@@ -13,40 +11,34 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
-import service.AdminService;
-import service.FoodService;
-import service.UserService;
+import service.*;
+
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 public class AdminReportController {
     @FXML
-    private TextArea foodEntriesComparisonArea;
+    public TextArea foodEntriesComparisonArea;
     @FXML
-    private BarChart<String, Number> barChart;
+    public BarChart<String, Number> barChart;
     @FXML
-    private TableView<User> userTable;
+    public TableView<User> userTable;
     @FXML
-    private TableColumn<User, String> userIdColumn;
+    public TableColumn<User, String> userIdColumn;
     @FXML
-    private TableColumn<User, Boolean> moneyLimitColumn;
-    private AdminService adminService;
-    private FoodService foodService;
-    private UserService userService;
+    public TableColumn<User, Boolean> moneyLimitColumn;
+    private AdminServiceInterface adminService;
+    private FoodServiceInterface foodService;
+    private UserServiceInterface userService;
 
-    public AdminReportController(TextArea foodEntriesComparisonArea,BarChart<String,Number> barChart,TableView<User> userTable
-    ,TableColumn<User,String> userIdColumn, TableColumn<User,Boolean> moneyLimitColumn){
-        this.foodEntriesComparisonArea = foodEntriesComparisonArea;
-        this.barChart = barChart;
-        this.userTable = userTable;
-        this.userIdColumn = userIdColumn;
-        this.moneyLimitColumn = moneyLimitColumn;
+    //dependency injection
+    public AdminReportController(AdminServiceInterface adminService,FoodServiceInterface foodService,UserServiceInterface userService){
+        this.adminService = adminService;
+        this.foodService = foodService;
+        this.userService = userService;
     }
-
-
 
     @FXML
     public void initialize() {
