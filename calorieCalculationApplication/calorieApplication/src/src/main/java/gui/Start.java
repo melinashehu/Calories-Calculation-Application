@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 
 import static javafx.application.Application.launch;
 
-public class TestingGui extends Application { //tested and it works :)
+public class Start extends Application { 
 
     public void start(Stage primaryStage) throws Exception{
         primaryStage.setTitle("Register");

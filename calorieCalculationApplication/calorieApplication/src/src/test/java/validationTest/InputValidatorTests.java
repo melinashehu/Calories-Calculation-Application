@@ -59,7 +59,6 @@ public class InputValidatorTests {
         assertTrue(InputValidator.isValidPassword("testpassword"));
     }
 
-    //testet e meposhtme per IsValidInput jane te vlefshme per metoden qe lidhet me registerForm
     @Test
     public void testIsValidInput_EmptyNameInput(){
         String result = InputValidator.isValidInput("", "test@domain.com", "testpassword");
@@ -108,7 +107,6 @@ public class InputValidatorTests {
         assertNull(result);
     }
 
-    //testet e meposhtme per IsValidInput jane te vlefshme per metoden qe lidhet me loginForm
     @Test
     public void testIsValidInputLogin_EmptyEmailInput(){
         String result = InputValidator.isValidInput("", "");

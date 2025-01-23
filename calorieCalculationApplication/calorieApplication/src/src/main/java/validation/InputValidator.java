@@ -30,7 +30,6 @@ public class InputValidator {
         return !isEmpty(password) && password.length()>=6;
     }
 
-    //per validimin e te dhenave ne registerForm
     public static String isValidInput(String inputName, String inputEmail, String inputPassword) {
         if(isEmpty(inputName) || isEmpty(inputEmail) || isEmpty(inputPassword)){
             return "All fields must be filled.";
@@ -50,7 +49,6 @@ public class InputValidator {
         return null;
     }
 
-    //per validimin e te dhenave ne loginForm
     public static String isValidInput(String inputEmail, String inputPassword) {
         if( isEmpty(inputEmail) || isEmpty(inputPassword)){
             return "All fields must be filled.";
