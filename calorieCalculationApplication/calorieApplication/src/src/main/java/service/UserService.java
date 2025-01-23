@@ -1,7 +1,6 @@
 package service;
 import dao.FoodDAOImplementation;
 import dao.UserDAOImplementation;
-import dao.*;
 import entity.Food;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -11,7 +10,7 @@ import java.util.HashMap;
 import entity.StatisticalReport;
 import entity.User;
 
-public class UserService {
+public class UserService implements UserServiceInterface{
 
     private FoodDAOImplementation foodDAO;
     private UserDAOImplementation userDAO;
@@ -24,7 +23,10 @@ public class UserService {
         this.userDAO = new UserDAOImplementation();
     }
 
-    public double calculateTotalCaloriesConsumedPerWeek(int userId, Date startingDate) { //testuar, punon
+
+    @Override
+    public double calculateTotalCaloriesConsumedPerWeek(int userId,Date startingDate) { //testuar, punon
+
         List<Double> calorieValues = foodDAO.getCalorieValuesForAWeeklyPeriodForAUser(userId, startingDate);
         double totalCalories = 0.0;
         for (double calorie : calorieValues) {
@@ -37,7 +39,10 @@ public class UserService {
     /**
      * @author :Melina
      */
-    public double calculateTotalMoneySpentPerWeek(int userId, Date startingDate) { //testuar, punon
+
+    @Override
+    public double calculateTotalMoneySpentPerWeek(int userId,Date startingDate) { //testuar, punon
+
         List<Double> moneySpentValues = foodDAO.getMoneySpentFromAUser(userId, startingDate);
         double totalMoneySpent = 0.0;
         for (double money : moneySpentValues) {
@@ -50,6 +55,7 @@ public class UserService {
     /**
      * @author :Melina
      */
+    @Override
     public int calculateDaysAboveCalorieThresholdPerWeek(int userId, double calorieThreshold) {//testuar, punon
         List<Food> foods = foodDAO.getFoodsForUserByDate(userId);
         Map<Date, Double> dailyCalories = new HashMap<>();
@@ -71,7 +77,10 @@ public class UserService {
     /**
      * @author :Amina
      */
-    public double sumofTodaysTotalCalories(int userId) { //testuar, punon
+
+    @Override
+    public double sumofTodaysTotalCalories(int userId){ //testuar, punon
+
         List<Double> todaysCalories = foodDAO.getTodaysTotalCalories(userId);
         double todaysTotalCaloriesCount = 0.0;
         for (double calorieValue : todaysCalories) {
@@ -79,6 +88,8 @@ public class UserService {
         }
         return todaysTotalCaloriesCount;
     }
+
+    @Override
 
     public double sumOfTotalMoneySpent(int userId, Date startingDate) {
         List<Double> totalMoney = foodDAO.getMoneySpentFromAUser(userId, startingDate);
@@ -89,7 +100,10 @@ public class UserService {
         return totalMoneySpent;
     }
 
-    public void updateHasExceededLimitForAllUsers() {
+
+    @Override
+    public void updateHasExceededLimitForAllUsers(){
+
         List<User> allUsers = userDAO.getAllUsers();
         Date startingDate = Date.valueOf(LocalDate.now().minusMonths(1));
         for (User user : allUsers) {
@@ -104,6 +118,7 @@ public class UserService {
     /**
      * @author :Melina
      */
+    @Override
     public StatisticalReport generateUserReport(int userId, Date startingDate, double calorieThreshold) {
         double totalCalories = calculateTotalCaloriesConsumedPerWeek(userId, startingDate);
         double totalSpending = calculateTotalMoneySpentPerWeek(userId, startingDate);
@@ -113,13 +128,12 @@ public class UserService {
 
     }
 
+    @Override
+
     public List<User> getAllUsersService() {
         return userDAO.getAllUsers();
     }
 
-    public boolean deleteUserService(int userId) {
-        return userDAO.deleteUser(userId);
-    }
 
     public List<Integer> getAllUsersIdsService() {
         return userDAO.getAllUsersIds();
@@ -140,5 +154,12 @@ public class UserService {
     public int getUserIdByEmailService(String email){
         return userDAO.getUserIdByEmail(email);
     }
+
+
+    @Override
+    public boolean deleteUserService(int userId){
+        return userDAO.deleteUser(userId);
+    }
+
 }
 
