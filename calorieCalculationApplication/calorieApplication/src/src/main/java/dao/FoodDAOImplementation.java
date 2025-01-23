@@ -19,6 +19,15 @@ import calendar.Calendar;
 import login.UserSession;
 
 public  class FoodDAOImplementation implements FoodDAO {
+    private DatabaseConnection databaseConnection = new DatabaseConnection();
+
+    public FoodDAOImplementation(DatabaseConnection databaseConnection) {
+        this.databaseConnection = databaseConnection;
+    }
+
+    public FoodDAOImplementation() {
+
+    }
 
     /**
      * @author :Amina
@@ -26,7 +35,7 @@ public  class FoodDAOImplementation implements FoodDAO {
     public List<Food> getAllFoods(){
         List<Food> allFoods = new ArrayList<Food>();
         String sql = "select * from user_foods";
-        try(Connection conn = DatabaseConnection.getConnection();
+        try(Connection conn = (Connection) databaseConnection.getConnection();
             PreparedStatement pst = conn.prepareStatement(sql)){
             ResultSet rs = pst.executeQuery();
             if(rs.next()){
@@ -49,7 +58,7 @@ public  class FoodDAOImplementation implements FoodDAO {
     @Override
     public Food getFood(int id) {
         String sql = "SELECT * FROM user_foods WHERE user_food_id=?";
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = (Connection) databaseConnection.getConnection();
              PreparedStatement pst = conn.prepareStatement(sql)) {
             pst.setInt(1, id);
             ResultSet rs = pst.executeQuery();
@@ -78,7 +87,7 @@ public  class FoodDAOImplementation implements FoodDAO {
         Date endDate = Calendar.calculateEndWeekDate(startingDate);
         String sql = "SELECT * FROM user_foods WHERE user_id = ? AND date_consumed BETWEEN ? AND ?";
         List<Food> foods = new ArrayList<>();
-        try (Connection conn = DatabaseConnection.getConnection();
+        try (Connection conn = (Connection) databaseConnection.getConnection();
              PreparedStatement pst = conn.prepareStatement(sql)) {
             pst.setInt(1, userId);
             pst.setDate(2, startingDate);
@@ -108,7 +117,7 @@ public  class FoodDAOImplementation implements FoodDAO {
         String sql = "SELECT calorie_value FROM user_foods WHERE user_id = ? AND date_consumed BETWEEN ? AND ?";
         List<Double> calorieValuesForAWeeklyPeriodForAUser = new ArrayList<>();
 
-        try (Connection connection = DatabaseConnection.getConnection();
+        try (Connection connection = (Connection) databaseConnection.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setInt(1,userId);
             pstmt.setDate(2, startingDate);
@@ -132,7 +141,7 @@ public  class FoodDAOImplementation implements FoodDAO {
         String sql = "SELECT food_price FROM user_foods WHERE user_id = ? AND date_consumed BETWEEN ? AND DATE_ADD(?, INTERVAL 1 MONTH)";
         List<Double> getSpendingForAUser = new ArrayList<>();
 
-        try (Connection connection = DatabaseConnection.getConnection();
+        try (Connection connection = (Connection) databaseConnection.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setInt(1, userId);
             pstmt.setDate(2, startingDate);
@@ -157,7 +166,7 @@ public  class FoodDAOImplementation implements FoodDAO {
         String sql = "SELECT * FROM user_foods WHERE user_id = ? ORDER BY date_consumed";
         List<Food> foods = new ArrayList<>();
 
-        try (Connection connection = DatabaseConnection.getConnection();
+        try (Connection connection = (Connection) databaseConnection.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setInt(1, userId);
             ResultSet rs = pstmt.executeQuery();
@@ -183,7 +192,7 @@ public  class FoodDAOImplementation implements FoodDAO {
     public List<Food> getAllFoodsForAUser(int userId) {
         String sql = "SELECT * FROM user_foods WHERE user_id = ?";
         List<Food> foods = new ArrayList<>();
-        try (Connection connection = DatabaseConnection.getConnection();
+        try (Connection connection = (Connection) databaseConnection.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setInt(1, userId);
             ResultSet rs = pstmt.executeQuery();
@@ -206,7 +215,7 @@ public  class FoodDAOImplementation implements FoodDAO {
     @Override
     public int getAllFoodEntriesForAWeeklyPeriod(java.sql.Date startingDate) {
         String sql = "SELECT COUNT(*) FROM user_foods WHERE date_consumed BETWEEN DATE_SUB(?, INTERVAL 6 DAY) AND ?";
-        try(Connection connection = DatabaseConnection.getConnection();
+        try(Connection connection = (Connection) databaseConnection.getConnection();
             PreparedStatement pstmt = connection.prepareStatement(sql)){
             pstmt.setDate(1, (Date) startingDate);
             pstmt.setDate(2, (Date) startingDate);
@@ -230,7 +239,7 @@ public  class FoodDAOImplementation implements FoodDAO {
         if(loggedInUser != null){
             java.sql.Date currentDate = Calendar.getCurrentDate();
             String sql = "INSERT INTO user_foods (food_name, calorie_value, food_price, date_consumed, user_id) VALUES (?, ?, ?, ?, ?)";
-            try (Connection connection = DatabaseConnection.getConnection();
+            try (Connection connection = (Connection) databaseConnection.getConnection();
                  PreparedStatement pstmt = connection.prepareStatement(sql)) {
                 pstmt.setString(1, food.getFoodName());
                 pstmt.setDouble(2, food.getCalorie());
@@ -252,7 +261,7 @@ public  class FoodDAOImplementation implements FoodDAO {
     @Override
     public boolean deleteFood(int id) {
         String sql = "DELETE FROM user_foods WHERE user_food_id = ?";
-        try (Connection connection = DatabaseConnection.getConnection();
+        try (Connection connection = (Connection) databaseConnection.getConnection();
              PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setInt(1, id);
             return pstmt.executeUpdate() > 0;
@@ -268,7 +277,7 @@ public  class FoodDAOImplementation implements FoodDAO {
     @Override
     public boolean updateFood(Food food) {
         String sql="UPDATE user_foods SET food_name=?, calorie_value=?, food_price=?, date_consumed=? WHERE user_food_id=?";
-        try(Connection conn = DatabaseConnection.getConnection();
+        try(Connection conn = (Connection) databaseConnection.getConnection();
             PreparedStatement pst = conn.prepareStatement(sql)){
             pst.setString(1, food.getFoodName());
             pst.setDouble(2, food.getCalorie());
@@ -289,8 +298,8 @@ public  class FoodDAOImplementation implements FoodDAO {
     public List<Double> getTodaysTotalCalories(int userId) { //testuar, punon
         String sql = "Select calorie_value from user_foods where user_id = ? and date_consumed = ?";
         List<Double> calories = new ArrayList<>();
-        try(Connection conn = DatabaseConnection.getConnection();
-        PreparedStatement pst = conn.prepareStatement(sql)){
+        try(Connection conn = (Connection) databaseConnection.getConnection();
+            PreparedStatement pst = conn.prepareStatement(sql)){
             pst.setInt(1, userId);
             pst.setDate(2, Date.valueOf(LocalDate.now()));
             ResultSet rs = pst.executeQuery();
