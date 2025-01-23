@@ -39,7 +39,7 @@ Testimi eshte bere mbi bazen e kriterit 50% statement coverage duke testuar disa
 
 ## Shenime
 
-Kemi testuar klasat qe menduam se ishin me kryesore, megjithate disa klasa nuk jane testuar plotesisht metodat per shkak te kufizimit te kohes dhe problemeve me framework e testeve. Perkatesisht klasat UserDAOImplementation, FoodDAOImplementation. 
+Kemi testuar klasat qe menduam se ishin me kryesore, megjithate te disa klasa nuk jane testuar plotesisht metodat per shkak te kufizimit te kohes dhe problemeve me framework e testeve. Perkatesisht klasat UserDAOImplementation, FoodDAOImplementation. 
 Ne folderin Dokumentacion mund te gjenden screenshot dhe plani i punes se projektit.
 
 
