@@ -22,7 +22,7 @@ public class AdminService implements AdminServiceInterface {
         this.userDAO = new UserDAOImplementation();
     }
 
-    private boolean isAdmin() {//kontrollimi nese user-i eshte admin
+    private boolean isAdmin() {
         User loggedInUser = UserSession.getLoggedInUser();
         return loggedInUser != null && "admin".equals(loggedInUser.getRole());
     }
@@ -31,7 +31,7 @@ public class AdminService implements AdminServiceInterface {
      * @author :Edna
      */
     @Override
-    public List<AdminReport> usersWhoExceededMonthlySpendingLimit(Date startingDate){//testuar dhe funksionon
+    public List<AdminReport> usersWhoExceededMonthlySpendingLimit(Date startingDate){
         if(!isAdmin()){
             throw new SecurityException("You have no access to this information!");
         }
@@ -62,11 +62,9 @@ public class AdminService implements AdminServiceInterface {
      * @author: Amina
      */
     @Override
-    public List<User> getAvgCaloriesPerUserLast7Days(){ //punon ne console
+    public List<User> getAvgCaloriesPerUserLast7Days(){
 
-        /*if(!isAdmin()){
-            throw new SecurityException("You have no access to this information!");
-        }*/
+
 
         List<User> reportList = new ArrayList<>();
         LocalDate today = LocalDate.now();
