@@ -1,0 +1,89 @@
+
+import dao.TestDatabaseConnection;
+import dao.UserDAOImplementation;
+import entity.User;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.sql.*;
+import java.util.List;
+import static org.junit.jupiter.api.Assertions.*;
+
+
+public class UserDAOImplementationTest {
+
+    private UserDAOImplementation userDAO;
+    private TestDatabaseConnection dbconnection = new TestDatabaseConnection();
+
+
+    @BeforeEach
+    void setUp() throws SQLException {
+        TestDatabaseConnection mockConnection = new TestDatabaseConnection();
+        userDAO = new UserDAOImplementation(mockConnection);
+
+        try (Connection connection = dbconnection.getConnection();
+             Statement stmt = connection.createStatement()) {
+
+        }
+
+    }
+
+    @Test
+    void testGetAllUsers() throws SQLException {
+
+        List<User> users = userDAO.getAllUsers();
+
+        assertNotNull(users);
+        assertEquals(2, users.size());
+        User user = users.get(0);
+        assertEquals(14, user.getUserId());
+        assertEquals("Test User", user.getUserName());
+        assertEquals("test@example.com", user.getUserEmail());
+        assertEquals("password123", user.getUserPassword());
+        assertEquals("user", user.getRole());
+        assertFalse(user.getHasExceededMoneyLimit());
+
+    }
+
+
+    @Test
+    void testGetUserById() throws SQLException {
+
+        User user = userDAO.getUserById(14);
+        assertNotNull(user);
+        assertEquals(14, user.getUserId());
+        assertEquals("Test User", user.getUserName());
+        assertEquals("test@example.com", user.getUserEmail());
+        assertEquals("password123", user.getUserPassword());
+        assertEquals("user", user.getRole());
+        assertFalse(user.getHasExceededMoneyLimit());
+    }
+
+
+    @Test
+    public void testGetUserByEmailAndPassword() throws SQLException {
+        String email = "test@example.com";
+        String password = "password123";
+
+        User user = userDAO.getUserByEmailAndPassword(email, password);
+
+        assertNotNull(user);
+        assertEquals(14, user.getUserId());
+        assertEquals(email, user.getUserEmail());
+        assertEquals(password, user.getUserPassword());
+    }
+
+    @Test
+    public void testGetUserByEmail() throws SQLException {
+        String email = "test@example.com";
+        int expectedUserId = 14;
+
+        int result = userDAO.getUserIdByEmail(email);
+        assertEquals(expectedUserId, result);
+    }
+
+
+}
+
+
+
