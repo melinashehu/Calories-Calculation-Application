@@ -3,11 +3,11 @@
 Projekti paraqet krijimin e nje aplikacioni per te menaxhuar kalorite dhe shpenzimet e perdoruesve.
 
 ## Authors
-Ne kete projekt kontribuan:
+Anëtarët e grupit të punës:
 - [@aminatpwk](https://github.com/aminatpwk)
 - [@Edna407](https://github.com/Edna407)
 - [@melinashehu](https://github.com/melinashehu)
-
+- [@Elv-1](https://github.com/Elv-1)
 ## Installation
 
 Per te marre dhe ekzekutuar projektin ne laptop personal te ekzekutohet komanda:
