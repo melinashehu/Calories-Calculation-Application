@@ -6,6 +6,8 @@ package dao;
  * Incorrect modifications can break the connection to the database and disrupt the entire application.
  */
 
+import javafx.beans.value.ObservableBooleanValue;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -13,15 +15,15 @@ import java.sql.SQLException;
 /**
  * @author :Amina
  */
-public class DatabaseConnection {
-    private static final String url="jdbc:mysql://localhost:3306/caloriescalculatorapp";
-    private static final String user="root";
-    private static final String password="";
+public class DatabaseConnection implements DatabaseConnectionInterface{
+    private static final String url = "jdbc:mysql://localhost:3306/caloriescalculatorapp";
+    private static final String user = "root";
+    private static final String password = "";
 
-    public static Connection getConnection() throws SQLException{
+    @Override
+    public  Connection getConnection() throws SQLException {
         return DriverManager.getConnection(url, user, password);
     }
-
     /*per arsye testimi
     public static void main(String[] args) throws SQLException{
         try(Connection con=getConnection()){
