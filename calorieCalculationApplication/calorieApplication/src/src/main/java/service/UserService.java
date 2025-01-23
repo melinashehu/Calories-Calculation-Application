@@ -24,7 +24,7 @@ public class UserService {
         this.userDAO = new UserDAOImplementation();
     }
 
-    public double calculateTotalCaloriesConsumedPerWeek(int userId,Date startingDate) { //testuar, punon
+    public double calculateTotalCaloriesConsumedPerWeek(int userId, Date startingDate) { //testuar, punon
         List<Double> calorieValues = foodDAO.getCalorieValuesForAWeeklyPeriodForAUser(userId, startingDate);
         double totalCalories = 0.0;
         for (double calorie : calorieValues) {
@@ -37,7 +37,7 @@ public class UserService {
     /**
      * @author :Melina
      */
-    public double calculateTotalMoneySpentPerWeek(int userId,Date startingDate) { //testuar, punon
+    public double calculateTotalMoneySpentPerWeek(int userId, Date startingDate) { //testuar, punon
         List<Double> moneySpentValues = foodDAO.getMoneySpentFromAUser(userId, startingDate);
         double totalMoneySpent = 0.0;
         for (double money : moneySpentValues) {
@@ -71,7 +71,7 @@ public class UserService {
     /**
      * @author :Amina
      */
-    public double sumofTodaysTotalCalories(int userId){ //testuar, punon
+    public double sumofTodaysTotalCalories(int userId) { //testuar, punon
         List<Double> todaysCalories = foodDAO.getTodaysTotalCalories(userId);
         double todaysTotalCaloriesCount = 0.0;
         for (double calorieValue : todaysCalories) {
@@ -79,6 +79,7 @@ public class UserService {
         }
         return todaysTotalCaloriesCount;
     }
+
     public double sumOfTotalMoneySpent(int userId, Date startingDate) {
         List<Double> totalMoney = foodDAO.getMoneySpentFromAUser(userId, startingDate);
         double totalMoneySpent = 0.0;
@@ -87,17 +88,17 @@ public class UserService {
         }
         return totalMoneySpent;
     }
-    public void updateHasExceededLimitForAllUsers(){
+
+    public void updateHasExceededLimitForAllUsers() {
         List<User> allUsers = userDAO.getAllUsers();
         Date startingDate = Date.valueOf(LocalDate.now().minusMonths(1));
-        for(User user : allUsers){
+        for (User user : allUsers) {
             double totalSpent = sumOfTotalMoneySpent(user.getUserId(), startingDate);
             boolean hasExceededLimit = totalSpent > 1000;
             user.setHasExceededMoneyLimit(hasExceededLimit);
             userDAO.updateUser(user);
         }
     }
-
 
 
     /**
@@ -109,25 +110,35 @@ public class UserService {
         int daysAboveThreshold = calculateDaysAboveCalorieThresholdPerWeek(userId, calorieThreshold);
 
         return new StatisticalReport(totalCalories, totalSpending, daysAboveThreshold);
-    
+
+    }
+
     public List<User> getAllUsersService() {
         return userDAO.getAllUsers();
     }
 
-    public boolean deleteUserService(int userId){
+    public boolean deleteUserService(int userId) {
         return userDAO.deleteUser(userId);
     }
 
-    public List<Integer> getAllUsersIdsService(){
+    public List<Integer> getAllUsersIdsService() {
         return userDAO.getAllUsersIds();
     }
 
-    public List<Boolean> getHasExceededMoneyLimitColumnService(){
+    public List<Boolean> getHasExceededMoneyLimitColumnService() {
         return userDAO.getHasExceededMoneyLimitColumn();
-    public boolean addUserService(User user){
-       return userDAO.addUser(user);
     }
-    public User getUserByEmailAndPasswordService(String email, String password){
+
+    public boolean addUserService(User user) {
+        return userDAO.addUser(user);
+    }
+
+    public User getUserByEmailAndPasswordService(String email, String password) {
         return userDAO.getUserByEmailAndPassword(email, password);
     }
+
+    public int getUserIdByEmailService(String email){
+        return userDAO.getUserIdByEmail(email);
+    }
 }
+

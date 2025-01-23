@@ -6,7 +6,9 @@ import dao.UserDAOImplementation;
 import entity.Food;
 import entity.User;
 import login.UserSession;
+
 import java.sql.Date;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +19,7 @@ public class AdminService {
     private final FoodDAOImplementation foodDAO;
     private FoodDAOImplementation reportCalculation;
 
-    public AdminService(){
+    public AdminService() throws SQLException {
         this.foodDAO = new FoodDAOImplementation();
         this.userDAO = new UserDAOImplementation();
     }

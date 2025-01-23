@@ -17,6 +17,7 @@ import service.AdminService;
 import service.FoodService;
 import service.UserService;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -33,12 +34,12 @@ public class AdminReportController {
     private TableColumn<User, String> userIdColumn;
     @FXML
     private TableColumn<User, Boolean> moneyLimitColumn;
-    private AdminService adminService;
-    private FoodService foodService;
-    private UserService userService;
+    private AdminService adminService = new AdminService();
+    private FoodService foodService = new FoodService();
+    private UserService userService = new UserService();
 
     public AdminReportController(TextArea foodEntriesComparisonArea,BarChart<String,Number> barChart,TableView<User> userTable
-    ,TableColumn<User,String> userIdColumn, TableColumn<User,Boolean> moneyLimitColumn){
+    ,TableColumn<User,String> userIdColumn, TableColumn<User,Boolean> moneyLimitColumn) throws SQLException {
         this.foodEntriesComparisonArea = foodEntriesComparisonArea;
         this.barChart = barChart;
         this.userTable = userTable;
